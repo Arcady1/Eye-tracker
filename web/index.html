@@ -10,8 +10,23 @@
 
 <body>
     <div class="index-container">
-        <div class="index-content"></div>
+        <div class="index-content">
+            <div class="canvas__wrapper canvas__wrapper_margin">
+                <video id="video" class="content__canvas" width="640px" height="480px">
+                    No video support in your browser... Use Google Chrome
+                </video>
+                <canvas id="canvas" class="content__canvas" width="640px" height="480px">
+                    No canvas support in your browser... Use Google Chrome
+                </canvas>
+            </div>
+        </div>
     </div>
+    <!-- Scripts -->
+    <script src="js/index.js"></script>
+    <!-- TF -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.6.0/dist/tf.js"></script>
+    <!-- Model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
 </body>
 
 </html>

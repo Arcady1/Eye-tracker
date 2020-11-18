@@ -14,12 +14,28 @@ html {
 }
 
 .index-container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #999;
+    min-width: 100vw;
+    min-height: 100vh;
 
     .index-content {
         width: 100%;
         height: 100%;
+
+        .canvas__wrapper {
+            width: 600px;
+            height: 600px;
+
+            .content__canvas {
+                display: block;
+                outline: 1px solid #000;
+                width: 100%;
+                height: 100%;
+                transform: scaleX(-1);
+            }
+        }
+
+        .canvas__wrapper_margin {
+            margin: 0 auto;
+        }
     }
 }
