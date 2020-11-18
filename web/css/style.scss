@@ -32,6 +32,10 @@ html {
                 height: 100%;
                 transform: scaleX(-1);
             }
+
+            .canvas_style {
+                display: none;
+            }
         }
 
         .canvas__wrapper_margin {

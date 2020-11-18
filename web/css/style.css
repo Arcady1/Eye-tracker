@@ -110,6 +110,9 @@ html {
   height: 100%;
   transform: scaleX(-1);
 }
+.index-container .index-content .canvas__wrapper .canvas_style {
+  display: none;
+}
 .index-container .index-content .canvas__wrapper_margin {
   margin: 0 auto;
 }
