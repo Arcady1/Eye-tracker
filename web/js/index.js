@@ -19,12 +19,8 @@ navigator.mediaDevices.getUserMedia({
     .then(() => {
         return modelLoading();
     })
-    .then((model_) => {
-        setInterval(() => {
-            modelPrediction(model_).then((predictions) => {
-                irisDotGenerator(predictions[0].annotations.leftEyeIris, predictions[0].annotations.rightEyeIris);
-            });
-        }, 1000);
+    .then((model) => {
+        makePredictions(model);
     })
     .catch(() => {
         console.log("ERROR: Model is not loaded");
@@ -37,6 +33,15 @@ async function modelLoading() {
     console.log("The model is loaded!");
     return model;
 }
+// The function makes predictions  
+function makePredictions(model_) {
+    setTimeout(() => {
+        modelPrediction(model_).then((predictions) => {
+            irisDotGenerator(predictions[0].annotations.leftEyeIris, predictions[0].annotations.rightEyeIris);
+        });
+        makePredictions(model_);
+    }, 4);
+}
 // Getting predictions; input: model 
 async function modelPrediction(model) {
     // an array of prediction objects for the faces in the input, which include information about each face
@@ -45,7 +50,7 @@ async function modelPrediction(model) {
     });
     return faces;
 }
-// Function circles the Iris; input: array of Iris position (x, y, z) 
+// The function circles the Iris; input: array of Iris position (x, y, z) 
 function irisDotGenerator(leftIrisPos, rightIrisPos) {
     let xL, yL, xR, yR;
     let irisLeftX = leftIrisPos[0][0];
@@ -74,8 +79,4 @@ function irisDotGenerator(leftIrisPos, rightIrisPos) {
     function video__centerPosition(xl, xr, y) {
         $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + (xr + (Math.abs(xl - xr) / 2)) + 'px; top: ' + y + 'px"> </div>');
     }
-}
-// Function changes mouse position
-function mousePosition() {
-
 }
