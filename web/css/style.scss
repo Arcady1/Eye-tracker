@@ -21,25 +21,39 @@ html {
         width: 100%;
         height: 100%;
 
-        .canvas__wrapper {
-            width: 600px;
-            height: 600px;
+        .video__wrapper {
+            position: relative;
+            width: 640px;
+            // ! height: 480px;
 
             .content__canvas {
                 display: block;
                 outline: 1px solid #000;
                 width: 100%;
                 height: 100%;
-                transform: scaleX(-1);
+                // transform: scaleX(-1);
             }
 
             .canvas_style {
                 display: none;
             }
+
+            .iris-position-dot {
+                display: block;
+                position: absolute;
+                width: $iris-position-dot;
+                height: $iris-position-dot;
+                left: 0;
+                top: 0;
+                background-color: #fff;
+                border-radius: 50%;
+                z-index: 10;
+            }
         }
 
-        .canvas__wrapper_margin {
-            margin: 0 auto;
-        }
+        // ! .video__wrapper_margin {
+        // !     margin: 0 auto;
+        // ! }
+
     }
 }

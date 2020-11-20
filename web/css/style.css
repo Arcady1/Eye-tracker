@@ -99,20 +99,27 @@ html {
   width: 100%;
   height: 100%;
 }
-.index-container .index-content .canvas__wrapper {
-  width: 600px;
-  height: 600px;
+.index-container .index-content .video__wrapper {
+  position: relative;
+  width: 640px;
 }
-.index-container .index-content .canvas__wrapper .content__canvas {
+.index-container .index-content .video__wrapper .content__canvas {
   display: block;
   outline: 1px solid #000;
   width: 100%;
   height: 100%;
-  transform: scaleX(-1);
 }
-.index-container .index-content .canvas__wrapper .canvas_style {
+.index-container .index-content .video__wrapper .canvas_style {
   display: none;
 }
-.index-container .index-content .canvas__wrapper_margin {
-  margin: 0 auto;
+.index-container .index-content .video__wrapper .iris-position-dot {
+  display: block;
+  position: absolute;
+  width: 1.5px;
+  height: 1.5px;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 10;
 }
