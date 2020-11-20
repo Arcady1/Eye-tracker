@@ -1,5 +1,4 @@
 let video = document.getElementById("video");
-let $irisDot = $("#iris-position-dot");
 let $video__wrapper = $("#video__wrapper");
 
 navigator.getUserMedia = navigator.getUserMedia ||
@@ -29,7 +28,7 @@ navigator.mediaDevices.getUserMedia({
     })
     .catch(() => {
         console.log("ERROR: Model is not loaded");
-    })
+    });
 
 // Model loading
 async function modelLoading() {
@@ -75,4 +74,8 @@ function irisDotGenerator(leftIrisPos, rightIrisPos) {
     function video__centerPosition(xl, xr, y) {
         $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + (xr + (Math.abs(xl - xr) / 2)) + 'px; top: ' + y + 'px"> </div>');
     }
+}
+// Function changes mouse position
+function mousePosition() {
+
 }
