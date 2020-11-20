@@ -37,6 +37,7 @@ async function modelLoading() {
 function makePredictions(model_) {
     setTimeout(() => {
         modelPrediction(model_).then((predictions) => {
+            console.log(predictions);
             irisDotGenerator(predictions[0].annotations.leftEyeIris, predictions[0].annotations.rightEyeIris);
         });
         makePredictions(model_);
