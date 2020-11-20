@@ -1,8 +1,6 @@
-// ! let canvas = document.getElementById("canvas");
 let video = document.getElementById("video");
 let $irisDot = $("#iris-position-dot");
 let $video__wrapper = $("#video__wrapper");
-// ! let ctx = canvas.getContext("2d");
 
 navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
@@ -22,21 +20,16 @@ navigator.mediaDevices.getUserMedia({
     .then(() => {
         return modelLoading();
     })
-    .catch(() => {
-        console.log("ERROR: Model is not loaded");
-    })
     .then((model_) => {
         setInterval(() => {
             modelPrediction(model_).then((predictions) => {
-                // ! console.log(predictions);
                 irisDotGenerator(predictions[0].annotations.leftEyeIris, predictions[0].annotations.rightEyeIris);
-                // ! irisDotPosition(predictions[0].annotations.leftEyeIris, predictions[0].annotations.rightEyeIris);
             });
-        }, 13);
+        }, 1000);
     })
     .catch(() => {
-        console.log("ERROR: Sth wrong with modelPrediction()");
-    });
+        console.log("ERROR: Model is not loaded");
+    })
 
 // Model loading
 async function modelLoading() {
@@ -49,36 +42,37 @@ async function modelLoading() {
 async function modelPrediction(model) {
     // an array of prediction objects for the faces in the input, which include information about each face
     const faces = await model.estimateFaces({
-        input: video,
-        // ! flipHorizontal: true
+        input: video
     });
     return faces;
-    // console.log(faces);
-}
-// Iris dot changing position
-function irisDotPosition(leftIrisPos, rightIrisPos) {
-    console.log("left: ", leftIrisPos);
-    console.log("right: ", rightIrisPos);
-    console.log("==============");
-    $irisDot.css({
-        left: leftIrisPos[0][0] + "px",
-        top: leftIrisPos[0][1] + "px"
-    })
 }
 // Function circles the Iris; input: array of Iris position (x, y, z) 
 function irisDotGenerator(leftIrisPos, rightIrisPos) {
     let xL, yL, xR, yR;
+    let irisLeftX = leftIrisPos[0][0];
+    let irisRightX = rightIrisPos[0][0];
+    let irisY = leftIrisPos[0][1];
 
     $(".iris-position-dot").remove();
 
     for (let i = 0; i < leftIrisPos.length; i++) {
         xL = leftIrisPos[i][0];
         yL = leftIrisPos[i][1];
-        
+
         xR = rightIrisPos[i][0];
         yR = rightIrisPos[i][1];
-        
-        $video__wrapper.prepend('<div class="iris-position-dot" id="iris-position-dot" style="left: ' + xL + 'px; top: ' + yL + 'px"> </div>');
-        $video__wrapper.prepend('<div class="iris-position-dot" id="iris-position-dot" style="left: ' + xR + 'px; top: ' + yR + 'px"> </div>');
+
+        video__wrapperPrepend(xL, yL);
+        video__wrapperPrepend(xR, yR);
+    }
+    video__centerPosition(irisLeftX, irisRightX, irisY);
+
+
+    function video__wrapperPrepend(x, y) {
+        $video__wrapper.prepend('<div class="iris-position-dot" style="left: ' + x + 'px; top: ' + y + 'px"> </div>');
+    }
+
+    function video__centerPosition(xl, xr, y) {
+        $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + (xr + (Math.abs(xl - xr) / 2)) + 'px; top: ' + y + 'px"> </div>');
     }
 }

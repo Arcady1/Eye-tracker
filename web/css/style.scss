@@ -22,20 +22,16 @@ html {
         height: 100%;
 
         .video__wrapper {
-            position: relative;
             width: 640px;
-            // ! height: 480px;
+            height: auto;
+            position: relative;
+            transform: scaleX(-1);
 
-            .content__canvas {
+            .video {
                 display: block;
-                outline: 1px solid #000;
                 width: 100%;
-                height: 100%;
-                // transform: scaleX(-1);
-            }
-
-            .canvas_style {
-                display: none;
+                height: auto;
+                outline: 1px solid #000;
             }
 
             .iris-position-dot {
@@ -43,17 +39,22 @@ html {
                 position: absolute;
                 width: $iris-position-dot;
                 height: $iris-position-dot;
-                left: 0;
                 top: 0;
+                left: 0;
                 background-color: #fff;
                 border-radius: 50%;
                 z-index: 10;
             }
+
+            .iris-position-center {
+                width: $iris-position-center;
+                height: $iris-position-center;
+                background-color: red;
+            }
         }
 
-        // ! .video__wrapper_margin {
-        // !     margin: 0 auto;
-        // ! }
-
+        .video__wrapper_margin {
+            margin: 0 auto;
+        }
     }
 }
