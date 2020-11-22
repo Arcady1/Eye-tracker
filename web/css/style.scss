@@ -14,12 +14,68 @@ html {
 }
 
 .index-container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #999;
+    min-width: 100vw;
+    min-height: 100vh;
 
     .index-content {
         width: 100%;
         height: 100%;
+
+        .video__wrapper {
+            width: 640px;
+            height: auto;
+            position: relative;
+            transform: scaleX(-1);
+
+            .video {
+                display: block;
+                width: 100%;
+                height: auto;
+                outline: 1px solid #000;
+            }
+
+            .iris-pos-dot {
+                display: block;
+                position: absolute;
+                width: $iris-position-dot;
+                height: $iris-position-dot;
+                top: 0;
+                left: 0;
+                background-color: #fff;
+                border-radius: 50%;
+                z-index: 10;
+            }
+
+            .iris-pos-center {
+                width: $iris-position-center;
+                height: $iris-position-center;
+                background-color: red;
+            }
+
+            .nose-pos-center {
+                width: $noce-position-center;
+                height: $noce-position-center;
+                background-color: blue;
+            }
+        }
+
+        .index__horizont-button {
+            display: block;
+            width: 200px;
+            height: 100px;
+            border: 2px solid #000;
+            border-radius: 20px;
+
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .horizont-button_margin {
+            margin: 0 auto;
+        }
+
+        .video__wrapper_margin {
+            margin: 0 auto;
+        }
     }
 }
