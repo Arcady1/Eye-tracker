@@ -26,58 +26,23 @@ navigator.mediaDevices.getUserMedia({
         console.log("ERROR: Model is not loaded");
     });
 
-// Model loading
-async function modelLoading() {
-    const model = await faceLandmarksDetection.load(
-        faceLandmarksDetection.SupportedPackages.mediapipe);
-    console.log("The model is loaded!");
-    return model;
-}
-// The function makes predictions  
-function makePredictions(model_) {
-    setTimeout(() => {
-        modelPrediction(model_).then((predictions) => {
-            console.log(predictions);
-            irisDotGenerator(predictions[0].annotations.leftEyeIris, predictions[0].annotations.rightEyeIris);
-        });
-        makePredictions(model_);
-    }, 4);
-}
-// Getting predictions; input: model 
-async function modelPrediction(model) {
-    // an array of prediction objects for the faces in the input, which include information about each face
-    const faces = await model.estimateFaces({
-        input: video
-    });
-    return faces;
-}
 // The function circles the Iris; input: array of Iris position (x, y, z) 
-function irisDotGenerator(leftIrisPos, rightIrisPos) {
-    let xL, yL, xR, yR;
-    let irisLeftX = leftIrisPos[0][0];
-    let irisRightX = rightIrisPos[0][0];
-    let irisY = leftIrisPos[0][1];
-
+function irisDotGenerator(leftIrisPos, rightIrisPos, midwayBetweenEyesPos) {
+    // Removing previous points 
     $(".iris-position-dot").remove();
 
     for (let i = 0; i < leftIrisPos.length; i++) {
-        xL = leftIrisPos[i][0];
-        yL = leftIrisPos[i][1];
-
-        xR = rightIrisPos[i][0];
-        yR = rightIrisPos[i][1];
-
-        video__wrapperPrepend(xL, yL);
-        video__wrapperPrepend(xR, yR);
+        pointsAroundTheIrises(leftIrisPos[i][0], leftIrisPos[i][1]);
+        pointsAroundTheIrises(rightIrisPos[i][0], rightIrisPos[i][1]);
     }
-    video__centerPosition(irisLeftX, irisRightX, irisY);
 
+    midwayBetweenEyes(midwayBetweenEyesPos);
 
-    function video__wrapperPrepend(x, y) {
+    function pointsAroundTheIrises(x, y) {
         $video__wrapper.prepend('<div class="iris-position-dot" style="left: ' + x + 'px; top: ' + y + 'px"> </div>');
     }
 
-    function video__centerPosition(xl, xr, y) {
-        $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + (xr + (Math.abs(xl - xr) / 2)) + 'px; top: ' + y + 'px"> </div>');
+    function midwayBetweenEyes(midwayBetweenEyesPos) {
+        $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + midwayBetweenEyesPos[0][0] + 'px; top: ' + midwayBetweenEyesPos[0][1] + 'px"> </div>');
     }
 }
