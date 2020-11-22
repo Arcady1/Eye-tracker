@@ -34,7 +34,7 @@ html {
                 outline: 1px solid #000;
             }
 
-            .iris-position-dot {
+            .iris-pos-dot {
                 display: block;
                 position: absolute;
                 width: $iris-position-dot;
@@ -46,10 +46,16 @@ html {
                 z-index: 10;
             }
 
-            .iris-position-center {
+            .iris-pos-center {
                 width: $iris-position-center;
                 height: $iris-position-center;
                 background-color: red;
+            }
+
+            .nose-pos-center {
+                width: $noce-position-center;
+                height: $noce-position-center;
+                background-color: blue;
             }
         }
 

@@ -111,7 +111,7 @@ html {
   height: auto;
   outline: 1px solid #000;
 }
-.index-container .index-content .video__wrapper .iris-position-dot {
+.index-container .index-content .video__wrapper .iris-pos-dot {
   display: block;
   position: absolute;
   width: 1.5px;
@@ -122,10 +122,15 @@ html {
   border-radius: 50%;
   z-index: 10;
 }
-.index-container .index-content .video__wrapper .iris-position-center {
+.index-container .index-content .video__wrapper .iris-pos-center {
   width: 3px;
   height: 3px;
   background-color: red;
+}
+.index-container .index-content .video__wrapper .nose-pos-center {
+  width: 3px;
+  height: 3px;
+  background-color: blue;
 }
 .index-container .index-content .video__wrapper_margin {
   margin: 0 auto;

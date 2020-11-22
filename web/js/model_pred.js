@@ -9,8 +9,9 @@ async function modelLoading() {
 function makePredictions(model_) {
     setTimeout(() => {
         modelPrediction(model_).then((predictions) => {
+            // console.log(predictions);
             let path = predictions["0"]["annotations"];
-            irisDotGenerator(path["leftEyeIris"], path["rightEyeIris"]);
+            faceDotGenerator(path["leftEyeIris"], path["rightEyeIris"], path["noseTip"]);
         });
         makePredictions(model_);
     }, 6);
