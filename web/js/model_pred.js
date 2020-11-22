@@ -10,8 +10,7 @@ function makePredictions(model_) {
     setTimeout(() => {
         modelPrediction(model_).then((predictions) => {
             let path = predictions["0"]["annotations"];
-            
-            irisDotGenerator(path["leftEyeIris"], path["rightEyeIris"], path["midwayBetweenEyes"]);
+            irisDotGenerator(path["leftEyeIris"], path["rightEyeIris"]);
         });
         makePredictions(model_);
     }, 6);

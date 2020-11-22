@@ -27,7 +27,16 @@ navigator.mediaDevices.getUserMedia({
     });
 
 // The function circles the Iris; input: array of Iris position (x, y, z) 
-function irisDotGenerator(leftIrisPos, rightIrisPos, midwayBetweenEyesPos) {
+function irisDotGenerator(leftIrisPos, rightIrisPos) {
+    let irisLeftX = leftIrisPos[0][0];
+    let irisLeftY = leftIrisPos[0][1];
+    let irisRightX = rightIrisPos[0][0];
+    let irisRightY = rightIrisPos[0][1];
+
+    let dotBetweenIrisesCoord = {
+        "x": min(irisLeftX, irisRightX) + (Math.abs(irisLeftX - irisRightX) / 2),
+        "y": min(irisLeftY, irisRightY) + (Math.abs(irisLeftY - irisRightY) / 2)
+    }
     // Removing previous points 
     $(".iris-position-dot").remove();
 
@@ -36,13 +45,13 @@ function irisDotGenerator(leftIrisPos, rightIrisPos, midwayBetweenEyesPos) {
         pointsAroundTheIrises(rightIrisPos[i][0], rightIrisPos[i][1]);
     }
 
-    midwayBetweenEyes(midwayBetweenEyesPos);
+    midwayBetweenEyes(dotBetweenIrisesCoord);
+}
 
-    function pointsAroundTheIrises(x, y) {
-        $video__wrapper.prepend('<div class="iris-position-dot" style="left: ' + x + 'px; top: ' + y + 'px"> </div>');
-    }
+function pointsAroundTheIrises(x, y) {
+    $video__wrapper.prepend('<div class="iris-position-dot" style="left: ' + x + 'px; top: ' + y + 'px"> </div>');
+}
 
-    function midwayBetweenEyes(midwayBetweenEyesPos) {
-        $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + midwayBetweenEyesPos[0][0] + 'px; top: ' + midwayBetweenEyesPos[0][1] + 'px"> </div>');
-    }
+function midwayBetweenEyes(dotCoord) {
+    $video__wrapper.prepend('<div class="iris-position-dot iris-position-center" style="left: ' + dotCoord.x + 'px; top: ' + dotCoord.y + 'px"> </div>');
 }
