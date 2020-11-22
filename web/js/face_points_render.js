@@ -4,6 +4,7 @@ function faceDotGenerator(leftIris, rightIris, nose) {
     let irisLeftY = leftIris[0][1];
     let irisRightX = rightIris[0][0];
     let irisRightY = rightIris[0][1];
+    let currentDistBetweenNoseAndEyes;
 
     let midwayBetweenEyes = {
         "x": min(irisLeftX, irisRightX) + (Math.abs(irisLeftX - irisRightX) / 2),
@@ -25,8 +26,8 @@ function faceDotGenerator(leftIris, rightIris, nose) {
     if (setNormalDistBetweenNoseAndEyes == true) {
         normalDistBetweenNoseAndEyes = currentDistBetweenNoseAndEyes;
         setNormalDistBetweenNoseAndEyes = false;
-        console.log(normalDistBetweenNoseAndEyes);
     }
+    checkScroll(currentDistBetweenNoseAndEyes, normalDistBetweenNoseAndEyes);
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

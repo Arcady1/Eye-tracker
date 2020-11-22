@@ -4,5 +4,4 @@ let $horizont_button = $("#horizont-button");
 // JS
 let video = document.getElementById("video");
 let normalDistBetweenNoseAndEyes = null;
-let currentDistBetweenNoseAndEyes = null;
 let setNormalDistBetweenNoseAndEyes = false;
