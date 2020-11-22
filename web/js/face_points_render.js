@@ -21,7 +21,12 @@ function faceDotGenerator(leftIris, rightIris, nose) {
     facePointsRendering(nose[0][0], nose[0][1], "iris-pos-dot nose-pos-center");
     // Setting currentDistBetweenNoseAndEyes
     currentDistBetweenNoseAndEyes = nose[0][1] - midwayBetweenEyes.y;
-    // ! console.log(currentDistBetweenNoseAndEyes);
+    // Setting normalDistBetweenNoseAndEyes
+    if (setNormalDistBetweenNoseAndEyes == true) {
+        normalDistBetweenNoseAndEyes = currentDistBetweenNoseAndEyes;
+        setNormalDistBetweenNoseAndEyes = false;
+        console.log(normalDistBetweenNoseAndEyes);
+    }
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

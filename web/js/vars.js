@@ -5,4 +5,4 @@ let $horizont_button = $("#horizont-button");
 let video = document.getElementById("video");
 let normalDistBetweenNoseAndEyes = null;
 let currentDistBetweenNoseAndEyes = null;
-let faceFixTimeout = 3000;
+let setNormalDistBetweenNoseAndEyes = false;

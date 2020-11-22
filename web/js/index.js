@@ -24,6 +24,5 @@ navigator.mediaDevices.getUserMedia({
     });
 
 $horizont_button.click(() => {
-    console.log("event");
-    normalDistBetweenNoseAndEyes = 0;
+    setNormalDistBetweenNoseAndEyes = true;
 })
