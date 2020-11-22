@@ -9,12 +9,17 @@ async function modelLoading() {
 function makePredictions(model_) {
     setTimeout(() => {
         modelPrediction(model_).then((predictions) => {
-            // console.log(predictions);
-            let path = predictions["0"]["annotations"];
-            faceDotGenerator(path["leftEyeIris"], path["rightEyeIris"], path["noseTip"]);
+            if (normalDistBetweenNoseAndEyes == null) {
+                console.log(`Press "IT'S OK"`);
+            }
+            else {
+                let path = predictions["0"]["annotations"];
+                faceFixTimeout = 6;
+                faceDotGenerator(path["leftEyeIris"], path["rightEyeIris"], path["noseTip"]);
+            }
         });
         makePredictions(model_);
-    }, 6);
+    }, faceFixTimeout);
 }
 // Getting predictions; input: model 
 async function modelPrediction(model) {

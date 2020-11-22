@@ -59,6 +59,21 @@ html {
             }
         }
 
+        .index__horizont-button {
+            display: block;
+            width: 200px;
+            height: 100px;
+            border: 2px solid #000;
+            border-radius: 20px;
+
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .horizont-button_margin {
+            margin: 0 auto;
+        }
+
         .video__wrapper_margin {
             margin: 0 auto;
         }

@@ -19,8 +19,11 @@ function faceDotGenerator(leftIris, rightIris, nose) {
 
     facePointsRendering(midwayBetweenEyes.x, midwayBetweenEyes.y, "iris-pos-dot iris-pos-center");
     facePointsRendering(nose[0][0], nose[0][1], "iris-pos-dot nose-pos-center");
+    // Setting currentDistBetweenNoseAndEyes
+    currentDistBetweenNoseAndEyes = nose[0][1] - midwayBetweenEyes.y;
+    // ! console.log(currentDistBetweenNoseAndEyes);
 }
-
+// Function is rendering points
 function facePointsRendering(x, y, cssClass) {
     $video__wrapper.prepend('<div class="' + cssClass + '" style="left: ' + x + 'px; top: ' + y + 'px"> </div>');
 }

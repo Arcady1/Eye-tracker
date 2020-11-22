@@ -1,6 +1,3 @@
-let video = document.getElementById("video");
-let $video__wrapper = $("#video__wrapper");
-
 navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
@@ -25,3 +22,8 @@ navigator.mediaDevices.getUserMedia({
     .catch(() => {
         console.log("ERROR: Model is not loaded");
     });
+
+$horizont_button.click(() => {
+    console.log("event");
+    normalDistBetweenNoseAndEyes = 0;
+})
