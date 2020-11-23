@@ -37,25 +37,23 @@ html {
             .iris-pos-dot {
                 display: block;
                 position: absolute;
-                width: $iris-position-dot;
-                height: $iris-position-dot;
+                width: $position-dot;
+                height: $position-dot;
                 top: 0;
                 left: 0;
                 background-color: #fff;
                 border-radius: 50%;
-                z-index: 10;
+                z-index: 2;
             }
 
             .iris-pos-center {
-                width: $iris-position-center;
-                height: $iris-position-center;
                 background-color: red;
+                z-index: 3;
             }
 
-            .nose-pos-center {
-                width: $noce-position-center;
-                height: $noce-position-center;
+            .eyes-pos-center {
                 background-color: blue;
+                z-index: 4;
             }
         }
 

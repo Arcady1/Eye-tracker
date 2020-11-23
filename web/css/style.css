@@ -114,23 +114,21 @@ html {
 .index-container .index-content .video__wrapper .iris-pos-dot {
   display: block;
   position: absolute;
-  width: 1.5px;
-  height: 1.5px;
+  width: 1px;
+  height: 1px;
   top: 0;
   left: 0;
   background-color: #fff;
   border-radius: 50%;
-  z-index: 10;
+  z-index: 2;
 }
 .index-container .index-content .video__wrapper .iris-pos-center {
-  width: 3px;
-  height: 3px;
   background-color: red;
+  z-index: 3;
 }
-.index-container .index-content .video__wrapper .nose-pos-center {
-  width: 3px;
-  height: 3px;
+.index-container .index-content .video__wrapper .eyes-pos-center {
   background-color: blue;
+  z-index: 4;
 }
 .index-container .index-content .index__horizont-button {
   display: block;

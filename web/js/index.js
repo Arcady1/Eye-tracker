@@ -24,7 +24,7 @@ navigator.mediaDevices.getUserMedia({
     });
 // Setting a new normal distance between eyes and nose 
 $horizont_button.click(() => {
-    setNormalDistBetweenNoseAndEyes = true;
+    setNormalDist = true;
 })
 // Function checks if its need to scroll
 function checkScroll(cur, norm) {
