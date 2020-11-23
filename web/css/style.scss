@@ -68,6 +68,18 @@ html {
             text-transform: uppercase;
         }
 
+        .index__horizont-point {
+            display: dlock;
+            position: absolute;
+            margin: 0 auto;
+            top: calc(50% - 50px);
+            left: calc(50% - 50px);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #333;
+        }
+
         .horizont-button_margin {
             margin: 0 auto;
         }

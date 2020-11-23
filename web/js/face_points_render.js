@@ -1,5 +1,6 @@
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator(...args) {
+    let currentDist;
     // Removing previous points 
     $(".iris-pos-dot").remove();
     // Face rendering
@@ -74,15 +75,14 @@ function faceDotGenerator(...args) {
     facePointsRendering(faceParts["midwayBetweenIrises"].x, faceParts["midwayBetweenIrises"].y, "iris-pos-dot iris-pos-center");
     facePointsRendering(faceParts["midwayNormalIrisPos"].x, faceParts["midwayNormalIrisPos"].y, "iris-pos-dot eyes-pos-center");
 
-
-    // ! Setting currentDist
-    // ! currentDist = nose[0][1] - midwayBetweenIrises.y;
-    // ! // Setting normalDist
-    // ! if (setNormalDist == true) {
-    // !     normalDist = currentDist;
-    // !     setNormalDist = false;
-    // ! }
-    // ! checkScroll(currentDist, normalDist);
+    // Setting currentDist
+    currentDist = faceParts.midwayNormalIrisPos.x - faceParts.midwayBetweenIrises.y;
+    // Setting normalDist
+    if (setNormalDist == true) {
+        normalDist = currentDist;
+        setNormalDist = false;
+    }
+    checkScroll(currentDist, normalDist);
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {
