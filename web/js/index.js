@@ -26,16 +26,34 @@ navigator.mediaDevices.getUserMedia({
 $horizont_button.click(() => {
     setNormalDist = true;
     $horizont_point.css("display", "none");
+    clearInterval(timerID);
+    frequency();
+});
+$click_pos.click(() => {
+    console.log("currentDist", currentDist, "normalDist", normalDist, "dif", currentDist - normalDist);
 });
 // Function checks if its need to scroll
 function checkScroll(cur, norm) {
-    // console.log(cur, norm);
-    // ! 1.7
-    if (cur - norm > 1.74)
-        console.log("Up", cur, norm, cur - norm);
-    // ! -2.5
-    else if (cur - norm < (-2.1))
-        console.log("Down", cur, norm, cur - norm);
+    if (cur - norm > 0.35)
+        ++up_;
+    else if (cur - norm < (-0.4))
+        ++down_;
     else
-        console.log("Stop", cur - norm);
+        ++stop_;
+}
+// View direction timer 
+function frequency() {
+    timerID = setInterval(() => {
+        let res = Math.max(up_, down_, stop_);
+        let sum = up_ + down_ + stop_;
+        if (res == up_)
+            console.log("UP:", res + "/" + sum + " ~ " + res / sum * 100 + "%");
+        else if (res == down_)
+            console.log("DOWN:", res + "/" + sum + " ~ " + res / sum * 100 + "%");
+        else if (res == stop_)
+            console.log("STOP:", res + "/" + sum + " ~ " + res / sum * 100 + "%");
+        up_ = 0;
+        down_ = 0;
+        stop_ = 0;
+    }, 2500);
 }
