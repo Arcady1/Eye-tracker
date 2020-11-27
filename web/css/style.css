@@ -92,8 +92,9 @@ html {
 }
 
 .index-container {
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 140vh;
+  background-color: #333;
 }
 .index-container .index-content {
   width: 100%;
@@ -114,23 +115,21 @@ html {
 .index-container .index-content .video__wrapper .iris-pos-dot {
   display: block;
   position: absolute;
-  width: 1.5px;
-  height: 1.5px;
+  width: 1px;
+  height: 1px;
   top: 0;
   left: 0;
   background-color: #fff;
   border-radius: 50%;
-  z-index: 10;
+  z-index: 2;
 }
 .index-container .index-content .video__wrapper .iris-pos-center {
-  width: 3px;
-  height: 3px;
   background-color: red;
+  z-index: 3;
 }
-.index-container .index-content .video__wrapper .nose-pos-center {
-  width: 3px;
-  height: 3px;
+.index-container .index-content .video__wrapper .eyes-pos-center {
   background-color: blue;
+  z-index: 4;
 }
 .index-container .index-content .index__horizont-button {
   display: block;
@@ -140,6 +139,17 @@ html {
   border-radius: 20px;
   font-size: 1rem;
   text-transform: uppercase;
+}
+.index-container .index-content .index__horizont-point {
+  display: dlock;
+  position: absolute;
+  margin: 0 auto;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #999;
 }
 .index-container .index-content .horizont-button_margin {
   margin: 0 auto;

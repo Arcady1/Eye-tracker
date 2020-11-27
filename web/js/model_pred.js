@@ -9,9 +9,8 @@ async function modelLoading() {
 function makePredictions(model_) {
     setTimeout(() => {
         modelPrediction(model_).then((predictions) => {
-            faceFixTimeout = 6;
             let path = predictions["0"]["annotations"];
-            faceDotGenerator(path["leftEyeIris"], path["rightEyeIris"], path["noseTip"]);
+            faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
         });
         makePredictions(model_);
     }, 6);

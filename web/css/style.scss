@@ -14,8 +14,9 @@ html {
 }
 
 .index-container {
-    min-width: 100vw;
-    min-height: 100vh;
+    width: 100%;
+    min-height: 140vh;
+    background-color: #333;
 
     .index-content {
         width: 100%;
@@ -37,25 +38,23 @@ html {
             .iris-pos-dot {
                 display: block;
                 position: absolute;
-                width: $iris-position-dot;
-                height: $iris-position-dot;
+                width: $position-dot;
+                height: $position-dot;
                 top: 0;
                 left: 0;
                 background-color: #fff;
                 border-radius: 50%;
-                z-index: 10;
+                z-index: 2;
             }
 
             .iris-pos-center {
-                width: $iris-position-center;
-                height: $iris-position-center;
                 background-color: red;
+                z-index: 3;
             }
 
-            .nose-pos-center {
-                width: $noce-position-center;
-                height: $noce-position-center;
+            .eyes-pos-center {
                 background-color: blue;
+                z-index: 4;
             }
         }
 
@@ -68,6 +67,18 @@ html {
 
             font-size: 1rem;
             text-transform: uppercase;
+        }
+
+        .index__horizont-point {
+            display: dlock;
+            position: absolute;
+            margin: 0 auto;
+            top: calc(50% - 50px);
+            left: calc(50% - 50px);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #999;
         }
 
         .horizont-button_margin {
