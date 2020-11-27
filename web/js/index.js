@@ -31,6 +31,9 @@ $horizont_button.click(() => {
 });
 $click_pos.click(() => {
     console.log("currentDist", currentDist, "normalDist", normalDist, "dif", currentDist - normalDist);
+    $('html').animate({
+        scrollTop: "+=100px"
+    }, 600);
 });
 // Function checks if its need to scroll
 function checkScroll(cur, norm) {
@@ -46,14 +49,29 @@ function frequency() {
     timerID = setInterval(() => {
         let res = Math.max(up_, down_, stop_);
         let sum = up_ + down_ + stop_;
-        if (res == up_)
+        if (res == up_) {
+            pastDirecion = 1;
+            currentDirection = 1;
             console.log("UP:", res + "/" + sum + " ~ " + res / sum * 100 + "%");
-        else if (res == down_)
+        } else if (res == down_) {
+            pastDirecion = -1;
+            currentDirection = -1;
             console.log("DOWN:", res + "/" + sum + " ~ " + res / sum * 100 + "%");
-        else if (res == stop_)
+        } else if (res == stop_) {
+            pastDirecion = 0;
+            currentDirection = 0;
             console.log("STOP:", res + "/" + sum + " ~ " + res / sum * 100 + "%");
+        }
         up_ = 0;
         down_ = 0;
         stop_ = 0;
     }, 2500);
+
+
+}
+// Functions scrolls the wab-page
+function scrolling() {
+    $('html').animate({
+        
+    })
 }

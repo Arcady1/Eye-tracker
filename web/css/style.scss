@@ -14,8 +14,9 @@ html {
 }
 
 .index-container {
-    min-width: 100vw;
-    min-height: 100vh;
+    width: 100%;
+    min-height: 140vh;
+    background-color: #333;
 
     .index-content {
         width: 100%;
@@ -77,7 +78,7 @@ html {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #333;
+            background-color: #999;
         }
 
         .horizont-button_margin {

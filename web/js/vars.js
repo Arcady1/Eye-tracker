@@ -13,3 +13,5 @@ let up_ = 0;
 let down_ = 0;
 let stop_ = 0;
 let timerID;
+let currentDirection;
+let pastDirecion;
