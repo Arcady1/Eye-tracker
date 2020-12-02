@@ -44,7 +44,7 @@ function faceDotGenerator(...args) {
             "x": args[5][3][0],
             "y": args[5][3][1]
         }
-    }    
+    }
     // Irises
     facePointsRendering(faceParts.irisLeft.x, faceParts.irisLeft.y, class__);
     facePointsRendering(faceParts.irisRight.x, faceParts.irisRight.y, class__);
@@ -55,26 +55,23 @@ function faceDotGenerator(...args) {
     facePointsRendering(faceParts.irisRight.x, faceParts.rightLowerEyePos.y, class__ + "eyes-red-style");
     facePointsRendering(faceParts.irisRight.x, faceParts.rightUpperEyePos.y, class__ + "eyes-blue-style");
 
-    // Setting currentDist
+    // Setting previousDist and currentDist
+    if (currentDist != undefined) {
+        previousDist = {
+            "leftEyeYDist": currentDist.leftEyeYDist,
+            "rightEyeYDist": currentDist.rightEyeYDist
+        };
+    }
     currentDist = {
         "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
         "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
     };
 
-    // ! console.log(currentDist.leftEyeYDist, currentDist.rightEyeYDist);
-    // Setting normalDist
-    if (setNormalDist == true) {
-        normalDist = currentDist;
-        setNormalDist = false;
-        console.log(normalDist);
-    }
-    if (normalDist != null) {
-        // ! Проверять моргание
-        // ! Если lock == false
-        // ! При двойном моргании вывести сообщение "unlocked" 
-        // ! Сделать скролл вверх или вних
-        // ! После возвращения глаз в центр - lock = true
-    }
+    // TODO Проверять моргание
+    // TODO Если lock == false
+    // TODO При двойном моргании вывести сообщение "unlocked" 
+    // TODO Сделать скролл вверх или вних
+    // TODO После возвращения глаз в центр - lock = true
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

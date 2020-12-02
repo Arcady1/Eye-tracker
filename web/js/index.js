@@ -22,10 +22,6 @@ navigator.mediaDevices.getUserMedia({
     .catch(() => {
         console.log("ERROR: Model is not loaded");
     });
-// Setting a new normal distance between eyes and nose 
-$horizont_button.click(() => {
-    setNormalDist = true;
-});
 
 // ?  Function checks if its need to scroll
 // ?  function checkScroll(cur, norm) {

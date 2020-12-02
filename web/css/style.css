@@ -131,29 +131,6 @@ html {
   background-color: blue;
   z-index: 4;
 }
-.index-container .index-content .index__horizont-button {
-  display: block;
-  width: 200px;
-  height: 100px;
-  border: 2px solid #000;
-  border-radius: 20px;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-.index-container .index-content .index__horizont-point {
-  display: dlock;
-  position: absolute;
-  margin: 0 auto;
-  top: calc(50% - 50px);
-  left: calc(50% - 50px);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #999;
-}
-.index-container .index-content .horizont-button_margin {
-  margin: 0 auto;
-}
 .index-container .index-content .video__wrapper_margin {
   margin: 0 auto;
 }
