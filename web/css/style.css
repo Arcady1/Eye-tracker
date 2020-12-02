@@ -93,7 +93,7 @@ html {
 
 .index-container {
   width: 100%;
-  min-height: 140vh;
+  min-height: 100vh;
   background-color: #333;
 }
 .index-container .index-content {
@@ -123,11 +123,11 @@ html {
   border-radius: 50%;
   z-index: 2;
 }
-.index-container .index-content .video__wrapper .iris-pos-center {
+.index-container .index-content .video__wrapper .eyes-red-style {
   background-color: red;
   z-index: 3;
 }
-.index-container .index-content .video__wrapper .eyes-pos-center {
+.index-container .index-content .video__wrapper .eyes-blue-style {
   background-color: blue;
   z-index: 4;
 }
