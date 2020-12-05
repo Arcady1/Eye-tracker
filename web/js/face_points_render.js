@@ -29,20 +29,20 @@ function faceDotGenerator(...args) {
         // Left eye
         "leftLowerEyePos": {
             // We don't need X, because we use irisLeft X
-            "y": min(args[1][4][1], args[1][3][1]) + (Math.abs(args[1][4][1] - args[1][3][1]) / 2)
+            "y": min(args[1][4][1], args[1][3][1])
         },
         "leftUpperEyePos": {
             "x": args[2][3][0],
-            "y": args[2][3][1]
+            "y": max(args[2][3][1], args[2][4][1])
         },
         // Right eye
         "rightLowerEyePos": {
             // We don't need X, because we use irisLeft X
-            "y": min(args[4][4][1], args[4][3][1]) + (Math.abs(args[4][4][1] - args[4][3][1]) / 2)
+            "y": min(args[4][3][1], args[4][4][1])
         },
         "rightUpperEyePos": {
             "x": args[5][3][0],
-            "y": args[5][3][1]
+            "y": max(args[5][3][1], args[5][4][1])
         }
     }
     // Irises
@@ -66,6 +66,10 @@ function faceDotGenerator(...args) {
         "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
         "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
     };
+    // The function checks if the user blinked; input: currentDist
+    // console.log(currentDist.leftEyeYDist, previousDist.leftEyeYDist);
+    if (currentDist != undefined)
+        blinkCheck();
 
     // TODO Проверять моргание
     // TODO Если lock == false
