@@ -11,11 +11,11 @@ function makePredictions(model_) {
         modelPrediction(model_).then((predictions) => {
             let path = predictions["0"]["annotations"];
             faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
-        }).catch(() => {
-            console.log("No face");
+        }).catch((err) => {
+            console.log(err);
         });
         makePredictions(model_);
-    }, 10);
+    }, 12);
 }
 // Getting predictions; input: model 
 async function modelPrediction(model) {

@@ -4,17 +4,6 @@ function faceDotGenerator(...args) {
     let class__ = "iris-pos-dot ";
     // Removing previous points 
     $(".iris-pos-dot").remove();
-    // ? Face rendering
-    // ? args.forEach((facePart, index) => { // Part of face anf index from "faceDotGenerator"
-    // ?     let class_ = "iris-pos-dot";
-    // ?     if ((index == 1) || (index == 2) || (index == 4) || (index == 5)) {
-    // ?         class_ += " eyes-blue-style";
-    // ?     }
-    // ?     facePart.forEach(coords => { // Coords XYZ
-    // ?         facePointsRendering(coords[0], coords[1], class_);
-    // ?     });
-    // ? });
-
     // User face parts
     let faceParts = {
         // Irises
@@ -28,54 +17,86 @@ function faceDotGenerator(...args) {
         },
         // Left eye
         "leftLowerEyePos": {
-            // We don't need X, because we use irisLeft X
+            "x": args[0][0][0],
             "y": min(args[1][4][1], args[1][3][1])
         },
         "leftUpperEyePos": {
-            "x": args[2][3][0],
+            "x": args[0][0][0],
             "y": max(args[2][3][1], args[2][4][1])
         },
         // Right eye
         "rightLowerEyePos": {
-            // We don't need X, because we use irisLeft X
+            "x": args[3][0][0],
             "y": min(args[4][3][1], args[4][4][1])
         },
         "rightUpperEyePos": {
-            "x": args[5][3][0],
+            "x": args[3][0][0],
             "y": max(args[5][3][1], args[5][4][1])
         }
-    }
+    };
+    
+    // ! RENDERING
     // Irises
-    facePointsRendering(faceParts.irisLeft.x, faceParts.irisLeft.y, class__);
-    facePointsRendering(faceParts.irisRight.x, faceParts.irisRight.y, class__);
+    // facePointsRendering(faceParts.irisLeft.x, faceParts.irisLeft.y, class__);
+    // facePointsRendering(faceParts.irisRight.x, faceParts.irisRight.y, class__);
     // Left eye
-    facePointsRendering(faceParts.irisLeft.x, faceParts.leftLowerEyePos.y, class__ + "eyes-red-style");
-    facePointsRendering(faceParts.irisLeft.x, faceParts.leftUpperEyePos.y, class__ + "eyes-blue-style");
+    // facePointsRendering(faceParts.irisLeft.x, faceParts.leftLowerEyePos.y, class__ + "eyes-red-style");
+    // facePointsRendering(faceParts.irisLeft.x, faceParts.leftUpperEyePos.y, class__ + "eyes-blue-style");
     // Right eye
-    facePointsRendering(faceParts.irisRight.x, faceParts.rightLowerEyePos.y, class__ + "eyes-red-style");
-    facePointsRendering(faceParts.irisRight.x, faceParts.rightUpperEyePos.y, class__ + "eyes-blue-style");
+    // facePointsRendering(faceParts.irisRight.x, faceParts.rightLowerEyePos.y, class__ + "eyes-red-style");
+    // facePointsRendering(faceParts.irisRight.x, faceParts.rightUpperEyePos.y, class__ + "eyes-blue-style");
+    // ! RENDERING
 
-    // Setting previousDist and currentDist
-    if (currentDist != undefined) {
-        previousDist = {
-            "leftEyeYDist": currentDist.leftEyeYDist,
-            "rightEyeYDist": currentDist.rightEyeYDist
+    // Setting the previous Eyelid Distance and current Eyelid Distance
+    // Makes for blink test
+    if (currEyelidDist != undefined) {
+        prevEyelidDist = {
+            "leftEyeYDist": currEyelidDist.leftEyeYDist,
+            "rightEyeYDist": currEyelidDist.rightEyeYDist
         };
     }
-    currentDist = {
+    currEyelidDist = {
         "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
         "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
     };
-    // The function checks if the user blinked; input: currentDist
-    // console.log(currentDist.leftEyeYDist, previousDist.leftEyeYDist);
-    if (currentDist != undefined)
+    // The function checks if the user blinked; input: currEyelidDist
+    if (currEyelidDist != undefined)
         blinkCheck();
+    // The function sets the setNormDistBetweenEyeCenterAndIrisCenter and scrolls the webpage
+    if (scrollState == true) {
+        // Center between Irises
+        faceParts.midwayBetweenIrises = {
+            "x": centerPosition(faceParts.irisLeft, faceParts.irisRight, "x"),
+            "y": centerPosition(faceParts.irisLeft, faceParts.irisRight, "y")
+        };
+        // Left eye
+        faceParts.leftEyeCenter = {
+            "x": centerPosition(faceParts.leftUpperEyePos, faceParts.leftLowerEyePos, "x"),
+            "y": centerPosition(faceParts.leftUpperEyePos, faceParts.leftLowerEyePos, "y")
+        }
+        // Right eye
+        faceParts.rightEyeCenter = {
+            "x": centerPosition(faceParts.rightUpperEyePos, faceParts.rightLowerEyePos, "x"),
+            "y": centerPosition(faceParts.rightUpperEyePos, faceParts.rightLowerEyePos, "y")
+        };
+        // Center between Eyes
+        faceParts.midwayBetweenEyes = {
+            // x": centerPosition(faceParts.leftEyeCenter, faceParts.rightEyeCenter),
+            "x": faceParts.midwayBetweenIrises.x,
+            "y": centerPosition(faceParts.leftEyeCenter, faceParts.rightEyeCenter, "y")
+        };
 
-    // TODO Проверять моргание
-    // TODO Если lock == false
-    // TODO При двойном моргании вывести сообщение "unlocked" 
-    // TODO Сделать скролл вверх или вних
-    // TODO После возвращения глаз в центр - lock = true
+        // ! RENDERING
+        // facePointsRendering(faceParts.midwayBetweenIrises.x, faceParts.midwayBetweenIrises.y, class__ + "eyes-red-style");
+        // facePointsRendering(faceParts.midwayBetweenEyes.x, faceParts.midwayBetweenEyes.y, class__ + "eyes-blue-style");
+        // ! RENDERING
+        // Setting the normal distance between the Eye center and the Iris one
+        if (setNormDistBetweenEyeCenterAndIrisCenter == true)
+            normDistBetweenEyeCenterAndIrisCenter = faceParts.midwayBetweenEyes.y - faceParts.midwayBetweenIrises.y;
+        setNormDistBetweenEyeCenterAndIrisCenter = false;
+        // Scroll
+        makeScroll(faceParts);
+    }
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

@@ -4,17 +4,21 @@ function blinkCheck() {
     let resetTimer = 500;
 
     // Filling the blinkDates array
-    if ((previousDist.leftEyeYDist - currentDist.leftEyeYDist > k) || (previousDist.rightEyeYDist - currentDist.rightEyeYDist > k)) {
+    if ((prevEyelidDist.leftEyeYDist - currEyelidDist.leftEyeYDist > k) || (prevEyelidDist.rightEyeYDist - currEyelidDist.rightEyeYDist > k)) {
         console.log("Blink!");
         blinkDates[blinkDatesIndex] = new Date().getTime();
         // Blink interval
         if (blinkDatesIndex == 1) {
             blinkDates[2] = blinkDates[1] - blinkDates[0];
             // Reset blink timer
-            if (blinkDates[2] > resetTimer)
+            if (blinkDates[2] > resetTimer) {
                 console.log("Reset");
-            else
+            }
+            else {
+                scrollState = true;
+                setNormDistBetweenEyeCenterAndIrisCenter = true;
                 console.log(blinkDates[2]);
+            }
         }
         // blinkDatesIndex changing
         blinkDatesIndex = changeBlinkIndex();
