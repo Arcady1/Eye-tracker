@@ -71,9 +71,9 @@ function setNormDistBetweenEyeCenterAndIrisCenterFunc() {
         // Update the norm average distance
         if (counter == stopCounter) {
             normDistBetweenEyeCenterAndIrisCenter = axisCounter / counter;
-            setNormDistBetweenEyeCenterAndIrisCenter = false;
             setterNormDistBetweenEyeCenterAndIrisCenter = setNormDistBetweenEyeCenterAndIrisCenterFunc();
             // ? STATES
+            setNormDistBetweenEyeCenterAndIrisCenter = false;
             makeScroll.state = 1;
         }
     }

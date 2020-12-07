@@ -96,6 +96,7 @@ function faceDotGenerator(...args) {
             makeScroll.state = 0;
             setterNormDistBetweenEyeCenterAndIrisCenter(faceParts);
         }
+        // Setting the current distance between the Eye center and the Iris one
         setterCurrentDistBetweenEyeCenterAndIrisCenter(faceParts);
 
         if (makeScroll.state == 1)
