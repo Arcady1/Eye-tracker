@@ -34,7 +34,7 @@ function faceDotGenerator(...args) {
             "y": max(args[5][3][1], args[5][4][1])
         }
     };
-    
+
     // ! RENDERING
     // Irises
     // facePointsRendering(faceParts.irisLeft.x, faceParts.irisLeft.y, class__);
@@ -90,12 +90,16 @@ function faceDotGenerator(...args) {
         // facePointsRendering(faceParts.midwayBetweenIrises.x, faceParts.midwayBetweenIrises.y, class__ + "eyes-red-style");
         // facePointsRendering(faceParts.midwayBetweenEyes.x, faceParts.midwayBetweenEyes.y, class__ + "eyes-blue-style");
         // ! RENDERING
+
         // Setting the normal distance between the Eye center and the Iris one
-        if (setNormDistBetweenEyeCenterAndIrisCenter == true)
-            normDistBetweenEyeCenterAndIrisCenter = faceParts.midwayBetweenEyes.y - faceParts.midwayBetweenIrises.y;
-        setNormDistBetweenEyeCenterAndIrisCenter = false;
-        // Scroll
-        makeScroll(faceParts);
+        if (setNormDistBetweenEyeCenterAndIrisCenter == true) {
+            makeScroll.state = 0;
+            setterNormDistBetweenEyeCenterAndIrisCenter(faceParts);
+        }
+        setterCurrentDistBetweenEyeCenterAndIrisCenter(faceParts);
+
+        if (makeScroll.state == 1)
+            makeScroll();
     }
 }
 // Function is rendering points
