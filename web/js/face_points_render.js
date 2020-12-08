@@ -59,10 +59,10 @@ function faceDotGenerator(...args) {
         "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
         "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
     };
-    // The function checks if the user blinked; input: currEyelidDist
+
     if (currEyelidDist != undefined)
         blinkCheck();
-    // The function sets the setNormDistBetweenEyeCenterAndIrisCenter and scrolls the webpage
+        
     if (scrollState == true) {
         // Center between Irises
         faceParts.midwayBetweenIrises = {
