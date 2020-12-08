@@ -72,21 +72,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
-@media (max-width: 425px) {
-  html {
-    font-size: 12px !important;
-  }
-}
-@media (min-width: 426px) and (max-width: 600px) {
-  html {
-    font-size: 13px !important;
-  }
-}
-@media (min-width: 601px) and (max-width: 1300px) {
-  html {
-    font-size: 14px !important;
-  }
-}
 html {
   font-size: 16px;
 }

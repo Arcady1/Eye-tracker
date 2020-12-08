@@ -1,6 +1,6 @@
 // The function checks if the user blinked
 function blinkCheck() {
-    let k = 2.2; // ! ПОДОБРАТЬ КОЭФФИЦИЕНТ
+    let k = 2.2; // ! Select a coefficient
     let resetTimer = 500;
 
     // Filling the blinkDates array
