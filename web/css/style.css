@@ -125,11 +125,11 @@ html {
 }
 .index-container .index-content .video__wrapper .eyes-red-style {
   background-color: red;
-  z-index: 3;
+  z-index: 4;
 }
 .index-container .index-content .video__wrapper .eyes-blue-style {
   background-color: blue;
-  z-index: 4;
+  z-index: 3;
 }
 .index-container .index-content .video__wrapper_margin {
   margin: 0 auto;
