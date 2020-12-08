@@ -15,7 +15,7 @@ html {
 
 .index-container {
     width: 100%;
-    min-height: 110vh;
+    min-height: 100vh;
     background-color: #333;
 
     .index-content {
@@ -29,7 +29,7 @@ html {
             transform: scaleX(-1);
 
             .video {
-                display: block;
+                display: none;
                 width: 100%;
                 height: auto;
                 outline: 1px solid #000;
@@ -61,5 +61,21 @@ html {
         .video__wrapper_margin {
             margin: 0 auto;
         }
+
+        .index__paragraph {
+            display: block;
+            width: 20vw;
+            color: #fff;
+            font-size: 1.3rem;
+            line-height: 1.5rem;
+        }
+
+        .index__paragraph_margin {
+            margin: 0 auto;
+        }
+    }
+
+    .index-content_padding {
+        padding: 5% 0;
     }
 }
