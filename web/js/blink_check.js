@@ -15,9 +15,11 @@ function blinkCheck() {
                 console.log("Reset");
             }
             else {
+                console.log(blinkDates[2]);
+                // * STATES
                 scrollState = true;
                 setNormDistBetweenEyeCenterAndIrisCenter = true;
-                console.log(blinkDates[2]);
+                makeScroll = makeScroll_();
             }
         }
         // blinkDatesIndex changing

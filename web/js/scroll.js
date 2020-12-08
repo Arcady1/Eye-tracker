@@ -1,7 +1,6 @@
 // Vars
 setterNormDistBetweenEyeCenterAndIrisCenter = setNormDistBetweenEyeCenterAndIrisCenterFunc();
 setterCurrentDistBetweenEyeCenterAndIrisCenter = setCurrentDistBetweenEyeCenterAndIrisCenterFunc();
-makeScroll = makeScroll_();
 
 function makeScroll_() {
     let norm, cur;
