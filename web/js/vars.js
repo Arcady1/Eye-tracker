@@ -1,17 +1,20 @@
 // jQuery
 let $video__wrapper = $("#video__wrapper");
-let $horizont_button = $("#horizont-button");
-let $horizont_point = $("#horizont-point");
-let $click_pos = $("#fix-pos");
 // JS
 let video = document.getElementById("video");
-let normalDist = null;
-let setNormalDist = false;
-// ! TEMP
-let currentDist = null;
-let up_ = 0;
-let down_ = 0;
-let stop_ = 0;
-let timerID;
-let currentDirection;
-let pastDirecion;
+// The normal distance between the eye center and the iris
+let normDistBetweenEyeCenterAndIrisCenter;
+let setNormDistBetweenEyeCenterAndIrisCenter = false;
+let currentDistBetweenEyeCenterAndIrisCenter;
+// Functions (nested functions)
+let setterNormDistBetweenEyeCenterAndIrisCenter;
+let setterCurrentDistBetweenEyeCenterAndIrisCenter;
+let makeScroll;
+// Eyes distance
+let prevEyelidDist = 0;
+let currEyelidDist = 0;
+// Whether to scroll a webpage
+let scrollState = false;
+// Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
+let blinkDates = [0, 0, 0];
+let blinkDatesIndex = 0;

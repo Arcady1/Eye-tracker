@@ -72,28 +72,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
-@media (max-width: 425px) {
-  html {
-    font-size: 12px !important;
-  }
-}
-@media (min-width: 426px) and (max-width: 600px) {
-  html {
-    font-size: 13px !important;
-  }
-}
-@media (min-width: 601px) and (max-width: 1300px) {
-  html {
-    font-size: 14px !important;
-  }
-}
 html {
   font-size: 16px;
 }
 
 .index-container {
   width: 100%;
-  min-height: 140vh;
+  min-height: 100vh;
   background-color: #333;
 }
 .index-container .index-content {
@@ -107,7 +92,7 @@ html {
   transform: scaleX(-1);
 }
 .index-container .index-content .video__wrapper .video {
-  display: block;
+  display: none;
   width: 100%;
   height: auto;
   outline: 1px solid #000;
@@ -123,37 +108,27 @@ html {
   border-radius: 50%;
   z-index: 2;
 }
-.index-container .index-content .video__wrapper .iris-pos-center {
+.index-container .index-content .video__wrapper .eyes-red-style {
   background-color: red;
-  z-index: 3;
-}
-.index-container .index-content .video__wrapper .eyes-pos-center {
-  background-color: blue;
   z-index: 4;
 }
-.index-container .index-content .index__horizont-button {
-  display: block;
-  width: 200px;
-  height: 100px;
-  border: 2px solid #000;
-  border-radius: 20px;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-.index-container .index-content .index__horizont-point {
-  display: dlock;
-  position: absolute;
-  margin: 0 auto;
-  top: calc(50% - 50px);
-  left: calc(50% - 50px);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #999;
-}
-.index-container .index-content .horizont-button_margin {
-  margin: 0 auto;
+.index-container .index-content .video__wrapper .eyes-blue-style {
+  background-color: blue;
+  z-index: 3;
 }
 .index-container .index-content .video__wrapper_margin {
   margin: 0 auto;
+}
+.index-container .index-content .index__paragraph {
+  display: block;
+  width: 20vw;
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+}
+.index-container .index-content .index__paragraph_margin {
+  margin: 0 auto;
+}
+.index-container .index-content_padding {
+  padding: 5% 0;
 }

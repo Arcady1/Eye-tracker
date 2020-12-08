@@ -1,14 +1,9 @@
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator(...args) {
-    // !!! let currentDist;
+    // CSS classes
+    let class__ = "iris-pos-dot ";
     // Removing previous points 
     $(".iris-pos-dot").remove();
-    // Face rendering
-    // ? args.forEach(facePart => {
-    // ?     facePart.forEach(coords => {
-    // ?         facePointsRendering(coords[0], coords[1], "iris-pos-dot");
-    // ?     });
-    // ? });
     // User face parts
     let faceParts = {
         // Irises
@@ -22,67 +17,91 @@ function faceDotGenerator(...args) {
         },
         // Left eye
         "leftLowerEyePos": {
-            "x": min(args[1][4][0], args[1][3][0]) + (Math.abs(args[1][4][0] - args[1][3][0]) / 2),
-            "y": min(args[1][4][1], args[1][3][1]) + (Math.abs(args[1][4][1] - args[1][3][1]) / 2)
+            "x": args[0][0][0],
+            "y": min(args[1][4][1], args[1][3][1])
         },
         "leftUpperEyePos": {
-            "x": args[2][3][0],
-            "y": args[2][3][1]
+            "x": args[0][0][0],
+            "y": max(args[2][3][1], args[2][4][1])
         },
         // Right eye
         "rightLowerEyePos": {
-            "x": min(args[4][4][0], args[4][3][0]) + (Math.abs(args[4][4][0] - args[4][3][0]) / 2),
-            "y": min(args[4][4][1], args[4][3][1]) + (Math.abs(args[4][4][1] - args[4][3][1]) / 2)
+            "x": args[3][0][0],
+            "y": min(args[4][3][1], args[4][4][1])
         },
         "rightUpperEyePos": {
-            "x": args[5][3][0],
-            "y": args[5][3][1]
+            "x": args[3][0][0],
+            "y": max(args[5][3][1], args[5][4][1])
         }
-    }
-    // * Midway Irises
-    faceParts.midwayBetweenIrises = {
-        "x": min(faceParts.irisLeft.x, faceParts.irisRight.x) + (Math.abs(faceParts.irisLeft.x - faceParts.irisRight.x) / 2),
-        "y": min(faceParts.irisLeft.y, faceParts.irisRight.y) + (Math.abs(faceParts.irisLeft.y - faceParts.irisRight.y) / 2)
     };
+
+    // ! RENDERING
+    // Irises
+    // facePointsRendering(faceParts.irisLeft.x, faceParts.irisLeft.y, class__);
+    // facePointsRendering(faceParts.irisRight.x, faceParts.irisRight.y, class__);
     // Left eye
-    faceParts.leftNormalIrisPos = {
-        "x": min(faceParts.leftUpperEyePos.x, faceParts.leftLowerEyePos.x) + (Math.abs(faceParts.leftUpperEyePos.x - faceParts.leftLowerEyePos.x) / 2),
-        "y": min(faceParts.leftUpperEyePos.y, faceParts.leftLowerEyePos.y) + (Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y) / 2)
-    }
+    // facePointsRendering(faceParts.irisLeft.x, faceParts.leftLowerEyePos.y, class__ + "eyes-red-style");
+    // facePointsRendering(faceParts.irisLeft.x, faceParts.leftUpperEyePos.y, class__ + "eyes-blue-style");
     // Right eye
-    faceParts.rightNormalIrisPos = {
-        "x": min(faceParts.rightUpperEyePos.x, faceParts.rightLowerEyePos.x) + (Math.abs(faceParts.rightUpperEyePos.x - faceParts.rightLowerEyePos.x) / 2),
-        "y": min(faceParts.rightUpperEyePos.y, faceParts.rightLowerEyePos.y) + (Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y) / 2)
-    };
-    // * Midway Normal Irises
-    faceParts.midwayNormalIrisPos = {
-        // You can use this "x": 
-        // "x": min(faceParts.leftNormalIrisPos.x, faceParts.rightNormalIrisPos.x) + (Math.abs(faceParts.leftNormalIrisPos.x - faceParts.rightNormalIrisPos.x) / 2),
-        // Or this one:
-        "x": faceParts.midwayBetweenIrises.x,
-        "y": min(faceParts.leftNormalIrisPos.y, faceParts.rightNormalIrisPos.y) + (Math.abs(faceParts.leftNormalIrisPos.y - faceParts.rightNormalIrisPos.y) / 2)
-    };
+    // facePointsRendering(faceParts.irisRight.x, faceParts.rightLowerEyePos.y, class__ + "eyes-red-style");
+    // facePointsRendering(faceParts.irisRight.x, faceParts.rightUpperEyePos.y, class__ + "eyes-blue-style");
+    // ! RENDERING
 
-    // ?  for (const key in faceParts) {
-    // ?      let CSSclass = "";
-    // ?      if (key == "midwayBetweenIrises")
-    // ?          CSSclass += "iris-pos-center";
-    // ?      else
-    // ?          CSSclass += "eyes-pos-center";
-    // ?      facePointsRendering(faceParts[key].x, faceParts[key].y, CSSclass);
-    // ?  }
-
-    facePointsRendering(faceParts["midwayBetweenIrises"].x, faceParts["midwayBetweenIrises"].y, "iris-pos-dot iris-pos-center");
-    facePointsRendering(faceParts["midwayNormalIrisPos"].x, faceParts["midwayNormalIrisPos"].y, "iris-pos-dot eyes-pos-center");
-
-    // Setting currentDist
-    currentDist = faceParts.midwayNormalIrisPos.y - faceParts.midwayBetweenIrises.y;
-    // Setting normalDist
-    if (setNormalDist == true) {
-        normalDist = currentDist;
-        setNormalDist = false;
+    // Setting the previous Eyelid Distance and current Eyelid Distance
+    // Makes for blink test
+    if (currEyelidDist != undefined) {
+        prevEyelidDist = {
+            "leftEyeYDist": currEyelidDist.leftEyeYDist,
+            "rightEyeYDist": currEyelidDist.rightEyeYDist
+        };
     }
-    checkScroll(currentDist, normalDist);
+    currEyelidDist = {
+        "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
+        "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
+    };
+
+    if (currEyelidDist != undefined)
+        blinkCheck();
+        
+    if (scrollState == true) {
+        // Center between Irises
+        faceParts.midwayBetweenIrises = {
+            "x": centerPosition(faceParts.irisLeft, faceParts.irisRight, "x"),
+            "y": centerPosition(faceParts.irisLeft, faceParts.irisRight, "y")
+        };
+        // Left eye
+        faceParts.leftEyeCenter = {
+            "x": centerPosition(faceParts.leftUpperEyePos, faceParts.leftLowerEyePos, "x"),
+            "y": centerPosition(faceParts.leftUpperEyePos, faceParts.leftLowerEyePos, "y")
+        }
+        // Right eye
+        faceParts.rightEyeCenter = {
+            "x": centerPosition(faceParts.rightUpperEyePos, faceParts.rightLowerEyePos, "x"),
+            "y": centerPosition(faceParts.rightUpperEyePos, faceParts.rightLowerEyePos, "y")
+        };
+        // Center between Eyes
+        faceParts.midwayBetweenEyes = {
+            // x": centerPosition(faceParts.leftEyeCenter, faceParts.rightEyeCenter),
+            "x": faceParts.midwayBetweenIrises.x,
+            "y": centerPosition(faceParts.leftEyeCenter, faceParts.rightEyeCenter, "y")
+        };
+
+        // ! RENDERING
+        // facePointsRendering(faceParts.midwayBetweenIrises.x, faceParts.midwayBetweenIrises.y, class__ + "eyes-red-style");
+        // facePointsRendering(faceParts.midwayBetweenEyes.x, faceParts.midwayBetweenEyes.y, class__ + "eyes-blue-style");
+        // ! RENDERING
+
+        // Setting the normal distance between the Eye center and the Iris one
+        if (setNormDistBetweenEyeCenterAndIrisCenter == true) {
+            makeScroll.state = 0;
+            setterNormDistBetweenEyeCenterAndIrisCenter(faceParts);
+        }
+        // Setting the current distance between the Eye center and the Iris one
+        setterCurrentDistBetweenEyeCenterAndIrisCenter(faceParts);
+
+        if (makeScroll.state == 1)
+            makeScroll();
+    }
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

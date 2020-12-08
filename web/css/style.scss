@@ -2,12 +2,6 @@
 @import 'null-style';
 // переменные
 @import '../source/var';
-// шаблоны
-@import '../source/templ';
-// миксины
-@import '../source/mixin';
-// медиа стили
-@import "media-style";
 
 html {
     font-size: 16px;
@@ -15,7 +9,7 @@ html {
 
 .index-container {
     width: 100%;
-    min-height: 140vh;
+    min-height: 100vh;
     background-color: #333;
 
     .index-content {
@@ -29,7 +23,7 @@ html {
             transform: scaleX(-1);
 
             .video {
-                display: block;
+                display: none;
                 width: 100%;
                 height: auto;
                 outline: 1px solid #000;
@@ -47,46 +41,35 @@ html {
                 z-index: 2;
             }
 
-            .iris-pos-center {
+            .eyes-red-style {
                 background-color: red;
-                z-index: 3;
-            }
-
-            .eyes-pos-center {
-                background-color: blue;
                 z-index: 4;
             }
-        }
 
-        .index__horizont-button {
-            display: block;
-            width: 200px;
-            height: 100px;
-            border: 2px solid #000;
-            border-radius: 20px;
-
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-
-        .index__horizont-point {
-            display: dlock;
-            position: absolute;
-            margin: 0 auto;
-            top: calc(50% - 50px);
-            left: calc(50% - 50px);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #999;
-        }
-
-        .horizont-button_margin {
-            margin: 0 auto;
+            .eyes-blue-style {
+                background-color: blue;
+                z-index: 3;
+            }
         }
 
         .video__wrapper_margin {
             margin: 0 auto;
         }
+
+        .index__paragraph {
+            display: block;
+            width: 20vw;
+            color: #fff;
+            font-size: 1.3rem;
+            line-height: 1.5rem;
+        }
+
+        .index__paragraph_margin {
+            margin: 0 auto;
+        }
+    }
+
+    .index-content_padding {
+        padding: 5% 0;
     }
 }
