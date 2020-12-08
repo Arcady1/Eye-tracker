@@ -9,14 +9,13 @@ function makeScroll_() {
     let downCoef = -0.150;
     // Scroll direction: 0 - horizon, 1 - up, -1 - down
     let scrollDirection = 0;
-    // Whether to scroll a webpage
-    let scrollState = false;
 
     return function makeScroll__() {
         norm = normDistBetweenEyeCenterAndIrisCenter;
         cur = currentDistBetweenEyeCenterAndIrisCenter
 
         console.log("norm:", norm.toFixed(3), "cur:", cur.toFixed(3));
+        // Setting the view direction
         if (cur - norm > upCoef)
             scrollDirection = 1;
         else if (cur - norm < downCoef)
@@ -24,9 +23,8 @@ function makeScroll_() {
         else
             scrollDirection = 0;
         console.log(scrollDirection);
-        
+
         // TODO Делаем скролл в нужном напрвлении
-        // TODO Если положение глаз в 0 => scrollState = false
     }
 }
 // The function sets the current currentDistBetweenEyeCenterAndIrisCenter AVERAGE value of the distance
