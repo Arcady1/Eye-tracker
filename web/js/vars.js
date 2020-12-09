@@ -14,7 +14,7 @@ let makeScroll;
 let prevEyelidDist = 0;
 let currEyelidDist = 0;
 // Whether to scroll a webpage
-let scrollState = false;
+let letsScroll = false;
 // Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
 let blinkDates = [0, 0, 0];
 let blinkDatesIndex = 0;

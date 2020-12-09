@@ -42,10 +42,13 @@ function makeScroll_() {
             scrollTop: window.pageYOffset + length
         }, duration, "linear", () => {
             if (scrollDirection != 0) {
-                console.log("again");
+                console.log("direction: " + scrollDirection);
                 scrollPreset(duration, length);
-            } else
+            } else {
                 console.log("stop");
+                // * STATES
+                letsScroll = false;
+            }
         });
     }
 }

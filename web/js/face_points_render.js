@@ -63,7 +63,7 @@ function faceDotGenerator(...args) {
     if (currEyelidDist != undefined)
         blinkCheck();
         
-    if (scrollState == true) {
+    if (letsScroll == true) {
         // Center between Irises
         faceParts.midwayBetweenIrises = {
             "x": centerPosition(faceParts.irisLeft, faceParts.irisRight, "x"),
