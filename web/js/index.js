@@ -22,3 +22,9 @@ navigator.mediaDevices.getUserMedia({
     .catch(() => {
         console.log("ERROR: Model is not loaded");
     });
+
+// Stop scroll while scrolling the mouse wheel
+window.addEventListener("wheel", () => {
+    // * STATES
+    resetScrollStates();
+});
