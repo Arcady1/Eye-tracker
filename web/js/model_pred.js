@@ -13,6 +13,8 @@ function makePredictions(model_) {
             faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
         }).catch((err) => {
             console.log(err);
+            // Reset scroll if the face is't in the frame
+            scrollDirection = 0;
         });
         makePredictions(model_);
     }, 12);

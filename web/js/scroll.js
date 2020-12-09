@@ -6,9 +6,8 @@ function makeScroll_() {
     let norm, cur;
     let upCoef = 0.105;
     let downCoef = -0.130;
-    // Scroll direction: 0 - horizon, 1 - up, -1 - down
-    let scrollDirection = 0;
     let previousScrollDirection;
+    scrollDirection = 0;
 
     return function makeScroll__() {
         norm = normDistBetweenEyeCenterAndIrisCenter;

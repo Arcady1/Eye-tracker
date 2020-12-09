@@ -58,7 +58,9 @@ html {
 
         .index__paragraph {
             display: block;
-            width: 20vw;
+            width: 30%;
+            min-width: 200px;
+            max-width: 450px;
             color: #fff;
             font-size: 1.3rem;
             line-height: 1.5rem;
