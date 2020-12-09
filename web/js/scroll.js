@@ -40,7 +40,7 @@ function makeScroll_() {
         $('html').animate({
             scrollTop: window.pageYOffset + length
         }, duration, "linear", () => {
-            if (scrollDirection != 0) {
+            if ((scrollDirection == previousScrollDirection) && (scrollDirection != 0)) {
                 console.log("direction: " + scrollDirection);
                 scrollPreset(duration, length);
             } else {

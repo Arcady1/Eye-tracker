@@ -62,7 +62,7 @@ function faceDotGenerator(...args) {
 
     if (currEyelidDist != undefined)
         blinkCheck();
-        
+
     if (letsScroll == true) {
         // Center between Irises
         faceParts.midwayBetweenIrises = {
@@ -101,7 +101,8 @@ function faceDotGenerator(...args) {
 
         if (makeScroll.state == 1)
             makeScroll();
-    }
+    } else
+        scrollDirection = 0;
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {
