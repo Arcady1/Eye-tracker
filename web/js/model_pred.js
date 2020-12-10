@@ -16,8 +16,7 @@ function makePredictions(model_) {
             .catch((err) => {
                 console.log(`NO FACE\n${err}`);
                 // Stop scroll if the face isn't in the frame
-                letsScroll = false;
-                scrollDirection = 0;
+                resetScrollStates();
             });
         makePredictions(model_);
     }, 12);

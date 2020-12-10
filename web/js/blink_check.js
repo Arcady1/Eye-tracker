@@ -16,6 +16,8 @@ function blinkCheck() {
             letsScroll = true;
             setNormDistBetweenEyeCenterAndIrisCenter = true;
             makeScroll = makeScroll_();
+            wheelScrollCounter == 0;
+            showLockSymbol(false);
         }
         // blinkDatesIndex changing
         blinkDatesIndex = changeBlinkIndex();

@@ -25,6 +25,15 @@ navigator.mediaDevices.getUserMedia({
 
 // Stop scroll while scrolling the mouse wheel
 window.addEventListener("wheel", () => {
+    wheelScrollCounter = 1;
     // * STATES
-    resetScrollStates();
+    if (wheelScrollCounter == 1)
+        resetScrollStates();
 });
+// The function displays the lock / unlock symbol => changing $lockSymbol css class
+function showLockSymbol(toLock = true) {
+    if (toLock == true)
+        $lockSymbol.removeClass("unlock-active");
+    else
+        $lockSymbol.addClass("unlock-active");
+}

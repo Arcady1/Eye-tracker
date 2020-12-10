@@ -1,5 +1,6 @@
 // jQuery
 let $video__wrapper = $("#video__wrapper");
+let $lockSymbol = $("#lock-symbol");
 // JS
 let video = document.getElementById("video");
 // The normal distance between the eye center and the iris
@@ -20,3 +21,5 @@ let scrollDirection = 0;
 // Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
 let blinkDates = [0, 0, 0];
 let blinkDatesIndex = 0;
+// Wheel scroll
+let wheelScrollCounter = 0;
