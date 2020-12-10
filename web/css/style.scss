@@ -90,19 +90,22 @@ html {
         top: 0;
         left: 0;
 
+        visibility: hidden;
+        opacity: 0;
+        transition-duration: .5s;
+
         .lock-symbol {
             display: block;
             width: var(--lock-symbol-size);
             max-width: var(--lock-symbol-max-size);
             height: var(--lock-symbol-size);
             max-height: var(--lock-symbol-max-size);
-            background-color: #999;
+            background-color: #ccc;
             border-radius: 50%;
-            opacity: .9;
 
             background-size: 75%;
             background-repeat: no-repeat;
-            background-position: center center;
+            background-position: center;
         }
 
         .lock-active {

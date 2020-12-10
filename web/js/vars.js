@@ -1,6 +1,7 @@
 // jQuery
 let $video__wrapper = $("#video__wrapper");
 let $lockSymbol = $("#lock-symbol");
+let $lockSymbolWrapper = $("#lock-symbol__wrapper");
 // JS
 let video = document.getElementById("video");
 // The normal distance between the eye center and the iris

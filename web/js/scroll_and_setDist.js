@@ -97,5 +97,4 @@ function resetScrollStates() {
     letsScroll = false;
     scrollDirection = 0;
     showLockSymbol();
-    console.log("stop");
 }

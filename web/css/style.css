@@ -150,6 +150,9 @@ html {
   background-color: transparent;
   top: 0;
   left: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 0.5s;
 }
 .index-container .index__lock-symbol__wrapper .lock-symbol {
   display: block;
@@ -157,12 +160,11 @@ html {
   max-width: var(--lock-symbol-max-size);
   height: var(--lock-symbol-size);
   max-height: var(--lock-symbol-max-size);
-  background-color: #999;
+  background-color: #ccc;
   border-radius: 50%;
-  opacity: 0.9;
   background-size: 75%;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
 }
 .index-container .index__lock-symbol__wrapper .lock-active {
   background-image: url("../img/lock/lock.svg");
