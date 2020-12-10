@@ -101,8 +101,7 @@ function faceDotGenerator(...args) {
 
         if (makeScroll.state == 1)
             makeScroll();
-    } else
-        scrollDirection = 0;
+    }
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

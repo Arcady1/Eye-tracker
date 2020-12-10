@@ -8,14 +8,17 @@ async function modelLoading() {
 // The function makes predictions  
 function makePredictions(model_) {
     setTimeout(() => {
-        modelPrediction(model_).then((predictions) => {
-            let path = predictions["0"]["annotations"];
-            faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
-        }).catch((err) => {
-            console.log(err);
-            // Stop scroll if the face is't in the frame
-            letsScroll = false;
-        });
+        modelPrediction(model_)
+            .then((predictions) => {
+                let path = predictions["0"]["annotations"];
+                faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
+            })
+            .catch((err) => {
+                console.log(`NO FACE\n${err}`);
+                // Stop scroll if the face is't in the frame
+                letsScroll = false;
+                scrollDirection = 0;
+            });
         makePredictions(model_);
     }, 12);
 }
