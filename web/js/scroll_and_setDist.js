@@ -6,9 +6,8 @@ function makeScroll_() {
     let norm, cur;
     let upCoef = 0.105;
     let downCoef = -0.130;
-    // Scroll direction: 0 - horizon, 1 - up, -1 - down
-    let scrollDirection = 0;
     let previousScrollDirection;
+    scrollDirection = 0;
 
     return function makeScroll__() {
         norm = normDistBetweenEyeCenterAndIrisCenter;
@@ -30,22 +29,27 @@ function makeScroll_() {
     }
 
     function webpageScroll() {
-        // ! console.log("diection:", scrollDirection);
         if (scrollDirection == 1)
-            scrollPreset(300, -30);
+            scrollPreset(200, -15);
         else if (scrollDirection == -1)
-            scrollPreset(300, 30);
+            scrollPreset(200, 15);
     }
 
     function scrollPreset(duration, length) {
         $('html').animate({
             scrollTop: window.pageYOffset + length
         }, duration, "linear", () => {
-            if (scrollDirection != 0) {
-                console.log("again");
+            // If scroll has reached the beginning or end of the page
+            if ((window.pageYOffset == 0) || (window.pageYOffset == document.documentElement.scrollHeight - document.body.clientHeight))
+                resetScrollStates();
+            // If the view direction wasn't changed
+            else if ((scrollDirection == previousScrollDirection) && (scrollDirection != 0)) {
+                console.log("direction: " + scrollDirection);
                 scrollPreset(duration, length);
-            } else
-                console.log("stop");
+            }
+            // If the view direction was changed to the opposite
+            else
+                resetScrollStates();
         });
     }
 }
@@ -54,12 +58,11 @@ function setCurrentDistBetweenEyeCenterAndIrisCenterFunc() {
     // I use a counter to read the average currentDistBetweenEyeCenterAndIrisCenter value 
     let counter = 0;
     let axisCounter = 0;
-    let stopCounter = 10;
+    let stopCounter = 20;
 
     return function setCurDist(faceParts) {
         ++counter;
         axisCounter += (faceParts.midwayBetweenEyes.y - faceParts.midwayBetweenIrises.y);
-        // ! console.log("cur: " + counter);
         // Update the current average distance
         if (counter == stopCounter) {
             currentDistBetweenEyeCenterAndIrisCenter = axisCounter / counter;
@@ -78,7 +81,6 @@ function setNormDistBetweenEyeCenterAndIrisCenterFunc() {
     return function setNormDist(faceParts) {
         ++counter;
         axisCounter += (faceParts.midwayBetweenEyes.y - faceParts.midwayBetweenIrises.y);
-        // ! console.log("norm: " + counter);
         // Update the norm average distance
         if (counter == stopCounter) {
             normDistBetweenEyeCenterAndIrisCenter = axisCounter / counter;
@@ -89,4 +91,10 @@ function setNormDistBetweenEyeCenterAndIrisCenterFunc() {
             makeScroll.state = 1;
         }
     }
+}
+// Reset scroll states
+function resetScrollStates() {
+    letsScroll = false;
+    scrollDirection = 0;
+    showLockSymbol();
 }

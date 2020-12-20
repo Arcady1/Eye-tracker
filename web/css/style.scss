@@ -1,7 +1,11 @@
 // обнуление стилей
 @import 'null-style';
-// переменные
-@import '../source/var';
+
+:root {
+    --position-dot: 1px;
+    --lock-symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
+    --lock-symbol-max-size: 64px;
+}
 
 html {
     font-size: 16px;
@@ -32,8 +36,8 @@ html {
             .iris-pos-dot {
                 display: block;
                 position: absolute;
-                width: $position-dot;
-                height: $position-dot;
+                width: var(--position-dot);
+                height: var(--position-dot);
                 top: 0;
                 left: 0;
                 background-color: #fff;
@@ -58,7 +62,9 @@ html {
 
         .index__paragraph {
             display: block;
-            width: 20vw;
+            width: 30%;
+            min-width: 200px;
+            max-width: 450px;
             color: #fff;
             font-size: 1.3rem;
             line-height: 1.5rem;
@@ -71,5 +77,43 @@ html {
 
     .index-content_padding {
         padding: 5% 0;
+    }
+
+    .index__lock-symbol__wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        background-color: transparent;
+        top: 0;
+        left: 0;
+
+        visibility: hidden;
+        opacity: 0;
+        transition-duration: .5s;
+
+        .lock-symbol {
+            display: block;
+            width: var(--lock-symbol-size);
+            max-width: var(--lock-symbol-max-size);
+            height: var(--lock-symbol-size);
+            max-height: var(--lock-symbol-max-size);
+            background-color: #ccc;
+            border-radius: 50%;
+
+            background-size: 75%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .lock-active {
+            background-image: url('../img/lock/lock.svg');
+        }
+
+        .unlock-active {
+            background-image: url('../img/lock/unlock.svg');
+        }
     }
 }

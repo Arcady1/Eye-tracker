@@ -5,22 +5,19 @@ function blinkCheck() {
 
     // Filling the blinkDates array
     if ((prevEyelidDist.leftEyeYDist - currEyelidDist.leftEyeYDist > k) || (prevEyelidDist.rightEyeYDist - currEyelidDist.rightEyeYDist > k)) {
-        console.log("Blink!");
+        console.log("blink");
         blinkDates[blinkDatesIndex] = new Date().getTime();
         // Blink interval
-        if (blinkDatesIndex == 1) {
-            blinkDates[2] = blinkDates[1] - blinkDates[0];
-            // Reset blink timer
-            if (blinkDates[2] > resetTimer) {
-                console.log("Reset");
-            }
-            else {
-                console.log(blinkDates[2]);
-                // * STATES
-                scrollState = true;
-                setNormDistBetweenEyeCenterAndIrisCenter = true;
-                makeScroll = makeScroll_();
-            }
+        blinkDates[2] = Math.abs(blinkDates[1] - blinkDates[0]);
+        // Reset blink timer
+        if (blinkDates[2] <= resetTimer) {
+            console.log(blinkDates[2]);
+            // * STATES
+            letsScroll = true;
+            setNormDistBetweenEyeCenterAndIrisCenter = true;
+            makeScroll = makeScroll_();
+            wheelScrollCounter = 0;
+            showLockSymbol(false);
         }
         // blinkDatesIndex changing
         blinkDatesIndex = changeBlinkIndex();

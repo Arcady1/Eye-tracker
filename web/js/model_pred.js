@@ -8,12 +8,16 @@ async function modelLoading() {
 // The function makes predictions  
 function makePredictions(model_) {
     setTimeout(() => {
-        modelPrediction(model_).then((predictions) => {
-            let path = predictions["0"]["annotations"];
-            faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
-        }).catch((err) => {
-            console.log(err);
-        });
+        modelPrediction(model_)
+            .then((predictions) => {
+                let path = predictions["0"]["annotations"];
+                faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
+            })
+            .catch((err) => {
+                console.log(`NO FACE\n${err}`);
+                // Stop scroll if the face isn't in the cam
+                resetScrollStates();
+            });
         makePredictions(model_);
     }, 12);
 }
