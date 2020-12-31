@@ -1,10 +1,16 @@
 // обнуление стилей
 @import 'null-style';
+// template styles
+@import '../sourse/templ';
 
 :root {
     --position-dot: 1px;
-    --lock-symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
-    --lock-symbol-max-size: 64px;
+
+    --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
+    --symbol-max-size: 64px;
+    --symbol-color: #ccc;
+
+    --symbols-duration: .5s;
 }
 
 html {
@@ -15,6 +21,23 @@ html {
     width: 100%;
     min-height: 100vh;
     background-color: #333;
+
+    .index__eye-symbol {
+        @extend %note-images-set;
+        transition-duration: var(--symbols-duration);
+
+        position: fixed;
+        top: 10px;
+        right: 10px;
+    }    
+
+    .eye-symbol-watch {
+        background-image: url('../img/eye/watch.svg');
+    }
+
+    .eye-symbol-unwatch {
+        background-image: url('../img/eye/unwatch.svg');
+    }
 
     .index-content {
         width: 100%;
@@ -92,20 +115,10 @@ html {
 
         visibility: hidden;
         opacity: 0;
-        transition-duration: .5s;
+        transition-duration: var(--symbols-duration);
 
         .lock-symbol {
-            display: block;
-            width: var(--lock-symbol-size);
-            max-width: var(--lock-symbol-max-size);
-            height: var(--lock-symbol-size);
-            max-height: var(--lock-symbol-max-size);
-            background-color: #ccc;
-            border-radius: 50%;
-
-            background-size: 75%;
-            background-repeat: no-repeat;
-            background-position: center;
+            @extend %note-images-set;
         }
 
         .lock-active {

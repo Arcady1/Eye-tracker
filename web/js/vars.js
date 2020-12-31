@@ -1,7 +1,11 @@
 // jQuery
 let $video__wrapper = $("#video__wrapper");
+// Lock symbol
 let $lockSymbol = $("#lock-symbol");
 let $lockSymbolWrapper = $("#lock-symbol__wrapper");
+let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
+// Eye symbol
+let $eyeSymbol = $("#index__eye-symbol");
 // JS
 let video = document.getElementById("video");
 // Eyes distance

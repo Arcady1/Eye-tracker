@@ -72,10 +72,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
+.index-container .index__lock-symbol__wrapper .lock-symbol, .index-container .index__eye-symbol {
+  display: block;
+  width: var(--symbol-size);
+  max-width: var(--symbol-max-size);
+  height: var(--symbol-size);
+  max-height: var(--symbol-max-size);
+  background-color: var(--symbol-color);
+  border-radius: 50%;
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 :root {
   --position-dot: 1px;
-  --lock-symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
-  --lock-symbol-max-size: 64px;
+  --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
+  --symbol-max-size: 64px;
+  --symbol-color: #ccc;
+  --symbols-duration: .5s;
 }
 
 html {
@@ -86,6 +101,18 @@ html {
   width: 100%;
   min-height: 100vh;
   background-color: #333;
+}
+.index-container .index__eye-symbol {
+  transition-duration: var(--symbols-duration);
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+.index-container .eye-symbol-watch {
+  background-image: url("../img/eye/watch.svg");
+}
+.index-container .eye-symbol-unwatch {
+  background-image: url("../img/eye/unwatch.svg");
 }
 .index-container .index-content {
   width: 100%;
@@ -152,19 +179,7 @@ html {
   left: 0;
   visibility: hidden;
   opacity: 0;
-  transition-duration: 0.5s;
-}
-.index-container .index__lock-symbol__wrapper .lock-symbol {
-  display: block;
-  width: var(--lock-symbol-size);
-  max-width: var(--lock-symbol-max-size);
-  height: var(--lock-symbol-size);
-  max-height: var(--lock-symbol-max-size);
-  background-color: #ccc;
-  border-radius: 50%;
-  background-size: 75%;
-  background-repeat: no-repeat;
-  background-position: center;
+  transition-duration: var(--symbols-duration);
 }
 .index-container .index__lock-symbol__wrapper .lock-active {
   background-image: url("../img/lock/lock.svg");
