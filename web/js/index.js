@@ -30,6 +30,7 @@ window.addEventListener("wheel", () => {
     if (wheelScrollCounter == 1)
         resetScrollStates();
 });
+
 // The function displays the lock / unlock symbol => changing $lockSymbol css class
 function showLockSymbol(toLock = true) {
     let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;

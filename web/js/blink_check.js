@@ -9,21 +9,33 @@ function blinkCheck() {
         blinkDates[blinkDatesIndex] = new Date().getTime();
         // Blink interval
         blinkDates[2] = Math.abs(blinkDates[1] - blinkDates[0]);
-        // Reset blink timer
+        // Reset blink timer; this "if" works when the user made double blink
         if (blinkDates[2] <= resetTimer) {
             console.log(blinkDates[2]);
-            // * STATES
-            letsScroll = true;
-            setNormDistBetweenEyeCenterAndIrisCenter = true;
-            makeScroll = makeScroll_();
-            wheelScrollCounter = 0;
-            showLockSymbol(false);
+            setScrollDirectionAndMakeScroll();
         }
         // blinkDatesIndex changing
         blinkDatesIndex = changeBlinkIndex();
     }
 }
+
 // The function swap blinkDatesIndex
 function changeBlinkIndex() {
     return (blinkDatesIndex == 0) ? 1 : 0;
+}
+
+// The function checks scroll direction and starts scroll
+function setScrollDirectionAndMakeScroll() {
+    if (scrollDirection == 0) {
+        showLockSymbol(false);
+        // "index.js"
+        wheelScrollCounter = 0;
+        // TODO Проверка направления взгляда
+        scrollDirection = -1;
+
+        makeScroll();
+    } else {
+        showLockSymbol();
+        scrollDirection = 0;
+    }
 }
