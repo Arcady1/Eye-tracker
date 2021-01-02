@@ -1,31 +1,8 @@
 // The function checks if the user blinked
-// function blinkCheck() {
-//     let k = 2.2; // ! Select a coefficient
-//     let resetTimer = 500;
-
-//     // Filling the blinkDates array
-//     if ((prevEyelidDist.leftEyeYDist - currEyelidDist.leftEyeYDist > k) || (prevEyelidDist.rightEyeYDist - currEyelidDist.rightEyeYDist > k)) {
-//         console.log("blink");
-//         blinkDates[blinkDatesIndex] = new Date().getTime();
-//         // Blink interval
-//         blinkDates[2] = Math.abs(blinkDates[1] - blinkDates[0]);
-//         // Reset blink timer; this "if" works when the user made double blink
-//         if (blinkDates[2] <= resetTimer) {
-//             console.log(blinkDates[2]);
-//             setScrollDirectionAndMakeScroll();
-//         }
-//         // blinkDatesIndex changing
-//         blinkDatesIndex = changeBlinkIndex();
-//     }
-// }
-
-// !
-
-
 function blinkCheck(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist) {
     // Significant reduction in the distance between the eyelids (%)
-    const k_close = 18;
-    const k_open = 6;
+    const k_close = 40;
+    const k_open = 25;
     // Blink interval
     const resetTimer = 500;
     // The difference between previous and current eyelid distance (%)
@@ -33,7 +10,8 @@ function blinkCheck(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDi
         "leftEyeVal": (currentLeftEyeDist * 100) / blinkEyelidDistArr[blinkIndex]["leftEyeDist"],
         "rightEyeVal": (currentRightEyeDist * 100) / blinkEyelidDistArr[blinkIndex]["rightEyeDist"]
     }
-
+    
+    // ? console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
     // Checking for head displacement
     silhouetteOffsetBoolean(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist);
 
