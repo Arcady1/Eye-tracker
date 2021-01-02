@@ -1,12 +1,9 @@
 // The function checks scroll direction and starts scroll
 function setScrollDirectionAndMakeScroll() {
-    if (scrollDirection == 0) {
-        showLockSymbol(false);
+    if (scrollDirection != 0) {
+        // ! showLockSymbol(false);
         // "index.js"
         wheelScrollCounter = 0;
-        // TODO Проверка направления взгляда
-        scrollDirection = -1;
-
         makeScroll();
     } else {
         showLockSymbol();
@@ -14,13 +11,13 @@ function setScrollDirectionAndMakeScroll() {
     }
 }
 
-// function makeScroll_(scrollDirection) {
+// The function triggers a scroll
 function makeScroll() {
     let pageScrollOffset = 2;
     let pageScrollSpeed = 10;
 
     if (scrollDirection == 1)
-        smoothScroll(pageScrollSpeed, pageScrollOffset);
+        smoothScroll(pageScrollSpeed, -pageScrollOffset);
     else if (scrollDirection == -1)
         smoothScroll(pageScrollSpeed, pageScrollOffset);
 

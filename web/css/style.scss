@@ -19,9 +19,9 @@ html {
 
 .index-container {
     width: 100%;
-    // min-height: 100vh;
-    height: 100vh;      // ! temp
-    overflow: hidden;   // ! temp
+    min-height: 100vh;
+    // height: 100vh;      // ! temp
+    // overflow: hidden;   // ! temp
     background-color: #333;
 
     .index__eye-symbol {
@@ -52,7 +52,7 @@ html {
             transform: scaleX(-1);
 
             .video {
-                display: block;
+                display: none;
                 width: 100%;
                 height: auto;
                 outline: 1px solid #000;
