@@ -1,7 +1,7 @@
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator(...args) {
     // ! CSS classes
-    // ! let class__ = "iris-pos-dot ";
+    let class__ = "iris-pos-dot ";
     // Removing previous points 
     $(".iris-pos-dot").remove();
     // User face parts
@@ -35,6 +35,14 @@ function faceDotGenerator(...args) {
         }
     };
 
+    // Current distance between eyelids
+    faceParts.leftCurrentEyelidDist = {
+        "leftEyelidDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
+    };
+    faceParts.rightCurrentEyelidDist = {
+        "rightEyelidDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y)
+    };
+
     // ! RENDERING
     // Irises
     // facePointsRendering(faceParts.irisLeft.x, faceParts.irisLeft.y, class__);
@@ -47,21 +55,29 @@ function faceDotGenerator(...args) {
     // facePointsRendering(faceParts.irisRight.x, faceParts.rightUpperEyePos.y, class__ + "eyes-blue-style");
     // ! RENDERING
 
-    // Setting the previous Eyelid Distance and current Eyelid Distance
-    // Makes for blink test
-    if (currEyelidDist != undefined) {
-        prevEyelidDist = {
-            "leftEyeYDist": currEyelidDist.leftEyeYDist,
-            "rightEyeYDist": currEyelidDist.rightEyeYDist
-        };
+    // Default distance between eyelids
+    if (blinkEyelidDistArr[blinkIndex] == 0) {
+        blinkEyelidDistArr[blinkIndex] = {
+            "leftEyeDist": faceParts.leftCurrentEyelidDist.leftEyelidDist,
+            "rightEyeDist": faceParts.rightCurrentEyelidDist.rightEyelidDist
+        }
     }
-    currEyelidDist = {
-        "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
-        "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
-    };
 
-    if (currEyelidDist != undefined)
-        blinkCheck();
+    // Setting the previous Eyelid Distance and current Eyelid Distance
+    // ! Makes for blink test
+    // ! if (currEyelidDist != undefined) {
+    // !     prevEyelidDist = {
+    // !         "leftEyeYDist": currEyelidDist.leftEyeYDist,
+    // !         "rightEyeYDist": currEyelidDist.rightEyeYDist
+    // !     };
+    // ! }
+    // ! currEyelidDist = {
+    // !     "leftEyeYDist": Math.abs(faceParts.leftUpperEyePos.y - faceParts.leftLowerEyePos.y),
+    // !     "rightEyeYDist": Math.abs(faceParts.rightUpperEyePos.y - faceParts.rightLowerEyePos.y)
+    // ! };
+
+    // ! if (currEyelidDist != undefined)
+    blinkCheck(faceParts.leftCurrentEyelidDist.leftEyelidDist, faceParts.rightCurrentEyelidDist.rightEyelidDist);
 }
 // Function is rendering points
 function facePointsRendering(x, y, cssClass) {

@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root {
-  --position-dot: 1px;
+  --position-dot: 2px;
   --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
   --symbol-max-size: 64px;
   --symbol-color: #ccc;
@@ -99,7 +99,8 @@ html {
 
 .index-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background-color: #333;
 }
 .index-container .index__eye-symbol {
@@ -125,7 +126,7 @@ html {
   transform: scaleX(-1);
 }
 .index-container .index-content .video__wrapper .video {
-  display: none;
+  display: block;
   width: 100%;
   height: auto;
   outline: 1px solid #000;

@@ -15,7 +15,10 @@ let currEyelidDist = 0;
 let scrollDirection = 0;
 // Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
 let blinkDates = [0, 0, 0];
-let blinkDatesIndex = 0;
+// ! let blinkDatesIndex = 0;
+// Array of distances between eyelids { "leftEyeDist", rightEyeDist" }
+let blinkEyelidDistArr = [0, 0, 0];
+let blinkIndex = 0;
 // Wheel scroll
 let wheelScrollCounter = 0;
 // ScrollTimer
