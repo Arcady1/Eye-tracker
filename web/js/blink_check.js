@@ -23,19 +23,3 @@ function blinkCheck() {
 function changeBlinkIndex() {
     return (blinkDatesIndex == 0) ? 1 : 0;
 }
-
-// The function checks scroll direction and starts scroll
-function setScrollDirectionAndMakeScroll() {
-    if (scrollDirection == 0) {
-        showLockSymbol(false);
-        // "index.js"
-        wheelScrollCounter = 0;
-        // TODO Проверка направления взгляда
-        scrollDirection = -1;
-
-        makeScroll();
-    } else {
-        showLockSymbol();
-        scrollDirection = 0;
-    }
-}

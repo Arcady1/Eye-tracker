@@ -18,3 +18,5 @@ let blinkDates = [0, 0, 0];
 let blinkDatesIndex = 0;
 // Wheel scroll
 let wheelScrollCounter = 0;
+// ScrollTimer
+let timerScroll;
