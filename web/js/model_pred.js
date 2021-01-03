@@ -11,12 +11,26 @@ function makePredictions(model_) {
         modelPrediction(model_)
             .then((predictions) => {
                 let path = predictions["0"]["annotations"];
-                faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"]);
+                faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
+            })
+            .then(() => {
+                changeEyeWatchSymbol.status = 0;
+                // changeEyeWatchSymbol.status == the number of function calls
+                if (changeEyeWatchSymbol.status == 0) {
+                    changeEyeWatchSymbol.status = 1;
+                    changeEyeWatchSymbol(false);
+                }
             })
             .catch((err) => {
+                if (changeEyeWatchSymbol.status == 1) {
+                    changeEyeWatchSymbol.status = 2
+                    changeEyeWatchSymbol(true);
+                }
                 console.log(`NO FACE\n${err}`);
                 // Stop scroll if the face isn't in the cam
-                resetScrollStates();
+                scrollDirection = 0;
+                // Stop blinks if the face isn't in the cam
+                blinkIndex = 0;
             });
         makePredictions(model_);
     }, 12);

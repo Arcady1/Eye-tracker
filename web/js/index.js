@@ -28,11 +28,11 @@ window.addEventListener("wheel", () => {
     wheelScrollCounter += 1;
     // * STATES
     if (wheelScrollCounter == 1)
-        resetScrollStates();
+        scrollDirection = 0;
 });
+
 // The function displays the lock / unlock symbol => changing $lockSymbol css class
 function showLockSymbol(toLock = true) {
-    let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
     // Make it visible
     $lockSymbolWrapper.css({
         "visibility": "visible",
@@ -53,4 +53,14 @@ function showLockSymbol(toLock = true) {
             "opacity": 0
         });
     }, lockSymbolWrapperHiddenTimer);
+}
+
+function changeEyeWatchSymbol(unwatchSymbol = true) {
+    if (unwatchSymbol == true) {
+        $eyeSymbol.removeClass("eye-symbol-watch");
+        $eyeSymbol.addClass("eye-symbol-unwatch");
+    } else {
+        $eyeSymbol.removeClass("eye-symbol-unwatch");
+        $eyeSymbol.addClass("eye-symbol-watch");
+    }
 }
