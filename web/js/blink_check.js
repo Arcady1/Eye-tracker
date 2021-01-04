@@ -1,5 +1,6 @@
 let scroll_and_setDist = require('./scroll_and_setDist.js');
 let vars = require('./vars.js');
+let symbols = require('./symbols.js');
 
 // The function checks if the user blinked
 function blinkCheck() {
@@ -49,8 +50,7 @@ function blinkCheck() {
                     vars.setScrollDirection = true;
                     silhouetteOffsetBoolean(fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
                     // It shows the unlock sign
-                    console.log("showLockSymbol(false)");
-                    // ! showLockSymbol(false);
+                    symbols.showLockSymbol(false);
                 }
             }
 

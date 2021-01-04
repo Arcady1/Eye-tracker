@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-app": "browserify web/js/index.js web/js/model_pred.js -o web/js/bundle.js"
+    "build-app": "browserify web/js/index.js -o web/js/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -13,5 +13,8 @@
   "author": "Arkady Gusarov",
   "devDependencies": {
     "browserify": "latest"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
   }
 }
