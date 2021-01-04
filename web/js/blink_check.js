@@ -106,8 +106,7 @@ function blinkCheck() {
 
         function scrollBeginning() {
             vars.setScrollDirection = false;
-            console.log("scroll_and_setDist.setScrollDirectionAndMakeScroll()");
-            // ! scroll_and_setDist.setScrollDirectionAndMakeScroll();
+            scroll_and_setDist.setScrollDirectionAndMakeScroll();
         }
     }
 }

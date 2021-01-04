@@ -2,42 +2,25 @@ let vars = require('./vars.js');
 
 // The function checks scroll direction and starts scroll
 function setScrollDirectionAndMakeScroll() {
-    // Scroll direction: 0 - horizon, 1 - up, -1 - down
-    // ! let vars.scrollDirection = 0;
-    //  It is used for the correct operation of the function silhouetteOffsetBoolean. Allows to set the direction of scrolling by head movement
-    // ! let toSetScrollDirection = false;
+    let pageScrollOffset = 2;
+    let pageScrollSpeed = 10;
+    let timerScroll;
 
-    // ! return function (getScrollDirection_ = false, setScrollDirection_ = 5, getToSetScrollDirection_ = false, setToSetScrollDirection_ = 5) {
     return function () {
-        // Getting and setting vars.scrollDirection and toSetScrollDirection
-        // if (setScrollDirection_ != 5) {
-        //     console.log("setScrollDirection_");
-        //     vars.scrollDirection = setScrollDirection;
-        // }
-        // if (getToSetScrollDirection_ == true) {
-        //     console.log("getToSetScrollDirection_");
-        //     return toSetScrollDirection;
-        // }
-        // if (setToSetScrollDirection_ != 5) {
-        //     console.log("setToSetScrollDirection_");
-        //     toSetScrollDirection = setToSetScrollDirection;
-        // }
-
         // The function checks scroll direction and starts scroll
         if (vars.scrollDirection != 0) {
             // "index.js"
+            console.log("wheelScrollCounter = 0;");
             // ! wheelScrollCounter = 0;
             makeScroll();
         } else {
+            console.log("showLockSymbol();");
             // !showLockSymbol();
             vars.scrollDirection = 0;
         }
 
         // The function triggers a scroll
         function makeScroll() {
-            let pageScrollOffset = 2;
-            let pageScrollSpeed = 10;
-
             if (vars.scrollDirection == 1)
                 smoothScroll(pageScrollSpeed, -pageScrollOffset);
             else if (vars.scrollDirection == -1)
@@ -56,14 +39,15 @@ function setScrollDirectionAndMakeScroll() {
                     return 0;
                 }
 
-                vars.timerScroll = setTimeout(smoothScroll, scrollSpeed, scrollSpeed, scrollOffset);
+                timerScroll = setTimeout(smoothScroll, scrollSpeed, scrollSpeed, scrollOffset);
             }
         }
 
         // Reset scroll states
         function resetScrollStates() {
             vars.scrollDirection = 0;
-            clearTimeout(vars.timerScroll);
+            clearTimeout(timerScroll);
+            console.log("showLockSymbol();");
             // ! showLockSymbol();
         }
     }
