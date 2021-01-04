@@ -3,8 +3,8 @@ let blink_check = require('./blink_check.js');
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
-    // Array of distances between eyelids { "leftEyeDist", rightEyeDist" }
-    let blinkEyelidDistArr = [0, 0, 0];
+    // Fixed distances between eyelids { "leftEyeDist", rightEyeDist" }
+    let fixedEyelidDist = 0;
     // Fixed silhouette positions { "top", "botom" }
     let fixedSilhouettePos = 0;
     // User face parts
@@ -46,8 +46,8 @@ function faceDotGenerator() {
         }
 
         // Default distance between eyelids
-        if (blinkEyelidDistArr[0] == 0) {
-            blinkEyelidDistArr[0] = {
+        if (fixedEyelidDist == 0) {
+            fixedEyelidDist = {
                 "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
                 "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
             }
@@ -61,7 +61,7 @@ function faceDotGenerator() {
             }
         }
 
-        blink_check.blinkCheck(blinkEyelidDistArr, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette, fixedSilhouettePos);
+        blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
     }
 }
 

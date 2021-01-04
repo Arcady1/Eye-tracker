@@ -5,8 +5,8 @@ let vars = require('./vars.js');
 // The function checks if the user blinked
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
-    const k_close = 25;
-    const k_open = 5;
+    const k_close = 40;
+    const k_open = 18;
     // Blink interval
     const resetTimer = 500;
     // The difference between previous and current eyelid distance (%)
@@ -14,25 +14,24 @@ function blinkCheck() {
     // Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
     let blinkDates = [0, 0, 0];
     let blinkDatesIndex = 0;
-    // The index of blinkEyelidDistArr
+    // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
     let blinkIndex = 0;
 
-    return function (blinkEyelidDistArr, fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist) {
+    return function (fixedEyelidDist, fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos) {
         // The function checks if the user blinked
         currentEyeDistValue = {
-            "leftEyeVal": (currentLeftEyeDist * 100) / blinkEyelidDistArr[0]["leftEyeDist"],
-            "rightEyeVal": (currentRightEyeDist * 100) / blinkEyelidDistArr[0]["rightEyeDist"]
+            "leftEyeVal": (currentLeftEyeDist * 100) / fixedEyelidDist["leftEyeDist"],
+            "rightEyeVal": (currentRightEyeDist * 100) / fixedEyelidDist["rightEyeDist"]
         }
 
-        console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
-
         // Checking for head displacement
-        silhouetteOffsetBoolean(blinkEyelidDistArr, fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist);
+        silhouetteOffsetBoolean(fixedEyelidDist, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
+
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (blinkIndex == 0)) {
             console.log("close");
             blinkIndex = 1;
-        } else if (((100 - currentEyeDistValue.leftEyeVal < -k_open) || (100 - currentEyeDistValue.rightEyeVal < -k_open)) && (blinkIndex == 1)) {
+        } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (blinkIndex == 1)) {
             console.log("open");
             blinkDates[blinkDatesIndex] = new Date().getTime();
             blinkIndex = 2;
@@ -49,7 +48,7 @@ function blinkCheck() {
                 else {
                     // Setting the vars.scrollDirection
                     vars.setScrollDirection = true;
-                    silhouetteOffsetBoolean(fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist);
+                    silhouetteOffsetBoolean(fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
                     // It shows the unlock sign
                     console.log("showLockSymbol(false)");
                     // ! showLockSymbol(false);
@@ -66,11 +65,11 @@ function blinkCheck() {
         }
 
         // The function checks if there was a significant displacement of the head
-        function silhouetteOffsetBoolean(blinkEyelidDistArr, fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist) {
+        function silhouetteOffsetBoolean(fixedEyelidDist, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos) {
             // Significant displacement of a person's face (%)
-            const k = 2.5;
-            let offsetValueTop = (fixedSilhouetteDist.top * 100) / currentSilhouetteDist.top;
-            let offsetValueBottom = (fixedSilhouetteDist.bottom * 100) / currentSilhouetteDist.bottom;
+            const k = 2;
+            let offsetValueTop = (fixedSilhouettePos.top * 100) / currentSilhouettePos.top;
+            let offsetValueBottom = (fixedSilhouettePos.bottom * 100) / currentSilhouettePos.bottom;
 
             /* If vars.setScrollDirection == true, the function sets vars.scrollDirection by head movement, otherwise checks 
             the face offset to reset blinkIndex and set blinkEyelidDistArr*/
@@ -78,35 +77,38 @@ function blinkCheck() {
                 // Scroll up
                 if ((100 - offsetValueTop < -k) || (100 - offsetValueBottom < -k)) {
                     vars.scrollDirection = 1;
-                    // Beginnig of scroll
-                    scroll_and_setDist.setScrollDirectionAndMakeScroll();
-                    vars.setScrollDirection = false;
+                    // Beginning of scroll
+                    scrollBeginning();
                 }
                 // Scroll down
                 else if ((100 - offsetValueBottom > k) || (100 - offsetValueTop > k)) {
                     vars.scrollDirection = -1;
                     // Beginning of scroll
-                    scroll_and_setDist.setScrollDirectionAndMakeScroll();
-                    vars.setScrollDirection = false;
+                    scrollBeginning();
                 }
             } else {
                 if ((100 - offsetValueTop < -k) || (100 - offsetValueTop > k) || (100 - offsetValueBottom < -k) || (100 - offsetValueBottom > k)) {
                     console.log("New direction");
 
                     // Setting a the default silhouette position
-                    fixedSilhouettePos.top = currentSilhouetteDist.top;
-                    fixedSilhouettePos.bottom = currentSilhouetteDist.bottom;
+                    fixedSilhouettePos.top = currentSilhouettePos.top;
+                    fixedSilhouettePos.bottom = currentSilhouettePos.bottom;
                     // Setting the blinkIndex
                     blinkIndex = 0;
 
-                    console.log(currentLeftEyeDist, currentRightEyeDist);
                     // Setting a the default eyes distance
-                    blinkEyelidDistArr[blinkIndex] = {
+                    fixedEyelidDist = {
                         "leftEyeDist": currentLeftEyeDist,
                         "rightEyeDist": currentRightEyeDist
                     }
                 }
             }
+        }
+
+        function scrollBeginning() {
+            vars.setScrollDirection = false;
+            console.log("scroll_and_setDist.setScrollDirectionAndMakeScroll()");
+            // ! scroll_and_setDist.setScrollDirectionAndMakeScroll();
         }
     }
 }
@@ -157,8 +159,8 @@ let blink_check = require('./blink_check.js');
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
-    // Array of distances between eyelids { "leftEyeDist", rightEyeDist" }
-    let blinkEyelidDistArr = [0, 0, 0];
+    // Fixed distances between eyelids { "leftEyeDist", rightEyeDist" }
+    let fixedEyelidDist = 0;
     // Fixed silhouette positions { "top", "botom" }
     let fixedSilhouettePos = 0;
     // User face parts
@@ -200,8 +202,8 @@ function faceDotGenerator() {
         }
 
         // Default distance between eyelids
-        if (blinkEyelidDistArr[0] == 0) {
-            blinkEyelidDistArr[0] = {
+        if (fixedEyelidDist == 0) {
+            fixedEyelidDist = {
                 "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
                 "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
             }
@@ -215,7 +217,7 @@ function faceDotGenerator() {
             }
         }
 
-        blink_check.blinkCheck(blinkEyelidDistArr, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette, fixedSilhouettePos);
+        blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
     }
 }
 
@@ -509,13 +511,9 @@ module.exports = {
     // toSetScrollDirectionFunc: toSetScrollDirectionFunc
 }
 },{"./vars.js":7}],7:[function(require,module,exports){
-let scrollDirection = 0;
-let setScrollDirection = false;
-let timerScroll;
-
 module.exports = {
-    scrollDirection: scrollDirection,
-    setScrollDirection: setScrollDirection,
-    timerScroll: timerScroll
+    scrollDirection: 0,
+    setScrollDirection: false
+    // timerScroll: timerScroll
 }
 },{}]},{},[4,5]);
