@@ -14,8 +14,6 @@ function blinkCheck() {
     // Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
     let blinkDates = [0, 0, 0];
     let blinkDatesIndex = 0;
-    // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
-    let blinkIndex = 0;
 
     return function (fixedEyelidDist, fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos) {
         // The function checks if the user blinked

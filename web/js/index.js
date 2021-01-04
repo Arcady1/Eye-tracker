@@ -32,22 +32,10 @@ let vars = require('./vars.js');
         });
 })();
 
-
-
 // Stop scroll while scrolling the mouse wheel
 window.addEventListener("wheel", () => {
     vars.wheelScrollCounter += 1;
-    // * STATES
+
     if (vars.wheelScrollCounter == 1)
         vars.scrollDirection = 0;
 });
-
-// TODO vars.js
-// // jQuery
-// let $video__wrapper = $("#video__wrapper");
-// // Lock symbol
-// ! let $lockSymbol = $("#lock-symbol");
-// ! let $lockSymbolWrapper = $("#lock-symbol__wrapper");
-// ! let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
-// // Eye symbol
-// let $eyeSymbol = $("#index__eye-symbol");

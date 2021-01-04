@@ -8,7 +8,6 @@ function showLockSymbol() {
     let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
 
     return function (toLock = true) {
-        console.log("IN showLockSymbol()");
         // Make it visible
         $lockSymbolWrapper.css({
             "visibility": "visible",
@@ -32,16 +31,22 @@ function showLockSymbol() {
     }
 }
 
-// function changeEyeWatchSymbol(unwatchSymbol = true) {
-//     if (unwatchSymbol == true) {
-//         $eyeSymbol.removeClass("eye-symbol-watch");
-//         $eyeSymbol.addClass("eye-symbol-unwatch");
-//     } else {
-//         $eyeSymbol.removeClass("eye-symbol-unwatch");
-//         $eyeSymbol.addClass("eye-symbol-watch");
-//     }
-// }
+function changeEyeWatchSymbol() {
+    // Eye symbol
+    let $eyeSymbol = $("#index__eye-symbol");
+
+    return function (unwatchSymbol = true) {
+        if (unwatchSymbol == true) {
+            $eyeSymbol.removeClass("eye-symbol-watch");
+            $eyeSymbol.addClass("eye-symbol-unwatch");
+        } else {
+            $eyeSymbol.removeClass("eye-symbol-unwatch");
+            $eyeSymbol.addClass("eye-symbol-watch");
+        }
+    }
+}
 
 module.exports = {
-    showLockSymbol: showLockSymbol()
+    showLockSymbol: showLockSymbol(),
+    changeEyeWatchSymbol: changeEyeWatchSymbol()
 }

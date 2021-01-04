@@ -10889,8 +10889,6 @@ function blinkCheck() {
     // Indexes: 0 - the first blink, 1 - the second one, 2 - difference (ms)
     let blinkDates = [0, 0, 0];
     let blinkDatesIndex = 0;
-    // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
-    let blinkIndex = 0;
 
     return function (fixedEyelidDist, fixedSilhouettePos, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos) {
         // The function checks if the user blinked
@@ -11132,27 +11130,17 @@ let vars = require('./vars.js');
         });
 })();
 
-
-
 // Stop scroll while scrolling the mouse wheel
 window.addEventListener("wheel", () => {
     vars.wheelScrollCounter += 1;
-    // * STATES
+
     if (vars.wheelScrollCounter == 1)
         vars.scrollDirection = 0;
 });
-
-// TODO vars.js
-// // jQuery
-// let $video__wrapper = $("#video__wrapper");
-// // Lock symbol
-// ! let $lockSymbol = $("#lock-symbol");
-// ! let $lockSymbolWrapper = $("#lock-symbol__wrapper");
-// ! let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
-// // Eye symbol
-// let $eyeSymbol = $("#index__eye-symbol");
 },{"./model_pred.js":6,"./vars.js":9}],6:[function(require,module,exports){
 let face_points_render = require('./face_points_render.js');
+let symbols = require('./symbols.js');
+let vars = require('./vars.js');
 
 // Model loading
 async function modelLoading() {
@@ -11173,25 +11161,25 @@ function makePredictions(model_) {
                     path = predictions["0"]["annotations"];
                     face_points_render.faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
                 })
-                // .then(() => {
-                //     changeEyeWatchSymbol.status = 0;
-                //     // changeEyeWatchSymbol.status == the number of function calls
-                //     if (changeEyeWatchSymbol.status == 0) {
-                //         changeEyeWatchSymbol.status = 1;
-                //         changeEyeWatchSymbol(false);
-                //     }
-                // })
-                // .catch((err) => {
-                //     if (changeEyeWatchSymbol.status == 1) {
-                //         changeEyeWatchSymbol.status = 2
-                //         changeEyeWatchSymbol(true);
-                //     }
-                //     console.log(`NO FACE\n${err}`);
-                //     // Stop scroll if the face isn't in the cam
-                //     scrollDirection = 0;
-                //     // Stop blinks if the face isn't in the cam
-                //     blinkIndex = 0;
-                // });
+                .then(() => {
+                    symbols.changeEyeWatchSymbol.status = 0;
+                    // symbols.changeEyeWatchSymbol.status == the number of function calls
+                    if (symbols.changeEyeWatchSymbol.status == 0) {
+                        symbols.changeEyeWatchSymbol.status = 1;
+                        symbols.changeEyeWatchSymbol(false);
+                    }
+                })
+                .catch((err) => {
+                    if (symbols.changeEyeWatchSymbol.status == 1) {
+                        symbols.changeEyeWatchSymbol.status = 2
+                        symbols.changeEyeWatchSymbol(true);
+                    }
+                    console.log(`NO FACE\n${err}`);
+                    // Stop scroll if the face isn't in the cam
+                    vars.scrollDirection = 0;
+                    // Stop blinks if the face isn't in the cam
+                    vars.blinkIndex = 0;
+                });
             predictionsTimer(model_);
         }, 12);
     }
@@ -11209,7 +11197,7 @@ module.exports = {
     modelLoading: modelLoading,
     makePredictions: makePredictions
 }
-},{"./face_points_render.js":4}],7:[function(require,module,exports){
+},{"./face_points_render.js":4,"./symbols.js":8,"./vars.js":9}],7:[function(require,module,exports){
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
 
@@ -11275,7 +11263,6 @@ function showLockSymbol() {
     let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
 
     return function (toLock = true) {
-        console.log("IN showLockSymbol()");
         // Make it visible
         $lockSymbolWrapper.css({
             "visibility": "visible",
@@ -11299,18 +11286,24 @@ function showLockSymbol() {
     }
 }
 
-// function changeEyeWatchSymbol(unwatchSymbol = true) {
-//     if (unwatchSymbol == true) {
-//         $eyeSymbol.removeClass("eye-symbol-watch");
-//         $eyeSymbol.addClass("eye-symbol-unwatch");
-//     } else {
-//         $eyeSymbol.removeClass("eye-symbol-unwatch");
-//         $eyeSymbol.addClass("eye-symbol-watch");
-//     }
-// }
+function changeEyeWatchSymbol() {
+    // Eye symbol
+    let $eyeSymbol = $("#index__eye-symbol");
+
+    return function (unwatchSymbol = true) {
+        if (unwatchSymbol == true) {
+            $eyeSymbol.removeClass("eye-symbol-watch");
+            $eyeSymbol.addClass("eye-symbol-unwatch");
+        } else {
+            $eyeSymbol.removeClass("eye-symbol-unwatch");
+            $eyeSymbol.addClass("eye-symbol-watch");
+        }
+    }
+}
 
 module.exports = {
-    showLockSymbol: showLockSymbol()
+    showLockSymbol: showLockSymbol(),
+    changeEyeWatchSymbol: changeEyeWatchSymbol()
 }
 },{"jquery":1}],9:[function(require,module,exports){
 module.exports = {
@@ -11318,6 +11311,8 @@ module.exports = {
     scrollDirection: 0,
     //  It is used for the correct operation of the function silhouetteOffsetBoolean. Allows to set the direction of scrolling by head movement
     setScrollDirection: false,
-    wheelScrollCounter: 0
+    wheelScrollCounter: 0,
+    // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
+    blinkIndex: 0
 }
 },{}]},{},[5]);
