@@ -6,7 +6,8 @@ let symbols = require('./symbols.js');
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
     const k_close = 40;
-    const k_open = 18;
+    const k_open_start = 18;
+    const k_open_end = 25;
     // Blink interval
     const resetTimer = 500;
     // The difference between previous and current eyelid distance (%)
@@ -25,11 +26,12 @@ function blinkCheck() {
         // Checking for head displacement
         silhouetteOffsetBoolean(fixedEyelidDist, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
 
+        console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (blinkIndex == 0)) {
             console.log("close");
             blinkIndex = 1;
-        } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (blinkIndex == 1)) {
+        } else if (((100 - currentEyeDistValue.leftEyeVal < k_open_end) || (100 - currentEyeDistValue.rightEyeVal < k_open_end)) && ((100 - currentEyeDistValue.leftEyeVal > k_open_start) || (100 - currentEyeDistValue.rightEyeVal > k_open_start)) && (blinkIndex == 1)) {
             console.log("open");
             blinkDates[blinkDatesIndex] = new Date().getTime();
             blinkIndex = 2;
