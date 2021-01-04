@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // jQuery
 let $video__wrapper = $("#video__wrapper");
 // Lock symbol
@@ -27,3 +28,14 @@ let wheelScrollCounter = 0;
 let timerScroll;
 //  It is used for the correct operation of the function silhouetteOffsetBoolean. Allows to set the direction of scrolling by head movement
 let setScrollDirection = false;
+=======
+module.exports = {
+    // Scroll direction: 0 - horizon, 1 - up, -1 - down
+    scrollDirection: 0,
+    //  It is used for the correct operation of the function silhouetteOffsetBoolean. Allows to set the direction of scrolling by head movement
+    setScrollDirection: false,
+    wheelScrollCounter: 0,
+    // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
+    blinkIndex: 0
+}
+>>>>>>> develop-head-movement-to-scroll-modules

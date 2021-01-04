@@ -1,0 +1,20 @@
+{
+  "name": "eye-control",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-app": "browserify web/js/index.js -o web/js/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcady1/Eye-control.git"
+  },
+  "author": "Arkady Gusarov",
+  "devDependencies": {
+    "browserify": "latest"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
+}

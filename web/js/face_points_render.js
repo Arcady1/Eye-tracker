@@ -1,9 +1,17 @@
 // The function circles the face parts; input: array of face position (x, y, z) 
+<<<<<<< HEAD
 function faceDotGenerator(...args) {
     // ! CSS classes
     let class__ = "iris-pos-dot ";
     // Removing previous points 
     $(".iris-pos-dot").remove();
+=======
+function faceDotGenerator() {
+    // Fixed distances between eyelids { "leftEyeDist", rightEyeDist" }
+    let fixedEyelidDist = 0;
+    // Fixed silhouette positions { "top", "botom" }
+    let fixedSilhouettePos = 0;
+>>>>>>> develop-head-movement-to-scroll-modules
     // User face parts
     let faceParts = {
         // Irises
@@ -59,11 +67,12 @@ function faceDotGenerator(...args) {
     // facePointsRendering(faceParts.irisRight.x, faceParts.rightUpperEyePos.y, class__ + "eyes-blue-style");
     // ! RENDERING
 
-    // Default distance between eyelids
-    if (fixedEyelidDist == 0) {
-        fixedEyelidDist = {
-            "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
-            "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
+        // Default distance between eyelids
+        if (fixedEyelidDist == 0) {
+            fixedEyelidDist = {
+                "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
+                "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
+            }
         }
     }
 
@@ -73,6 +82,11 @@ function faceDotGenerator(...args) {
             "top": faceParts.silhouette.top,
             "bottom": faceParts.silhouette.bottom
         }
+<<<<<<< HEAD
+=======
+
+        blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
+>>>>>>> develop-head-movement-to-scroll-modules
     }
 
     blinkCheck(faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette, fixedSilhouettePos);
