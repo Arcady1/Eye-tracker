@@ -45,12 +45,20 @@ function faceDotGenerator() {
             "bottom": extra_func.minInArrayOfArrays(args[6], 1)
         }
 
+<<<<<<< HEAD
         // Default distance between eyelids
         if (blinkEyelidDistArr[0] == 0) {
             blinkEyelidDistArr[0] = {
                 "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
                 "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
             }
+=======
+    // Default distance between eyelids
+    if (fixedEyelidDist == 0) {
+        fixedEyelidDist = {
+            "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
+            "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
+>>>>>>> develop-head-movement-to-scroll
         }
 
         // Fixed silhouette top and bottom positions
