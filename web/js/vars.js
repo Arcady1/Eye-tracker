@@ -17,7 +17,7 @@ let scrollDirection = 0;
 let blinkDates = [0, 0, 0];
 let blinkDatesIndex = 0;
 // Array of distances between eyelids { "leftEyeDist", rightEyeDist" }
-let blinkEyelidDistArr = [0, 0, 0];
+let fixedEyelidDist = 0;
 let blinkIndex = 0;
 // Fixed silhouette positions { "top", "botom" }
 let fixedSilhouettePos = 0;

@@ -2,23 +2,22 @@
 function blinkCheck(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist) {
     // Significant reduction in the distance between the eyelids (%)
     const k_close = 40;
-    const k_open = 25;
+    const k_open = 18;
     // Blink interval
     const resetTimer = 500;
     // The difference between previous and current eyelid distance (%)
     let currentEyeDistValue = {
-        "leftEyeVal": (currentLeftEyeDist * 100) / blinkEyelidDistArr[blinkIndex]["leftEyeDist"],
-        "rightEyeVal": (currentRightEyeDist * 100) / blinkEyelidDistArr[blinkIndex]["rightEyeDist"]
+        "leftEyeVal": (currentLeftEyeDist * 100) / fixedEyelidDist["leftEyeDist"],
+        "rightEyeVal": (currentRightEyeDist * 100) / fixedEyelidDist["rightEyeDist"]
     }
-    
-    // ? console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
+
     // Checking for head displacement
     silhouetteOffsetBoolean(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist);
 
     if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (blinkIndex == 0)) {
         console.log("close");
         blinkIndex = 1;
-    } else if (((100 - currentEyeDistValue.leftEyeVal < -k_open) || (100 - currentEyeDistValue.rightEyeVal < -k_open)) && (blinkIndex == 1)) {
+    } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (blinkIndex == 1)) {
         console.log("open");
         blinkDates[blinkDatesIndex] = new Date().getTime();
         blinkIndex = 2;
@@ -35,7 +34,6 @@ function blinkCheck(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDi
             else {
                 // Setting the scrollDirection
                 setScrollDirection = true;
-                silhouetteOffsetBoolean(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist);
                 // It shows the unlock sign
                 showLockSymbol(false);
             }
@@ -54,9 +52,11 @@ function changeBlinkIndex() {
 // The function checks if there was a significant displacement of the head
 function silhouetteOffsetBoolean(currentLeftEyeDist, currentRightEyeDist, currentSilhouetteDist, fixedSilhouetteDist) {
     // Significant displacement of a person's face (%)
-    const k = 2.5;
+    const k = 2;
     let offsetValueTop = (fixedSilhouetteDist.top * 100) / currentSilhouetteDist.top;
     let offsetValueBottom = (fixedSilhouetteDist.bottom * 100) / currentSilhouetteDist.bottom;
+
+    console.log(100 - offsetValueTop, 100 - offsetValueBottom);
 
     /* If setScrollDirection == true, the function sets scrollDirection by head movement, otherwise checks 
     the face offset to reset blinkIndex and set blinkEyelidDistArr*/
@@ -64,16 +64,14 @@ function silhouetteOffsetBoolean(currentLeftEyeDist, currentRightEyeDist, curren
         // Scroll up
         if ((100 - offsetValueTop < -k) || (100 - offsetValueBottom < -k)) {
             scrollDirection = 1;
-            // Beginnig of scroll
-            setScrollDirectionAndMakeScroll();
-            setScrollDirection = false;
+            // Beginning of scroll
+            scrollBeginning();
         }
         // Scroll down
         else if ((100 - offsetValueBottom > k) || (100 - offsetValueTop > k)) {
             scrollDirection = -1;
             // Beginning of scroll
-            setScrollDirectionAndMakeScroll();
-            setScrollDirection = false;
+            scrollBeginning();
         }
     } else {
         if ((100 - offsetValueTop < -k) || (100 - offsetValueTop > k) || (100 - offsetValueBottom < -k) || (100 - offsetValueBottom > k)) {
@@ -84,13 +82,17 @@ function silhouetteOffsetBoolean(currentLeftEyeDist, currentRightEyeDist, curren
             fixedSilhouettePos.bottom = currentSilhouetteDist.bottom;
             // Setting the blinkIndex
             blinkIndex = 0;
-
-            console.log(currentLeftEyeDist, currentRightEyeDist);
             // Setting a the default eyes distance
-            blinkEyelidDistArr[blinkIndex] = {
+            fixedEyelidDist = {
                 "leftEyeDist": currentLeftEyeDist,
                 "rightEyeDist": currentRightEyeDist
             }
         }
     }
+}
+
+// The function beginning the scroll
+function scrollBeginning() {
+    setScrollDirection = false;
+    setScrollDirectionAndMakeScroll();
 }

@@ -60,8 +60,8 @@ function faceDotGenerator(...args) {
     // ! RENDERING
 
     // Default distance between eyelids
-    if (blinkEyelidDistArr[blinkIndex] == 0) {
-        blinkEyelidDistArr[blinkIndex] = {
+    if (fixedEyelidDist == 0) {
+        fixedEyelidDist = {
             "leftEyeDist": faceParts.currentEyelidDist.leftEyelidDist,
             "rightEyeDist": faceParts.currentEyelidDist.rightEyelidDist
         }
