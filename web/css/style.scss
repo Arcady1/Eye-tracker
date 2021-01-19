@@ -9,6 +9,7 @@
     --symbol-max-size: 64px;
     --symbol-color: #ccc;
     --symbols-duration: .5s;
+    --chart-height: 320px; // == html chat height
 }
 
 html {
@@ -92,7 +93,7 @@ html {
             .chart {
                 display: block;
                 width: 640px;
-                height: 320px;
+                height: var(--chart-height);
             }
         }
 

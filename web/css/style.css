@@ -91,6 +91,7 @@ h1, h2, h3, h4, h5, h6 {
   --symbol-max-size: 64px;
   --symbol-color: #ccc;
   --symbols-duration: .5s;
+  --chart-height: 320px;
 }
 
 html {
@@ -164,7 +165,7 @@ html {
 .index-container .index-content .index__info-block .chart {
   display: block;
   width: 640px;
-  height: 320px;
+  height: var(--chart-height);
 }
 .index-container .index-content .index__paragraph {
   display: block;
