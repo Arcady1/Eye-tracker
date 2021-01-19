@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root {
-  --position-dot: 2px;
+  --position-dot: 3px;
   --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
   --symbol-max-size: 64px;
   --symbol-color: #ccc;
@@ -103,18 +103,49 @@ html {
   background-color: #333;
   position: relative;
 }
-.index-container .console-info {
+.index-container .index__info-block {
   display: inline-block;
   position: fixed;
   top: 0;
   left: 0;
   width: auto;
-  height: 40px;
+  height: auto;
   background-color: #fff;
   color: #000;
   line-height: 40px;
   font-size: 1.5rem;
   padding: 0 5px;
+}
+.index-container .index__info-block .video__wrapper {
+  width: 640px;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scaleX(-1);
+}
+.index-container .index__info-block .video__wrapper .video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.index-container .index__info-block .video__wrapper .face-pos-dot {
+  display: block;
+  position: absolute;
+  width: var(--position-dot);
+  height: var(--position-dot);
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 2;
+}
+.index-container .index__info-block .video__wrapper .face-red-style {
+  background-color: red;
+  z-index: 4;
+}
+.index-container .index__info-block .video__wrapper_margin {
+  margin: 0 auto;
 }
 .index-container .index__eye-symbol {
   transition-duration: var(--symbols-duration);
@@ -131,40 +162,6 @@ html {
 .index-container .index-content {
   width: 100%;
   height: 100%;
-}
-.index-container .index-content .video__wrapper {
-  width: 640px;
-  height: auto;
-  position: relative;
-  transform: scaleX(-1);
-}
-.index-container .index-content .video__wrapper .video {
-  display: none;
-  width: 100%;
-  height: auto;
-  outline: 1px solid #000;
-}
-.index-container .index-content .video__wrapper .iris-pos-dot {
-  display: block;
-  position: absolute;
-  width: var(--position-dot);
-  height: var(--position-dot);
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  border-radius: 50%;
-  z-index: 2;
-}
-.index-container .index-content .video__wrapper .eyes-red-style {
-  background-color: red;
-  z-index: 4;
-}
-.index-container .index-content .video__wrapper .eyes-blue-style {
-  background-color: blue;
-  z-index: 3;
-}
-.index-container .index-content .video__wrapper_margin {
-  margin: 0 auto;
 }
 .index-container .index-content .index__paragraph {
   display: block;

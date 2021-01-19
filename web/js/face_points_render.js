@@ -1,5 +1,8 @@
 let extra_func = require('./extra_func.js');
 let blink_check = require('./blink_check.js');
+let $ = require('jquery');
+
+let $videoWrapper = $("#video__wrapper");
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
@@ -11,6 +14,8 @@ function faceDotGenerator() {
     let faceParts = {};
 
     return function (...args) {
+        $("dot").remove();
+
         // User face parts
         faceParts = {
             // Left eye
@@ -28,6 +33,9 @@ function faceDotGenerator() {
                 "y": extra_func.max(args[3][3][1], args[3][4][1])
             }
         };
+
+        // Face dots rendering
+        faceDotRender(args);
 
         // Current distance between eyelids
         faceParts.currentEyelidDist = {
@@ -59,6 +67,15 @@ function faceDotGenerator() {
 
         blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
     }
+}
+
+// The function renders face silhouette
+function faceDotRender(args) {
+    args.forEach(facePart => {
+        facePart.forEach(pairOfCoords => {
+            $videoWrapper.append('<dot class="face-pos-dot face-red-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');
+        });
+    });
 }
 
 module.exports = {

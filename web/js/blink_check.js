@@ -2,16 +2,11 @@ let scroll_and_setDist = require('./scroll_and_setDist.js');
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
 
-let $ = require('jquery');
-// !
-let $consoleInfo = $("#console-info");
-// !
-
 // The function checks if the user blinked
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
     // How much the eye is closed (%)
-    const k_close = 30;
+    const k_close = 40;
     const k_open = 20;
     // Blink interval
     const resetTimer = 500;
@@ -34,12 +29,10 @@ function blinkCheck() {
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (vars.numOfBlinks == 0)) {
             console.log("close");
-            $consoleInfo.html("close");
 
             vars.numOfBlinks = 1;
         } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (vars.numOfBlinks == 1)) {
             console.log("open");
-            $consoleInfo.html("open");
 
             blinkDates[blinkDatesIndex] = new Date().getTime();
             vars.numOfBlinks = 2;

@@ -10877,16 +10877,11 @@ let scroll_and_setDist = require('./scroll_and_setDist.js');
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
 
-let $ = require('jquery');
-// !
-let $consoleInfo = $("#console-info");
-// !
-
 // The function checks if the user blinked
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
     // How much the eye is closed (%)
-    const k_close = 30;
+    const k_close = 40;
     const k_open = 20;
     // Blink interval
     const resetTimer = 500;
@@ -10909,12 +10904,10 @@ function blinkCheck() {
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (vars.numOfBlinks == 0)) {
             console.log("close");
-            $consoleInfo.html("close");
 
             vars.numOfBlinks = 1;
         } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (vars.numOfBlinks == 1)) {
             console.log("open");
-            $consoleInfo.html("open");
 
             blinkDates[blinkDatesIndex] = new Date().getTime();
             vars.numOfBlinks = 2;
@@ -10997,7 +10990,7 @@ function blinkCheck() {
 module.exports = {
     blinkCheck: blinkCheck()
 }
-},{"./scroll_and_setDist.js":7,"./symbols.js":8,"./vars.js":9,"jquery":1}],3:[function(require,module,exports){
+},{"./scroll_and_setDist.js":7,"./symbols.js":8,"./vars.js":9}],3:[function(require,module,exports){
 function min(a, b) {
     return (a <= b) ? a : b;
 }
@@ -11037,6 +11030,9 @@ module.exports = {
 },{}],4:[function(require,module,exports){
 let extra_func = require('./extra_func.js');
 let blink_check = require('./blink_check.js');
+let $ = require('jquery');
+
+let $videoWrapper = $("#video__wrapper");
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
@@ -11048,6 +11044,8 @@ function faceDotGenerator() {
     let faceParts = {};
 
     return function (...args) {
+        $("dot").remove();
+
         // User face parts
         faceParts = {
             // Left eye
@@ -11065,6 +11063,9 @@ function faceDotGenerator() {
                 "y": extra_func.max(args[3][3][1], args[3][4][1])
             }
         };
+
+        // Face dots rendering
+        faceDotRender(args);
 
         // Current distance between eyelids
         faceParts.currentEyelidDist = {
@@ -11098,10 +11099,19 @@ function faceDotGenerator() {
     }
 }
 
+// !
+function faceDotRender(args) {
+    args.forEach(facePart => {
+        facePart.forEach(pairOfCoords => {
+            $videoWrapper.append('<dot class="face-pos-dot face-red-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');
+        });
+    });
+}
+
 module.exports = {
     faceDotGenerator: faceDotGenerator()
 }
-},{"./blink_check.js":2,"./extra_func.js":3}],5:[function(require,module,exports){
+},{"./blink_check.js":2,"./extra_func.js":3,"jquery":1}],5:[function(require,module,exports){
 let model_pred = require('./model_pred.js');
 let vars = require('./vars.js');
 
