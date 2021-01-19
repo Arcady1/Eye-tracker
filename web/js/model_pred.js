@@ -38,7 +38,7 @@ function makePredictions(model_) {
                     // Stop scroll if the face isn't in the cam
                     vars.scrollDirection = 0;
                     // Stop blinks if the face isn't in the cam
-                    vars.blinkIndex = 0;
+                    vars.numOfBlinks = 0;
                 });
             predictionsTimer(model_);
         }, 12);
