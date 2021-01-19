@@ -10877,6 +10877,11 @@ let scroll_and_setDist = require('./scroll_and_setDist.js');
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
 
+let $ = require('jquery');
+// !
+let $consoleInfo = $("#console-info");
+// !
+
 // The function checks if the user blinked
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
@@ -10904,9 +10909,13 @@ function blinkCheck() {
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (vars.numOfBlinks == 0)) {
             console.log("close");
+            $consoleInfo.html("close");
+
             vars.numOfBlinks = 1;
         } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (vars.numOfBlinks == 1)) {
             console.log("open");
+            $consoleInfo.html("open");
+
             blinkDates[blinkDatesIndex] = new Date().getTime();
             vars.numOfBlinks = 2;
 
@@ -10988,7 +10997,7 @@ function blinkCheck() {
 module.exports = {
     blinkCheck: blinkCheck()
 }
-},{"./scroll_and_setDist.js":7,"./symbols.js":8,"./vars.js":9}],3:[function(require,module,exports){
+},{"./scroll_and_setDist.js":7,"./symbols.js":8,"./vars.js":9,"jquery":1}],3:[function(require,module,exports){
 function min(a, b) {
     return (a <= b) ? a : b;
 }
