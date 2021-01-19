@@ -103,54 +103,6 @@ html {
   background-color: #333;
   position: relative;
 }
-.index-container .index__info-block {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: auto;
-  height: auto;
-  background-color: #fff;
-  color: #000;
-  line-height: 40px;
-  font-size: 1.5rem;
-}
-.index-container .index__info-block .video__wrapper {
-  display: block;
-  width: 640px;
-  height: auto;
-  transform: scaleX(-1);
-  position: relative;
-}
-.index-container .index__info-block .video__wrapper .video {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.index-container .index__info-block .video__wrapper .face-pos-dot {
-  display: block;
-  position: absolute;
-  width: var(--position-dot);
-  height: var(--position-dot);
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  border-radius: 50%;
-  z-index: 2;
-}
-.index-container .index__info-block .video__wrapper .face-red-style {
-  background-color: red;
-  z-index: 4;
-}
-.index-container .index__info-block .video__wrapper_margin {
-  margin: 0 auto;
-}
-.index-container .index__info-block .chart {
-  display: block;
-  width: 640px;
-  height: 480px;
-}
 .index-container .index__eye-symbol {
   transition-duration: var(--symbols-duration);
   position: fixed;
@@ -164,20 +116,63 @@ html {
   background-image: url("../img/eye/unwatch.svg");
 }
 .index-container .index-content {
+  display: flex;
+  justify-content: space-evenly;
   width: 100%;
   height: 100%;
+}
+.index-container .index-content .index__info-block {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  color: #000;
+  line-height: 40px;
+  font-size: 1.5rem;
+}
+.index-container .index-content .index__info-block .video__wrapper {
+  display: block;
+  width: 640px;
+  height: auto;
+  transform: scaleX(-1);
+  position: relative;
+}
+.index-container .index-content .index__info-block .video__wrapper .video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.index-container .index-content .index__info-block .video__wrapper .face-pos-dot {
+  display: block;
+  position: absolute;
+  width: var(--position-dot);
+  height: var(--position-dot);
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 2;
+}
+.index-container .index-content .index__info-block .video__wrapper .face-red-style {
+  background-color: red;
+  z-index: 4;
+}
+.index-container .index-content .index__info-block .video__wrapper_margin {
+  margin: 0 auto;
+}
+.index-container .index-content .index__info-block .chart {
+  display: block;
+  width: 640px;
+  height: 320px;
 }
 .index-container .index-content .index__paragraph {
   display: block;
   width: 30%;
-  min-width: 200px;
-  max-width: 450px;
+  width: 35vw;
   color: #fff;
   font-size: 1.3rem;
   line-height: 1.5rem;
-}
-.index-container .index-content .index__paragraph_margin {
-  margin: 0 auto;
 }
 .index-container .index-content_padding {
   padding: 5% 0;

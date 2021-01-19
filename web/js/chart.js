@@ -5,7 +5,7 @@ function printChart() {
     let ctx = canvas.getContext("2d");
     let myChart;
 
-    return function() {
+    return function () {
         myChart = new Chart(ctx, {
             type: 'bar',
             data: {

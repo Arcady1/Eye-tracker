@@ -21,61 +21,6 @@ html {
     background-color: #333;
     position: relative;
 
-    .index__info-block {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: auto;
-        height: auto;
-        background-color: #fff;
-        color: #000;
-        line-height: 40px;
-        font-size: 1.5rem;
-
-        .video__wrapper {
-            display: block;
-            width: 640px;
-            height: auto;
-            transform: scaleX(-1);
-            position: relative;
-
-            .video {
-                display: block;
-                width: 100%;
-                height: auto;
-            }
-
-            .face-pos-dot {
-                display: block;
-                position: absolute;
-                width: var(--position-dot);
-                height: var(--position-dot);
-                top: 0;
-                left: 0;
-                background-color: #fff;
-                border-radius: 50%;
-                z-index: 2;
-            }
-
-            .face-red-style {
-                background-color: rgb(255, 0, 0);
-                z-index: 4;
-            }
-        }
-
-        .video__wrapper_margin {
-            margin: 0 auto;
-        }
-
-        .chart {
-            display: block;
-            width: 640px;
-            height: 480px;
-        }
-    }
-
     .index__eye-symbol {
         @extend %note-images-set;
         transition-duration: var(--symbols-duration);
@@ -94,21 +39,70 @@ html {
     }
 
     .index-content {
+        display: flex;
+        justify-content: space-evenly;
         width: 100%;
         height: 100%;
+
+        .index__info-block {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            color: #000;
+            line-height: 40px;
+            font-size: 1.5rem;
+
+            .video__wrapper {
+                display: block;
+                width: 640px;
+                height: auto;
+                transform: scaleX(-1);
+                position: relative;
+
+                .video {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+
+                .face-pos-dot {
+                    display: block;
+                    position: absolute;
+                    width: var(--position-dot);
+                    height: var(--position-dot);
+                    top: 0;
+                    left: 0;
+                    background-color: #fff;
+                    border-radius: 50%;
+                    z-index: 2;
+                }
+
+                .face-red-style {
+                    background-color: rgb(255, 0, 0);
+                    z-index: 4;
+                }
+            }
+
+            .video__wrapper_margin {
+                margin: 0 auto;
+            }
+
+            .chart {
+                display: block;
+                width: 640px;
+                height: 320px;
+            }
+        }
 
         .index__paragraph {
             display: block;
             width: 30%;
-            min-width: 200px;
-            max-width: 450px;
+            width: 35vw;
             color: #fff;
             font-size: 1.3rem;
             line-height: 1.5rem;
-        }
-
-        .index__paragraph_margin {
-            margin: 0 auto;
         }
     }
 
