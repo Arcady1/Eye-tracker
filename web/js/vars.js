@@ -5,5 +5,5 @@ module.exports = {
     setScrollDirection: false,
     wheelScrollCounter: 0,
     // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
-    blinkIndex: 0
+    numOfBlinks: 0
 }

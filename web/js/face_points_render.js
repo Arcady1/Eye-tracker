@@ -15,21 +15,17 @@ function faceDotGenerator() {
         faceParts = {
             // Left eye
             "leftLowerEyePos": {
-                "x": args[0][0][0],
-                "y": extra_func.min(args[1][4][1], args[1][3][1])
+                "y": extra_func.min(args[0][4][1], args[0][3][1])
             },
             "leftUpperEyePos": {
-                "x": args[0][0][0],
-                "y": extra_func.max(args[2][3][1], args[2][4][1])
+                "y": extra_func.max(args[1][3][1], args[1][4][1])
             },
             // Right eye
             "rightLowerEyePos": {
-                "x": args[3][0][0],
-                "y": extra_func.min(args[4][3][1], args[4][4][1])
+                "y": extra_func.min(args[2][3][1], args[2][4][1])
             },
             "rightUpperEyePos": {
-                "x": args[3][0][0],
-                "y": extra_func.max(args[5][3][1], args[5][4][1])
+                "y": extra_func.max(args[3][3][1], args[3][4][1])
             }
         };
 
@@ -41,8 +37,8 @@ function faceDotGenerator() {
 
         // Top and bottom of the face
         faceParts.silhouette = {
-            "top": extra_func.maxInArrayOfArrays(args[6], 1),
-            "bottom": extra_func.minInArrayOfArrays(args[6], 1)
+            "top": extra_func.maxInArrayOfArrays(args[4], 1),
+            "bottom": extra_func.minInArrayOfArrays(args[4], 1)
         }
 
         // Default distance between eyelids

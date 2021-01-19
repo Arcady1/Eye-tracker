@@ -2,12 +2,17 @@ let scroll_and_setDist = require('./scroll_and_setDist.js');
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
 
+let $ = require('jquery');
+// !
+let $consoleInfo = $("#console-info");
+// !
+
 // The function checks if the user blinked
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
-    const k_close = 40;
-    const k_open_start = 18;
-    const k_open_end = 25;
+    // How much the eye is closed (%)
+    const k_close = 30;
+    const k_open = 20;
     // Blink interval
     const resetTimer = 500;
     // The difference between previous and current eyelid distance (%)
@@ -26,15 +31,18 @@ function blinkCheck() {
         // Checking for head displacement
         silhouetteOffsetBoolean(fixedEyelidDist, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
 
-        console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
         // Checking for eyes closing and opening
-        if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (blinkIndex == 0)) {
+        if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (vars.numOfBlinks == 0)) {
             console.log("close");
-            blinkIndex = 1;
-        } else if (((100 - currentEyeDistValue.leftEyeVal < k_open_end) || (100 - currentEyeDistValue.rightEyeVal < k_open_end)) && ((100 - currentEyeDistValue.leftEyeVal > k_open_start) || (100 - currentEyeDistValue.rightEyeVal > k_open_start)) && (blinkIndex == 1)) {
+            $consoleInfo.html("close");
+
+            vars.numOfBlinks = 1;
+        } else if (((100 - currentEyeDistValue.leftEyeVal < k_open) || (100 - currentEyeDistValue.rightEyeVal < k_open)) && (vars.numOfBlinks == 1)) {
             console.log("open");
+            $consoleInfo.html("open");
+
             blinkDates[blinkDatesIndex] = new Date().getTime();
-            blinkIndex = 2;
+            vars.numOfBlinks = 2;
 
             // Blink interval
             blinkDates[2] = Math.abs(blinkDates[1] - blinkDates[0]);
@@ -55,7 +63,7 @@ function blinkCheck() {
             }
 
             blinkDatesIndex = changeBlinkIndex(blinkDatesIndex);
-            blinkIndex = 0;
+            vars.numOfBlinks = 0;
         }
 
         // The function swap blinkDatesIndex
@@ -92,8 +100,8 @@ function blinkCheck() {
                     // Setting a the default silhouette position
                     fixedSilhouettePos.top = currentSilhouettePos.top;
                     fixedSilhouettePos.bottom = currentSilhouettePos.bottom;
-                    // Setting the blinkIndex
-                    blinkIndex = 0;
+                    // Setting the vars.numOfBlinks
+                    vars.numOfBlinks = 0;
 
                     // Setting a the default eyes distance
                     fixedEyelidDist = {

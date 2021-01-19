@@ -19,7 +19,7 @@ function makePredictions(model_) {
             modelPrediction(model_)
                 .then((predictions) => {
                     path = predictions["0"]["annotations"];
-                    face_points_render.faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
+                    face_points_render.faceDotGenerator(path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
                 })
                 .then(() => {
                     symbols.changeEyeWatchSymbol.status = 0;
@@ -38,7 +38,7 @@ function makePredictions(model_) {
                     // Stop scroll if the face isn't in the cam
                     vars.scrollDirection = 0;
                     // Stop blinks if the face isn't in the cam
-                    vars.blinkIndex = 0;
+                    vars.numOfBlinks = 0;
                 });
             predictionsTimer(model_);
         }, 12);
