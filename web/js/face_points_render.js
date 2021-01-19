@@ -1,18 +1,20 @@
 let extra_func = require('./extra_func.js');
 let blink_check = require('./blink_check.js');
-let $ = require('jquery');
+let chart = require('./chart.js');
 
+let $ = require('jquery');
 let $videoWrapper = $("#video__wrapper");
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
+    console.log(chart.printChart());
     // Fixed distances between eyelids { "leftEyeDist", rightEyeDist" }
     let fixedEyelidDist = 0;
     // Fixed silhouette positions { "top", "botom" }
     let fixedSilhouettePos = 0;
     // User face parts
     let faceParts = {};
-
+    
     return function (...args) {
         // Removing all silhouette dots
         $("dot").remove();

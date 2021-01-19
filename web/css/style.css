@@ -104,7 +104,8 @@ html {
   position: relative;
 }
 .index-container .index__info-block {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
@@ -114,15 +115,13 @@ html {
   color: #000;
   line-height: 40px;
   font-size: 1.5rem;
-  padding: 0 5px;
 }
 .index-container .index__info-block .video__wrapper {
+  display: block;
   width: 640px;
   height: auto;
-  position: fixed;
-  top: 0;
-  left: 0;
   transform: scaleX(-1);
+  position: relative;
 }
 .index-container .index__info-block .video__wrapper .video {
   display: block;
@@ -146,6 +145,11 @@ html {
 }
 .index-container .index__info-block .video__wrapper_margin {
   margin: 0 auto;
+}
+.index-container .index__info-block .chart {
+  display: block;
+  width: 640px;
+  height: 480px;
 }
 .index-container .index__eye-symbol {
   transition-duration: var(--symbols-duration);

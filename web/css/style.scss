@@ -22,7 +22,8 @@ html {
     position: relative;
 
     .index__info-block {
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
         position: fixed;
         top: 0;
         left: 0;
@@ -32,15 +33,13 @@ html {
         color: #000;
         line-height: 40px;
         font-size: 1.5rem;
-        padding: 0 5px;
 
         .video__wrapper {
+            display: block;
             width: 640px;
             height: auto;
-            position: fixed;
-            top: 0;
-            left: 0;
             transform: scaleX(-1);
+            position: relative;
 
             .video {
                 display: block;
@@ -68,6 +67,12 @@ html {
 
         .video__wrapper_margin {
             margin: 0 auto;
+        }
+
+        .chart {
+            display: block;
+            width: 640px;
+            height: 480px;
         }
     }
 
