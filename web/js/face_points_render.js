@@ -14,6 +14,7 @@ function faceDotGenerator() {
     let faceParts = {};
 
     return function (...args) {
+        // Removing all silhouette dots
         $("dot").remove();
 
         // User face parts
@@ -34,7 +35,7 @@ function faceDotGenerator() {
             }
         };
 
-        // Face dots rendering
+        // Rendering silhouette dots
         faceDotRender(args);
 
         // Current distance between eyelids
