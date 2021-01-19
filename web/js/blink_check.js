@@ -26,7 +26,6 @@ function blinkCheck() {
         // Checking for head displacement
         silhouetteOffsetBoolean(fixedEyelidDist, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
 
-        console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (blinkIndex == 0)) {
             console.log("close");

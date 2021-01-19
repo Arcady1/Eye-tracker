@@ -10901,7 +10901,6 @@ function blinkCheck() {
         // Checking for head displacement
         silhouetteOffsetBoolean(fixedEyelidDist, currentLeftEyeDist, currentRightEyeDist, currentSilhouettePos, fixedSilhouettePos);
 
-        console.log(100 - currentEyeDistValue.leftEyeVal, 100 - currentEyeDistValue.rightEyeVal);
         // Checking for eyes closing and opening
         if (((100 - currentEyeDistValue.leftEyeVal > k_close) || (100 - currentEyeDistValue.rightEyeVal > k_close)) && (blinkIndex == 0)) {
             console.log("close");
@@ -11044,21 +11043,17 @@ function faceDotGenerator() {
         faceParts = {
             // Left eye
             "leftLowerEyePos": {
-                "x": args[0][0][0],
-                "y": extra_func.min(args[1][4][1], args[1][3][1])
+                "y": extra_func.min(args[0][4][1], args[0][3][1])
             },
             "leftUpperEyePos": {
-                "x": args[0][0][0],
-                "y": extra_func.max(args[2][3][1], args[2][4][1])
+                "y": extra_func.max(args[1][3][1], args[1][4][1])
             },
             // Right eye
             "rightLowerEyePos": {
-                "x": args[3][0][0],
-                "y": extra_func.min(args[4][3][1], args[4][4][1])
+                "y": extra_func.min(args[2][3][1], args[2][4][1])
             },
             "rightUpperEyePos": {
-                "x": args[3][0][0],
-                "y": extra_func.max(args[5][3][1], args[5][4][1])
+                "y": extra_func.max(args[3][3][1], args[3][4][1])
             }
         };
 
@@ -11070,8 +11065,8 @@ function faceDotGenerator() {
 
         // Top and bottom of the face
         faceParts.silhouette = {
-            "top": extra_func.maxInArrayOfArrays(args[6], 1),
-            "bottom": extra_func.minInArrayOfArrays(args[6], 1)
+            "top": extra_func.maxInArrayOfArrays(args[4], 1),
+            "bottom": extra_func.minInArrayOfArrays(args[4], 1)
         }
 
         // Default distance between eyelids
@@ -11161,7 +11156,7 @@ function makePredictions(model_) {
             modelPrediction(model_)
                 .then((predictions) => {
                     path = predictions["0"]["annotations"];
-                    face_points_render.faceDotGenerator(path["leftEyeIris"], path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeIris"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
+                    face_points_render.faceDotGenerator(path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
                 })
                 .then(() => {
                     symbols.changeEyeWatchSymbol.status = 0;
