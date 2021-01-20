@@ -122,7 +122,7 @@ html {
   width: 100%;
   height: 100%;
 }
-.index-container .index-content .index__info-block {
+.index-container .index-content .index__info-block__wrapper {
   display: flex;
   flex-direction: column;
   width: auto;
@@ -132,19 +132,19 @@ html {
   line-height: 40px;
   font-size: 1.5rem;
 }
-.index-container .index-content .index__info-block .video__wrapper {
+.index-container .index-content .index__info-block__wrapper .video__wrapper {
   display: block;
   width: 640px;
   height: auto;
   transform: scaleX(-1);
   position: relative;
 }
-.index-container .index-content .index__info-block .video__wrapper .video {
+.index-container .index-content .index__info-block__wrapper .video__wrapper .video {
   display: block;
   width: 100%;
   height: auto;
 }
-.index-container .index-content .index__info-block .video__wrapper .face-pos-dot {
+.index-container .index-content .index__info-block__wrapper .video__wrapper .face-pos-dot {
   display: block;
   position: absolute;
   width: var(--position-dot);
@@ -155,14 +155,14 @@ html {
   border-radius: 50%;
   z-index: 2;
 }
-.index-container .index-content .index__info-block .video__wrapper .face-red-style {
+.index-container .index-content .index__info-block__wrapper .video__wrapper .face-red-style {
   background-color: red;
   z-index: 4;
 }
-.index-container .index-content .index__info-block .video__wrapper_margin {
+.index-container .index-content .index__info-block__wrapper .video__wrapper_margin {
   margin: 0 auto;
 }
-.index-container .index-content .index__info-block .chart {
+.index-container .index-content .index__info-block__wrapper .chart {
   display: block;
   width: 640px;
   height: var(--chart-height);
@@ -197,4 +197,10 @@ html {
 }
 .index-container .index__lock-symbol__wrapper .unlock-active {
   background-image: url("../img/lock/unlock.svg");
+}
+
+.sticky-block {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }

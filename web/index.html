@@ -12,14 +12,16 @@
     <div class="index-container">
         <div class="index__eye-symbol eye-symbol-unwatch" id="index__eye-symbol"> </div>
         <div class="index-content index-content_padding">
-            <div class="index__info-block">
-                <div class="video__wrapper video__wrapper_margin" id="video__wrapper">
-                    <video id="video" class="video">
-                        No video support in your browser... Use Google Chrome
-                    </video>
-                    <!-- <dot class="face-pos-dot" id="face_dot"></dot> -->
+            <div class="index__info-block__wrapper">
+                <div class="info-block sticky-block">
+                    <div class="video__wrapper video__wrapper_margin" id="video__wrapper">
+                        <video id="video" class="video">
+                            No video support in your browser... Use Google Chrome
+                        </video>
+                        <!-- <dot class="face-pos-dot" id="face_dot"></dot> -->
+                    </div>
+                    <canvas class="chart" id="chart" width="640" height="320"></canvas>
                 </div>
-                <canvas class="chart" id="chart" width="640" height="320"></canvas>
             </div>
             <p class="index__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Rem
@@ -103,7 +105,7 @@
     <!-- Model -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
     <!-- Script -->
-    <script src="js/bundle.min.js"></script>
+    <script src="js/bundle.js"></script>
 </body>
 
 </html>
