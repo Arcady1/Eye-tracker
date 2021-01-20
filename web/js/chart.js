@@ -4,13 +4,15 @@ let vars = require('./vars.js');
 function chartInfoRendering() {
     let canvas = document.getElementById("chart");
     let ctx = canvas.getContext("2d");
+    // Chart defaults
+    Chart.defaults.global.defaultFontColor = '#fff';
     // A new chart
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: xLabelsGenerator(vars.chartXlabels),
+            labels: [],
             datasets: [{
-                data: yLabelsGenerator(vars.chartYlabels),
+                data: [],
                 backgroundColor: ['transparent'],
                 pointBackgroundColor: '#999',
                 lineTension: 0,
@@ -21,80 +23,64 @@ function chartInfoRendering() {
         options: {
             title: {
                 display: true,
-                text: 'TITLE'
+                text: 'Eye offset by time'
             },
             legend: {
                 display: false
+            },
+            animation: {
+                duration: 0
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Date"
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Y-coordinate eye offset"
+                    },
+                    ticks: {
+                        stepSize: 5
+                    }
+                }]
             }
         }
     })
-    // Chart defaults
-    Chart.defaults.global.defaultFontColor = '#fff';
 
-    return function (currDate, currYpos) {
-        // console.log(currDate, currYpos);
+    return function (xLabels, yLabels) {
+        myChart.data.labels = xLabels;
+        myChart.data.datasets[0].data = yLabels;
+        myChart.update();
     }
 }
 
-function xLabelsGenerator(xLabels) {
-    return [1, 2, 3, 4, 5, 6, 7];
+// The function updates xLabels and yLabels in chart
+function chartLabelAndDataGenerate(currDate, currPosY, XandYmaxLength) {
+    pushLabelAndDataInfo(currDate, currPosY);
+
+    if (vars.chartXlabels.length == XandYmaxLength + 1)
+        cutLabelAndDataInfo();
+
+    chartInfoRendering()(vars.chartXlabels, vars.chartYlabels);
 }
 
-function yLabelsGenerator(yLabels) {
-    return [240, 241, 237, 238, 245, 250, 241];
+// The function adds the last elements to vars.chartXlabels and vars.chartYlabels
+function pushLabelAndDataInfo(date_, pos) {
+    vars.chartXlabels.push(date_);
+    vars.chartYlabels.push(pos);
+}
+
+// The function removes the first element from the coordinate array
+function cutLabelAndDataInfo() {
+    vars.chartXlabels.splice(0, 1);
+    vars.chartYlabels.splice(0, 1);
 }
 
 module.exports = {
-    "chartInfoRendering": chartInfoRendering()
+    "chartInfoRendering": chartInfoRendering(),
+    "chartLabelAndDataGenerate": chartLabelAndDataGenerate
 }
-
-
-
-
-
-// myChart = new Chart(ctx, {
-//     type: 'line',
-//     data: {
-//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//         datasets: [{
-//             label: 'STH',
-//             data: [12, 19, 3, 5, 2, 3],
-//             backgroundColor: [
-//                 'transparent'
-//             ],
-//             borderColor: [
-//                 '#fff'
-//             ],
-//             borderWidth: 1
-//         }]
-//     },
-//     options: {
-//         title: {
-//             display: true,
-//             fontColor: '#fff',
-//             text: "TITLE"
-//         },
-//         scales: {
-//             xAxes: [{
-//                 scaleLabel: {
-//                     fontColor: '#fff',
-//                     display: true,
-//                     labelString: "XXX"
-//                 },
-//                 ticks: {
-//                     beginAtZero: true
-//                 }
-//             }],
-//             yAxes: [{
-//                 scaleLabel: {
-//                     fontColor: '#fff',
-//                     display: true,
-//                     labelString: "YYY"
-//                 },
-//                 ticks: {
-//                     beginAtZero: true
-//                 }
-//             }]
-//         }
-//     }
-// });

@@ -1,6 +1,7 @@
 let face_points_render = require('./face_points_render.js');
 let symbols = require('./symbols.js');
 let vars = require('./vars.js');
+let $ = require('jquery');
 
 // Model loading
 async function modelLoading() {
@@ -35,6 +36,8 @@ function makePredictions(model_) {
                         symbols.changeEyeWatchSymbol(true);
                     }
                     console.log(`NO FACE\n${err}`);
+                    // Removing all silhouette dots
+                    $("dot").remove();
                     // Stop scroll if the face isn't in the cam
                     vars.scrollDirection = 0;
                     // Stop blinks if the face isn't in the cam

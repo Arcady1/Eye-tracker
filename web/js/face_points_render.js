@@ -13,6 +13,10 @@ function faceDotGenerator() {
     let faceParts = {};
     // Video wrapper to remove dots in it 
     let $videoWrapper = $("#video__wrapper");
+    // Max length of xLabels and xLabels in chart
+    const XandYmaxLength = 100;
+    // Current time
+    let currentTime = 0;
 
     return function (...args) {
         // Removing all silhouette dots
@@ -67,8 +71,9 @@ function faceDotGenerator() {
             }
         }
 
-        // Chart rendering
-        chart.chartInfoRendering(((new Date).getMilliseconds()), faceParts.leftUpperEyePos.y);
+        // Chart label and data generator
+        currentTime = new Date();
+        chart.chartLabelAndDataGenerate(`${currentTime.getMinutes()}:${currentTime.getSeconds()}`, faceParts.leftUpperEyePos.y, XandYmaxLength);
 
         // Blink check
         blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
