@@ -35,13 +35,13 @@ function chartInfoRendering() {
                 xAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: "Date"
+                        labelString: "Time"
                     }
                 }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: "Y-coordinate eye offset"
+                        labelString: "Y - coordinate eye offset"
                     },
                     ticks: {
                         stepSize: 5
