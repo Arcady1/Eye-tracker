@@ -5,6 +5,7 @@
 
 :root {
     --position-dot: 3px;
+    --dot-color: #fff;
     --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
     --symbol-max-size: 64px;
     --symbol-color: #ccc;
@@ -68,6 +69,17 @@ html {
                     height: auto;
                 }
 
+                .video-shroud {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #000;
+                    opacity: .5;
+                }
+
                 .face-pos-dot {
                     display: block;
                     position: absolute;
@@ -75,13 +87,12 @@ html {
                     height: var(--position-dot);
                     top: 0;
                     left: 0;
-                    background-color: #fff;
                     border-radius: 50%;
                     z-index: 2;
                 }
 
-                .face-red-style {
-                    background-color: rgb(255, 0, 0);
+                .face-color-style {
+                    background-color: var(--dot-color);
                     z-index: 4;
                 }
             }

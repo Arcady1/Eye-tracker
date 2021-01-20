@@ -84,7 +84,7 @@ function faceDotGenerator() {
 function faceDotRender($videoWrapper, args) {
     args.forEach(facePart => {
         facePart.forEach(pairOfCoords => {
-            $videoWrapper.append('<dot class="face-pos-dot face-red-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');
+            $videoWrapper.append('<dot class="face-pos-dot face-color-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');
         });
     });
 }
