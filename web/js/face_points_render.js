@@ -1,20 +1,19 @@
 let extra_func = require('./extra_func.js');
 let blink_check = require('./blink_check.js');
 let chart = require('./chart.js');
-
 let $ = require('jquery');
-let $videoWrapper = $("#video__wrapper");
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
-    console.log(chart.printChart());
     // Fixed distances between eyelids { "leftEyeDist", rightEyeDist" }
     let fixedEyelidDist = 0;
     // Fixed silhouette positions { "top", "botom" }
     let fixedSilhouettePos = 0;
     // User face parts
     let faceParts = {};
-    
+    // Video wrapper to remove dots in it 
+    let $videoWrapper = $("#video__wrapper");
+
     return function (...args) {
         // Removing all silhouette dots
         $("dot").remove();
@@ -38,7 +37,7 @@ function faceDotGenerator() {
         };
 
         // Rendering silhouette dots
-        faceDotRender(args);
+        faceDotRender($videoWrapper, args);
 
         // Current distance between eyelids
         faceParts.currentEyelidDist = {
@@ -68,12 +67,16 @@ function faceDotGenerator() {
             }
         }
 
+        // Chart rendering
+        chart.chartInfoRendering(((new Date).getMilliseconds()), faceParts.leftUpperEyePos.y);
+
+        // Blink check
         blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
     }
 }
 
 // The function renders face silhouette
-function faceDotRender(args) {
+function faceDotRender($videoWrapper, args) {
     args.forEach(facePart => {
         facePart.forEach(pairOfCoords => {
             $videoWrapper.append('<dot class="face-pos-dot face-red-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');

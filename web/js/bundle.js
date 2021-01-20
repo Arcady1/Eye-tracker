@@ -32838,102 +32838,106 @@ module.exports = {
 }
 },{"./scroll_and_setDist.js":10,"./symbols.js":11,"./vars.js":12}],5:[function(require,module,exports){
 let Chart = require('chart.js');
+let vars = require('./vars.js');
 
-function printChart() {
+function chartInfoRendering() {
     let canvas = document.getElementById("chart");
     let ctx = canvas.getContext("2d");
-    let myChart;
-
-    let xLabels = [];
-
-    return function () {
-        // myChart = new Chart(ctx, {
-        //     type: 'line',
-        //     data: {
-        //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        //         datasets: [{
-        //             label: 'STH',
-        //             data: [12, 19, 3, 5, 2, 3],
-        //             backgroundColor: [
-        //                 'transparent'
-        //             ],
-        //             borderColor: [
-        //                 '#fff'
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             fontColor: '#fff',
-        //             text: "TITLE"
-        //         },
-        //         scales: {
-        //             xAxes: [{
-        //                 scaleLabel: {
-        //                     fontColor: '#fff',
-        //                     display: true,
-        //                     labelString: "XXX"
-        //                 },
-        //                 ticks: {
-        //                     beginAtZero: true
-        //                 }
-        //             }],
-        //             yAxes: [{
-        //                 scaleLabel: {
-        //                     fontColor: '#fff',
-        //                     display: true,
-        //                     labelString: "YYY"
-        //                 },
-        //                 ticks: {
-        //                     beginAtZero: true
-        //                 }
-        //             }]
-        //         }
-        //     }
-        // });
-
-        myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: xLabelsGenerator(xLabels),
-                datasets: [{
-                    data: yLabelsGenerator(),
-                    backgroundColor: [ 'transparent' ],
-                    pointBackgroundColor: '#fff',
-                    lineTension: 0,
-                    borderColor: '#fff',
-                    borderWidth: '2'
-                }]
+    // A new chart
+    let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xLabelsGenerator(vars.chartXlabels),
+            datasets: [{
+                data: yLabelsGenerator(vars.chartYlabels),
+                backgroundColor: ['transparent'],
+                pointBackgroundColor: '#999',
+                lineTension: 0,
+                borderColor: '#fff',
+                borderWidth: '2'
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'TITLE'
             },
-            options: {
-                title: {
-                    display: true,
-                    text: 'TITLE'
-                },
-                legend: {
-                    display: false
-                }
+            legend: {
+                display: false
             }
-        })
+        }
+    })
+    // Chart defaults
+    Chart.defaults.global.defaultFontColor = '#fff';
 
-        Chart.defaults.global.defaultFontColor = '#fff';
+    return function (currDate, currYpos) {
+        // console.log(currDate, currYpos);
     }
 }
 
-function xLabelsGenerator(labels) {
+function xLabelsGenerator(xLabels) {
     return [1, 2, 3, 4, 5, 6, 7];
 }
 
-function yLabelsGenerator() {
+function yLabelsGenerator(yLabels) {
     return [240, 241, 237, 238, 245, 250, 241];
 }
 
 module.exports = {
-    "printChart": printChart()
+    "chartInfoRendering": chartInfoRendering()
 }
-},{"chart.js":1}],6:[function(require,module,exports){
+
+
+
+
+
+// myChart = new Chart(ctx, {
+//     type: 'line',
+//     data: {
+//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//         datasets: [{
+//             label: 'STH',
+//             data: [12, 19, 3, 5, 2, 3],
+//             backgroundColor: [
+//                 'transparent'
+//             ],
+//             borderColor: [
+//                 '#fff'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         title: {
+//             display: true,
+//             fontColor: '#fff',
+//             text: "TITLE"
+//         },
+//         scales: {
+//             xAxes: [{
+//                 scaleLabel: {
+//                     fontColor: '#fff',
+//                     display: true,
+//                     labelString: "XXX"
+//                 },
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }],
+//             yAxes: [{
+//                 scaleLabel: {
+//                     fontColor: '#fff',
+//                     display: true,
+//                     labelString: "YYY"
+//                 },
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// });
+},{"./vars.js":12,"chart.js":1}],6:[function(require,module,exports){
 function min(a, b) {
     return (a <= b) ? a : b;
 }
@@ -32974,20 +32978,19 @@ module.exports = {
 let extra_func = require('./extra_func.js');
 let blink_check = require('./blink_check.js');
 let chart = require('./chart.js');
-
 let $ = require('jquery');
-let $videoWrapper = $("#video__wrapper");
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
-    console.log(chart.printChart());
     // Fixed distances between eyelids { "leftEyeDist", rightEyeDist" }
     let fixedEyelidDist = 0;
     // Fixed silhouette positions { "top", "botom" }
     let fixedSilhouettePos = 0;
     // User face parts
     let faceParts = {};
-    
+    // Video wrapper to remove dots in it 
+    let $videoWrapper = $("#video__wrapper");
+
     return function (...args) {
         // Removing all silhouette dots
         $("dot").remove();
@@ -33011,7 +33014,7 @@ function faceDotGenerator() {
         };
 
         // Rendering silhouette dots
-        faceDotRender(args);
+        faceDotRender($videoWrapper, args);
 
         // Current distance between eyelids
         faceParts.currentEyelidDist = {
@@ -33041,12 +33044,16 @@ function faceDotGenerator() {
             }
         }
 
+        // Chart rendering
+        chart.chartInfoRendering(((new Date).getMilliseconds()), faceParts.leftUpperEyePos.y);
+
+        // Blink check
         blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
     }
 }
 
 // The function renders face silhouette
-function faceDotRender(args) {
+function faceDotRender($videoWrapper, args) {
     args.forEach(facePart => {
         facePart.forEach(pairOfCoords => {
             $videoWrapper.append('<dot class="face-pos-dot face-red-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');
@@ -33275,6 +33282,8 @@ module.exports = {
     setScrollDirection: false,
     wheelScrollCounter: 0,
     // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
-    numOfBlinks: 0
+    numOfBlinks: 0,
+    chartXlabels: [],
+    chartYlabels: []
 }
 },{}]},{},[8]);
