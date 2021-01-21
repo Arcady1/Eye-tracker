@@ -6,10 +6,14 @@ The following features are implemented in the current version:
 2) Blink detection
 3) Page scrolling on double blinks
 
+### Important
+1) This website uses your webcam
+2) Face detection is performed online
+
 ![GIF]()
 
 ### How it works
-* Open this [web page][1]
+* Open this [DEMO][1]
 * Allow access to the camera
 * Wait for the algorithm to recognize your face (the eye icon in the upper right corner)
 * Make a double blink to start scroll (the "unlock" icon will appear)
@@ -36,10 +40,11 @@ $ npm install
 ### Credits
 This software uses the following open source packages:
 
-* [jQuery][2] (^3.5.1)
-* [Browserify][3] (latest)
-* [TensorFlow][4] (2.6.0)
-* [Face landmarks detection model][4.2] (0.0.1)
+* [jQuery][2] "^3.5.1"
+* [Browserify][3] "latest"
+* [TensorFlow][4] "2.6.0"
+* [Face landmarks detection model][4.2] "0.0.1"
+* [Chart.js][4.3] "^2.9.4"
 
 ### Acknowledgments
 * [TensorFlow Blog][5]
@@ -61,6 +66,7 @@ MIT
 [4]: https://github.com/tensorflow/tfjs
 [4.1]: https://github.com/google/mediapipe
 [4.2]: https://blog.tensorflow.org/2020/11/iris-landmark-tracking-in-browser-with-MediaPipe-and-TensorFlowJS.html
+[4.3]: https://github.com/chartjs/Chart.js
 
 [5]: https://blog.tensorflow.org/search?label=TensorFlow.js&max-results=20
 [5.2]: https://google.github.io/mediapipe/solutions/iris
