@@ -32883,7 +32883,7 @@ function chartInfoRendering() {
                         labelString: "Y - coordinate eye offset"
                     },
                     ticks: {
-                        stepSize: 5
+                        stepSize: 10
                     }
                 }]
             }
