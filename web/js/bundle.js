@@ -33163,12 +33163,11 @@ module.exports = {
 },{"./face_points_render.js":7,"./symbols.js":11,"./vars.js":12,"jquery":2}],10:[function(require,module,exports){
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
+let $ = require('jquery');
 
 // The function checks scroll direction and starts scroll
 function setScrollDirectionAndMakeScroll() {
-    let pageScrollOffset = 2;
-    let pageScrollSpeed = 10;
-    let timerScroll;
+    const pageScrollSpeed = 8000;
 
     return function () {
         // The function checks scroll direction and starts scroll
@@ -33182,31 +33181,32 @@ function setScrollDirectionAndMakeScroll() {
         // The function triggers a scroll
         function makeScroll() {
             if (vars.scrollDirection == 1)
-                smoothScroll(pageScrollSpeed, -pageScrollOffset);
+                smoothScroll(pageScrollSpeed, 0);
             else if (vars.scrollDirection == -1)
-                smoothScroll(pageScrollSpeed, pageScrollOffset);
+                smoothScroll(pageScrollSpeed, $(document).height() - $(window).height());
 
-            function smoothScroll(scrollSpeed, scrollOffset) {
-                window.scrollTo(0, window.pageYOffset + scrollOffset);
-                // If scroll has reached the beginning or end of the page
-                if ((window.pageYOffset == 0) || (window.pageYOffset == document.documentElement.scrollHeight - document.body.clientHeight)) {
-                    resetScrollStates();
-                    return 0;
-                }
-                // If double blink
-                else if (vars.scrollDirection == 0) {
-                    resetScrollStates();
-                    return 0;
-                }
-
-                timerScroll = setTimeout(smoothScroll, scrollSpeed, scrollSpeed, scrollOffset);
+            function smoothScroll(scrollSpeed, scrollTarget) {
+                $("html").animate({
+                    scrollTop: scrollTarget
+                }, {
+                    duration: scrollSpeed,
+                    easing: "linear",
+                    progress: () => {
+                        if (vars.scrollDirection == 0) {
+                            $("html").stop();
+                            resetScrollStates();
+                        }
+                    },
+                    complete: () => {
+                        resetScrollStates();
+                    }
+                });
             }
         }
 
         // Reset scroll states
         function resetScrollStates() {
             vars.scrollDirection = 0;
-            clearTimeout(timerScroll);
             symbols.showLockSymbol();
         }
     }
@@ -33215,7 +33215,7 @@ function setScrollDirectionAndMakeScroll() {
 module.exports = {
     setScrollDirectionAndMakeScroll: setScrollDirectionAndMakeScroll()
 }
-},{"./symbols.js":11,"./vars.js":12}],11:[function(require,module,exports){
+},{"./symbols.js":11,"./vars.js":12,"jquery":2}],11:[function(require,module,exports){
 let $ = require('jquery');
 
 // The function displays the lock / unlock symbol => changing $lockSymbol css class
