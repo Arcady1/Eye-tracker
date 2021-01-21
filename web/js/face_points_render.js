@@ -1,5 +1,7 @@
 let extra_func = require('./extra_func.js');
 let blink_check = require('./blink_check.js');
+let chart = require('./chart.js');
+let $ = require('jquery');
 
 // The function circles the face parts; input: array of face position (x, y, z) 
 function faceDotGenerator() {
@@ -9,8 +11,17 @@ function faceDotGenerator() {
     let fixedSilhouettePos = 0;
     // User face parts
     let faceParts = {};
+    // Video wrapper to remove dots in it 
+    let $videoWrapper = $("#video__wrapper");
+    // Max length of xLabels and xLabels in chart
+    const XandYmaxLength = 100;
+    // Current time
+    let currentTime = 0;
 
     return function (...args) {
+        // Removing all silhouette dots
+        $("dot").remove();
+
         // User face parts
         faceParts = {
             // Left eye
@@ -28,6 +39,9 @@ function faceDotGenerator() {
                 "y": extra_func.max(args[3][3][1], args[3][4][1])
             }
         };
+
+        // Rendering silhouette dots
+        faceDotRender($videoWrapper, args);
 
         // Current distance between eyelids
         faceParts.currentEyelidDist = {
@@ -57,8 +71,22 @@ function faceDotGenerator() {
             }
         }
 
+        // Chart label and data generator
+        currentTime = new Date();
+        chart.chartLabelAndDataGenerate(`${currentTime.getMinutes()}:${currentTime.getSeconds()}`, faceParts.leftUpperEyePos.y, XandYmaxLength);
+
+        // Blink check
         blink_check.blinkCheck(fixedEyelidDist, fixedSilhouettePos, faceParts.currentEyelidDist.leftEyelidDist, faceParts.currentEyelidDist.rightEyelidDist, faceParts.silhouette);
     }
+}
+
+// The function renders face silhouette
+function faceDotRender($videoWrapper, args) {
+    args.forEach(facePart => {
+        facePart.forEach(pairOfCoords => {
+            $videoWrapper.append('<dot class="face-pos-dot face-color-style" id="face_dot" style="top: ' + pairOfCoords[1] + 'px; left: ' + pairOfCoords[0] + 'px"></dot>');
+        });
+    });
 }
 
 module.exports = {

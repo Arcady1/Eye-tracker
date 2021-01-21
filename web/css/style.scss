@@ -4,13 +4,13 @@
 @import '../sourse/templ';
 
 :root {
-    --position-dot: 2px;
-
+    --position-dot: 3px;
+    --dot-color: #fff;
     --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
     --symbol-max-size: 64px;
     --symbol-color: #ccc;
-
     --symbols-duration: .5s;
+    --chart-height: 320px; // == html chat height
 }
 
 html {
@@ -23,20 +23,6 @@ html {
     background-color: #333;
     position: relative;
 
-    .console-info {
-        display: inline-block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: auto;
-        height: 40px;
-        background-color: #fff;
-        color: #000;
-        line-height: 40px;
-        font-size: 1.5rem;
-        padding: 0 5px;
-    }
-
     .index__eye-symbol {
         @extend %note-images-set;
         transition-duration: var(--symbols-duration);
@@ -44,7 +30,7 @@ html {
         position: fixed;
         top: 10px;
         right: 10px;
-    }    
+    }
 
     .eye-symbol-watch {
         background-image: url('../img/eye/watch.svg');
@@ -55,62 +41,82 @@ html {
     }
 
     .index-content {
+        display: flex;
+        justify-content: space-evenly;
         width: 100%;
         height: 100%;
 
-        .video__wrapper {
-            width: 640px;
+        .index__info-block__wrapper {
+            display: flex;
+            flex-direction: column;
+            width: auto;
             height: auto;
-            position: relative;
-            transform: scaleX(-1);
+            background-color: transparent;
+            color: #000;
+            line-height: 40px;
+            font-size: 1.5rem;
 
-            .video {
-                display: none;
-                width: 100%;
-                height: auto;
-                outline: 1px solid #000;
-            }
-
-            .iris-pos-dot {
+            .video__wrapper {
                 display: block;
-                position: absolute;
-                width: var(--position-dot);
-                height: var(--position-dot);
-                top: 0;
-                left: 0;
-                background-color: #fff;
-                border-radius: 50%;
-                z-index: 2;
+                width: 640px;
+                height: auto;
+                transform: scaleX(-1);
+                position: relative;
+
+                .video {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+
+                .video-shroud {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #000;
+                    opacity: .5;
+                }
+
+                .face-pos-dot {
+                    display: block;
+                    position: absolute;
+                    width: var(--position-dot);
+                    height: var(--position-dot);
+                    top: 0;
+                    left: 0;
+                    border-radius: 50%;
+                    z-index: 2;
+                }
+
+                .face-color-style {
+                    background-color: var(--dot-color);
+                    z-index: 4;
+                }
             }
 
-            .eyes-red-style {
-                background-color: red;
-                z-index: 4;
+            .video__wrapper_margin {
+                margin: 0 auto;
             }
 
-            .eyes-blue-style {
-                background-color: blue;
-                z-index: 3;
+            .chart {
+                display: block;
+                width: 640px;
+                height: var(--chart-height);
             }
-        }
-
-        .video__wrapper_margin {
-            margin: 0 auto;
         }
 
         .index__paragraph {
             display: block;
             width: 30%;
-            min-width: 200px;
-            max-width: 450px;
+            width: 35vw;
             color: #fff;
             font-size: 1.3rem;
             line-height: 1.5rem;
         }
 
-        .index__paragraph_margin {
-            margin: 0 auto;
-        }
     }
 
     .index-content_padding {
@@ -144,4 +150,9 @@ html {
             background-image: url('../img/lock/unlock.svg');
         }
     }
+}
+
+.sticky-block {
+    position: sticky;
+    top: 0;
 }

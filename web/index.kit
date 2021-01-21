@@ -10,16 +10,21 @@
 
 <body>
     <div class="index-container">
-        <div class="console-info" id="console-info"></div>
-        
         <div class="index__eye-symbol eye-symbol-unwatch" id="index__eye-symbol"> </div>
         <div class="index-content index-content_padding">
-            <div class="video__wrapper video__wrapper_margin" id="video__wrapper">
-                <video id="video" class="video">
-                    No video support in your browser... Use Google Chrome
-                </video>
+            <div class="index__info-block__wrapper">
+                <div class="info-block sticky-block">
+                    <div class="video__wrapper video__wrapper_margin" id="video__wrapper">
+                        <video id="video" class="video">
+                            No video support in your browser... Use Google Chrome
+                        </video>
+                        <div class="video-shroud"></div>
+                        <!-- <dot class="face-pos-dot" id="face_dot"></dot> -->
+                    </div>
+                    <canvas class="chart" id="chart" width="640" height="320"></canvas>
+                </div>
             </div>
-            <p class="index__paragraph index__paragraph_margin">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <p class="index__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Rem
                 eum aspernatur voluptates possimus rerum veritatis praesentium totam ex, aut omnis enim eligendi
                 doloremque
