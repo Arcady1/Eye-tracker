@@ -93,6 +93,7 @@ h1, h2, h3, h4, h5, h6 {
   --symbol-color: #ccc;
   --symbols-duration: .5s;
   --chart-height: 320px;
+  --video-shroud: .5;
 }
 
 html {
@@ -153,7 +154,7 @@ html {
   width: 100%;
   height: 100%;
   background-color: #000;
-  opacity: 0.5;
+  opacity: var(--video-shroud);
 }
 .index-container .index-content .index__info-block__wrapper .video__wrapper .face-pos-dot {
   display: block;
