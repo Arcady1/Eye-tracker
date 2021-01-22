@@ -1,18 +1,8 @@
 @import 'null-style';
+@import '../sourse/vars';
 @import '../sourse/media-style';
 // template styles
 @import '../sourse/templ';
-
-:root {
-    --position-dot: 3px;
-    --dot-color: #fff;
-    --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
-    --symbol-max-size: 64px;
-    --symbol-color: #ccc;
-    --symbols-duration: .5s;
-    --chart-height: 320px; // == html chat height
-    --video-shroud: .5;
-}
 
 html {
     font-size: 16px;
@@ -20,6 +10,7 @@ html {
 
 .index-container {
     width: 100%;
+    min-width: var(--index-min-width);
     min-height: 100vh;
     background-color: #333;
     position: relative;
@@ -52,7 +43,8 @@ html {
         .index__info-block__wrapper {
             display: flex;
             flex-direction: column;
-            width: auto;
+            width: 100%;
+            max-width: var(--max-video-width);
             height: auto;
             background-color: transparent;
             color: #000;
@@ -61,7 +53,8 @@ html {
 
             .video__wrapper {
                 display: block;
-                width: 640px;
+                width: 100%;
+                max-width: var(--max-video-width);
                 height: auto;
                 transform: scaleX(-1);
                 position: relative;
@@ -100,13 +93,10 @@ html {
                 }
             }
 
-            .video__wrapper_margin {
-                margin: 0 auto;
-            }
-
             .chart {
                 display: block;
-                width: 640px;
+                width: 100%;
+                max-width: var(--max-video-width);
                 height: var(--chart-height);
             }
         }
@@ -117,20 +107,16 @@ html {
 
         .index__paragraph {
             display: block;
-            width: 30%;
-            width: 35vw;
+            width: auto;
+            max-width: var(--max-video-width);
             color: #fff;
             font-size: 1.3rem;
             line-height: 1.5rem;
         }
-
-        .paragraph_padding {
-            padding: 0 calc(0px + 45*(100vw - 320px)/(1366 - 320));
-        }
     }
 
     .index-content_padding {
-        padding: 5% 0;
+        padding: 5% calc(10px + 45*(100vw - 320px)/(1366 - 320));
     }
 }
 
