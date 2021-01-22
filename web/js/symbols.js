@@ -4,15 +4,8 @@ let $ = require('jquery');
 function showLockSymbol() {
     // Lock symbol
     let $lockSymbol = $("#lock-symbol");
-    let $lockSymbolWrapper = $("#lock-symbol__wrapper");
-    let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
 
     return function (toLock = true) {
-        // Make it visible
-        $lockSymbolWrapper.css({
-            "visibility": "visible",
-            "opacity": 1
-        });
         // Show the lock / unlock symbol
         if (toLock == true) {
             $lockSymbol.removeClass("unlock-active");
@@ -21,13 +14,6 @@ function showLockSymbol() {
             $lockSymbol.removeClass("lock-active");
             $lockSymbol.addClass("unlock-active");
         }
-        // Make it hidden
-        setTimeout(() => {
-            $lockSymbolWrapper.css({
-                "visibility": "hidden",
-                "opacity": 0
-            });
-        }, lockSymbolWrapperHiddenTimer);
     }
 }
 

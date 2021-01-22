@@ -24,7 +24,7 @@ html {
     background-color: #333;
     position: relative;
 
-    .index__eye-symbol {
+    .lock-symbol {
         @extend %note-images-set;
         transition-duration: var(--symbols-duration);
 
@@ -33,12 +33,12 @@ html {
         right: 10px;
     }
 
-    .eye-symbol-watch {
-        background-image: url('../img/eye/watch.svg');
+    .lock-active {
+        background-image: url('../img/lock/lock.svg');
     }
 
-    .eye-symbol-unwatch {
-        background-image: url('../img/eye/unwatch.svg');
+    .unlock-active {
+        background-image: url('../img/lock/unlock.svg');
     }
 
     .index-content {
@@ -122,34 +122,6 @@ html {
 
     .index-content_padding {
         padding: 5% 0;
-    }
-
-    .index__lock-symbol__wrapper {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        background-color: transparent;
-        top: 0;
-        left: 0;
-
-        visibility: hidden;
-        opacity: 0;
-        transition-duration: var(--symbols-duration);
-
-        .lock-symbol {
-            @extend %note-images-set;
-        }
-
-        .lock-active {
-            background-image: url('../img/lock/lock.svg');
-        }
-
-        .unlock-active {
-            background-image: url('../img/lock/unlock.svg');
-        }
     }
 }
 
