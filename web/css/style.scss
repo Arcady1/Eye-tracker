@@ -1,5 +1,5 @@
-// обнуление стилей
 @import 'null-style';
+@import '../sourse/media-style';
 // template styles
 @import '../sourse/templ';
 
@@ -31,6 +31,7 @@ html {
         position: fixed;
         top: 10px;
         right: 10px;
+        z-index: 10;
     }
 
     .lock-active {
@@ -46,6 +47,7 @@ html {
         justify-content: space-evenly;
         width: 100%;
         height: 100%;
+        flex-wrap: wrap;
 
         .index__info-block__wrapper {
             display: flex;
@@ -109,6 +111,10 @@ html {
             }
         }
 
+        .info-block_margin {
+            margin-bottom: 4vh;
+        }
+
         .index__paragraph {
             display: block;
             width: 30%;
@@ -118,6 +124,9 @@ html {
             line-height: 1.5rem;
         }
 
+        .paragraph_padding {
+            padding: 0 calc(0px + 45*(100vw - 320px)/(1366 - 320));
+        }
     }
 
     .index-content_padding {

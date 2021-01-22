@@ -72,6 +72,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
+@media (min-width: 1366px) {
+  .paragraph_padding {
+    padding: 0 45px !important;
+  }
+}
 .index-container .lock-symbol {
   display: block;
   width: var(--symbol-size);
@@ -111,6 +116,7 @@ html {
   position: fixed;
   top: 10px;
   right: 10px;
+  z-index: 10;
 }
 .index-container .lock-active {
   background-image: url("../img/lock/lock.svg");
@@ -123,6 +129,7 @@ html {
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
+  flex-wrap: wrap;
 }
 .index-container .index-content .index__info-block__wrapper {
   display: flex;
@@ -178,6 +185,9 @@ html {
   width: 640px;
   height: var(--chart-height);
 }
+.index-container .index-content .info-block_margin {
+  margin-bottom: 4vh;
+}
 .index-container .index-content .index__paragraph {
   display: block;
   width: 30%;
@@ -185,6 +195,9 @@ html {
   color: #fff;
   font-size: 1.3rem;
   line-height: 1.5rem;
+}
+.index-container .index-content .paragraph_padding {
+  padding: 0 calc(0px + 45*(100vw - 320px)/(1366 - 320));
 }
 .index-container .index-content_padding {
   padding: 5% 0;
