@@ -6,7 +6,7 @@ let symbols = require('./symbols.js');
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
     // How much the eye is closed (%)
-    const k_close = 40;
+    const k_close = 30;
     const k_open = 20;
     // Blink interval
     const resetTimer = 500;

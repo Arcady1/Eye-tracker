@@ -1,7 +1,6 @@
 @import 'null-style';
 @import '../sourse/vars';
 @import '../sourse/media-style';
-// template styles
 @import '../sourse/templ';
 
 html {
@@ -61,8 +60,9 @@ html {
 
                 .video {
                     display: block;
-                    width: 100%;
+                    width: var(--max-video-width);
                     height: auto;
+                    position: relative;
                 }
 
                 .video-shroud {

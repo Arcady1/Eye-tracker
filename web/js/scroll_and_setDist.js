@@ -4,7 +4,9 @@ let $ = require('jquery');
 
 // The function checks scroll direction and starts scroll
 function setScrollDirectionAndMakeScroll() {
-    const pageScrollSpeed = 8000;
+    const kScroll = 1.828571429;
+    const pageScrollSpeedUp = 8400;
+    const pageScrollSpeedDown = pageScrollSpeedUp * kScroll;
 
     return function () {
         // The function checks scroll direction and starts scroll
@@ -18,9 +20,9 @@ function setScrollDirectionAndMakeScroll() {
         // The function triggers a scroll
         function makeScroll() {
             if (vars.scrollDirection == 1)
-                smoothScroll(pageScrollSpeed, 0);
+                smoothScroll(pageScrollSpeedUp, 0);
             else if (vars.scrollDirection == -1)
-                smoothScroll(pageScrollSpeed, $(document).height() - $(window).height());
+                smoothScroll(pageScrollSpeedDown, $(document).height() - $(window).height());
 
             function smoothScroll(scrollSpeed, scrollTarget) {
                 $("html").animate({
