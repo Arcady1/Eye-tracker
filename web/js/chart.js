@@ -1,7 +1,8 @@
 let Chart = require('chart.js');
 let vars = require('./vars.js');
+let chartInfoRendering = chartInfoRendering_();
 
-function chartInfoRendering() {
+function chartInfoRendering_() {
     let canvas = document.getElementById("chart");
     let ctx = canvas.getContext("2d");
     // Chart defaults
@@ -65,7 +66,7 @@ function chartLabelAndDataGenerate(currDate, currPosY, XandYmaxLength) {
     if (vars.chartXlabels.length == XandYmaxLength + 1)
         cutLabelAndDataInfo();
 
-    chartInfoRendering()(vars.chartXlabels, vars.chartYlabels);
+    chartInfoRendering(vars.chartXlabels, vars.chartYlabels);
 }
 
 // The function adds the last elements to vars.chartXlabels and vars.chartYlabels
@@ -81,6 +82,5 @@ function cutLabelAndDataInfo() {
 }
 
 module.exports = {
-    "chartInfoRendering": chartInfoRendering(),
     "chartLabelAndDataGenerate": chartLabelAndDataGenerate
 }

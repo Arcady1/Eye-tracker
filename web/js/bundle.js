@@ -32727,7 +32727,7 @@ let symbols = require('./symbols.js');
 function blinkCheck() {
     // Significant reduction in the distance between the eyelids (%)
     // How much the eye is closed (%)
-    const k_close = 40;
+    const k_close = 30;
     const k_open = 20;
     // Blink interval
     const resetTimer = 500;
@@ -32839,8 +32839,9 @@ module.exports = {
 },{"./scroll_and_setDist.js":10,"./symbols.js":11,"./vars.js":12}],5:[function(require,module,exports){
 let Chart = require('chart.js');
 let vars = require('./vars.js');
+let chartInfoRendering = chartInfoRendering_();
 
-function chartInfoRendering() {
+function chartInfoRendering_() {
     let canvas = document.getElementById("chart");
     let ctx = canvas.getContext("2d");
     // Chart defaults
@@ -32904,7 +32905,7 @@ function chartLabelAndDataGenerate(currDate, currPosY, XandYmaxLength) {
     if (vars.chartXlabels.length == XandYmaxLength + 1)
         cutLabelAndDataInfo();
 
-    chartInfoRendering()(vars.chartXlabels, vars.chartYlabels);
+    chartInfoRendering(vars.chartXlabels, vars.chartYlabels);
 }
 
 // The function adds the last elements to vars.chartXlabels and vars.chartYlabels
@@ -32920,7 +32921,6 @@ function cutLabelAndDataInfo() {
 }
 
 module.exports = {
-    "chartInfoRendering": chartInfoRendering(),
     "chartLabelAndDataGenerate": chartLabelAndDataGenerate
 }
 },{"./vars.js":12,"chart.js":1}],6:[function(require,module,exports){
@@ -33099,7 +33099,6 @@ window.addEventListener("wheel", () => {
 });
 },{"./model_pred.js":9,"./vars.js":12}],9:[function(require,module,exports){
 let face_points_render = require('./face_points_render.js');
-let symbols = require('./symbols.js');
 let vars = require('./vars.js');
 let $ = require('jquery');
 
@@ -33122,19 +33121,7 @@ function makePredictions(model_) {
                     path = predictions["0"]["annotations"];
                     face_points_render.faceDotGenerator(path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
                 })
-                .then(() => {
-                    symbols.changeEyeWatchSymbol.status = 0;
-                    // symbols.changeEyeWatchSymbol.status == the number of function calls
-                    if (symbols.changeEyeWatchSymbol.status == 0) {
-                        symbols.changeEyeWatchSymbol.status = 1;
-                        symbols.changeEyeWatchSymbol(false);
-                    }
-                })
                 .catch((err) => {
-                    if (symbols.changeEyeWatchSymbol.status == 1) {
-                        symbols.changeEyeWatchSymbol.status = 2
-                        symbols.changeEyeWatchSymbol(true);
-                    }
                     console.log(`NO FACE\n${err}`);
                     // Removing all silhouette dots
                     $("dot").remove();
@@ -33160,14 +33147,16 @@ module.exports = {
     modelLoading: modelLoading,
     makePredictions: makePredictions
 }
-},{"./face_points_render.js":7,"./symbols.js":11,"./vars.js":12,"jquery":2}],10:[function(require,module,exports){
+},{"./face_points_render.js":7,"./vars.js":12,"jquery":2}],10:[function(require,module,exports){
 let vars = require('./vars.js');
 let symbols = require('./symbols.js');
 let $ = require('jquery');
 
 // The function checks scroll direction and starts scroll
 function setScrollDirectionAndMakeScroll() {
-    const pageScrollSpeed = 8000;
+    const kScroll = 1.828571429;
+    const pageScrollSpeedUp = 8400;
+    const pageScrollSpeedDown = pageScrollSpeedUp * kScroll;
 
     return function () {
         // The function checks scroll direction and starts scroll
@@ -33181,9 +33170,9 @@ function setScrollDirectionAndMakeScroll() {
         // The function triggers a scroll
         function makeScroll() {
             if (vars.scrollDirection == 1)
-                smoothScroll(pageScrollSpeed, 0);
+                smoothScroll(pageScrollSpeedUp, 0);
             else if (vars.scrollDirection == -1)
-                smoothScroll(pageScrollSpeed, $(document).height() - $(window).height());
+                smoothScroll(pageScrollSpeedDown, $(document).height() - $(window).height());
 
             function smoothScroll(scrollSpeed, scrollTarget) {
                 $("html").animate({
@@ -33222,15 +33211,8 @@ let $ = require('jquery');
 function showLockSymbol() {
     // Lock symbol
     let $lockSymbol = $("#lock-symbol");
-    let $lockSymbolWrapper = $("#lock-symbol__wrapper");
-    let lockSymbolWrapperHiddenTimer = parseFloat($lockSymbolWrapper.css("transition-duration")) * 1000;
 
     return function (toLock = true) {
-        // Make it visible
-        $lockSymbolWrapper.css({
-            "visibility": "visible",
-            "opacity": 1
-        });
         // Show the lock / unlock symbol
         if (toLock == true) {
             $lockSymbol.removeClass("unlock-active");
@@ -33239,34 +33221,11 @@ function showLockSymbol() {
             $lockSymbol.removeClass("lock-active");
             $lockSymbol.addClass("unlock-active");
         }
-        // Make it hidden
-        setTimeout(() => {
-            $lockSymbolWrapper.css({
-                "visibility": "hidden",
-                "opacity": 0
-            });
-        }, lockSymbolWrapperHiddenTimer);
-    }
-}
-
-function changeEyeWatchSymbol() {
-    // Eye symbol
-    let $eyeSymbol = $("#index__eye-symbol");
-
-    return function (unwatchSymbol = true) {
-        if (unwatchSymbol == true) {
-            $eyeSymbol.removeClass("eye-symbol-watch");
-            $eyeSymbol.addClass("eye-symbol-unwatch");
-        } else {
-            $eyeSymbol.removeClass("eye-symbol-unwatch");
-            $eyeSymbol.addClass("eye-symbol-watch");
-        }
     }
 }
 
 module.exports = {
-    showLockSymbol: showLockSymbol(),
-    changeEyeWatchSymbol: changeEyeWatchSymbol()
+    showLockSymbol: showLockSymbol()
 }
 },{"jquery":2}],12:[function(require,module,exports){
 module.exports = {

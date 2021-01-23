@@ -1,5 +1,4 @@
 let face_points_render = require('./face_points_render.js');
-let symbols = require('./symbols.js');
 let vars = require('./vars.js');
 let $ = require('jquery');
 
@@ -22,19 +21,7 @@ function makePredictions(model_) {
                     path = predictions["0"]["annotations"];
                     face_points_render.faceDotGenerator(path["leftEyeLower0"], path["leftEyeUpper0"], path["rightEyeLower0"], path["rightEyeUpper0"], path["silhouette"]);
                 })
-                .then(() => {
-                    symbols.changeEyeWatchSymbol.status = 0;
-                    // symbols.changeEyeWatchSymbol.status == the number of function calls
-                    if (symbols.changeEyeWatchSymbol.status == 0) {
-                        symbols.changeEyeWatchSymbol.status = 1;
-                        symbols.changeEyeWatchSymbol(false);
-                    }
-                })
                 .catch((err) => {
-                    if (symbols.changeEyeWatchSymbol.status == 1) {
-                        symbols.changeEyeWatchSymbol.status = 2
-                        symbols.changeEyeWatchSymbol(true);
-                    }
                     console.log(`NO FACE\n${err}`);
                     // Removing all silhouette dots
                     $("dot").remove();
