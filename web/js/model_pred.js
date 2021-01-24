@@ -38,7 +38,7 @@ function makePredictions(model_) {
 async function modelPrediction(model) {
     // An array of prediction objects for the faces in the input, which include information about each face
     const faces = await model.estimateFaces({
-        input: video
+        input: vars.video
     });
     return faces;
 }

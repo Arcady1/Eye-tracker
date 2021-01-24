@@ -33061,8 +33061,6 @@ let vars = require('./vars.js');
 
 // IIFE
 (function () {
-    let video = document.getElementById("video");
-
     // Getting navigator.getUserMedia
     navigator.getUserMedia = navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
@@ -33074,10 +33072,8 @@ let vars = require('./vars.js');
             video: true,
             audio: false
         }).then(stream => {
-            video.srcObject = stream;
-            video.play();
-        }).catch(() => {
-            console.log("ERROR: No camera access");
+            vars.video.srcObject = stream;
+            vars.video.play();
         })
         .then(() => {
             return model_pred.modelLoading();
@@ -33085,8 +33081,8 @@ let vars = require('./vars.js');
         .then((model) => {
             model_pred.makePredictions(model);
         })
-        .catch(() => {
-            console.log("ERROR: Model is not loaded");
+        .catch((err) => {
+            console.log(`ERROR: No camera access OR Model is not loaded\n${err}`);
         });
 })();
 
@@ -33138,7 +33134,7 @@ function makePredictions(model_) {
 async function modelPrediction(model) {
     // An array of prediction objects for the faces in the input, which include information about each face
     const faces = await model.estimateFaces({
-        input: video
+        input: vars.video
     });
     return faces;
 }
@@ -33237,6 +33233,7 @@ module.exports = {
     // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
     numOfBlinks: 0,
     chartXlabels: [],
-    chartYlabels: []
+    chartYlabels: [],
+    video: document.getElementById("video")
 }
 },{}]},{},[8]);

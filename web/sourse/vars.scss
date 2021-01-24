@@ -1,0 +1,18 @@
+:root {
+    --index-min-width: 305px;
+    --index-bgc: #333;
+
+    --max-video-width: 640px;
+
+    --position-dot: 3px;
+    --dot-color: #fff;
+    --symbol-size: calc(54px + 10*(100vw - 320px)/(1366 - 320));
+    --symbol-max-size: 64px;
+    --symbol-color: #ccc;
+    --symbols-duration: .5s;
+    --chart-height: 320px; // == html chat height
+
+    --symbol-margin: 15px;
+    
+    --paragraph_margin: calc(30px - 30*(100vw - 320px)/(1297 - 320));
+}

@@ -1,0 +1,13 @@
+%note-images-set {
+    display: block;
+    width: var(--symbol-size);
+    max-width: var(--symbol-max-size);
+    height: var(--symbol-size);
+    max-height: var(--symbol-max-size);
+    background-color: var(--symbol-color);
+    border-radius: 50%;
+
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
