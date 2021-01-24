@@ -8,6 +8,7 @@
 </h1>
 
 This application allows you to scroll a web page with your head movements.
+<br>
 The following features are implemented in the current version:
 1) Determining the current head position
 2) Blink detection
