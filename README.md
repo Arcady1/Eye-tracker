@@ -67,7 +67,7 @@ This software uses the following open source packages:
 ### License
 MIT
 
-[0]: ./web/github/eye-control-gif.gif
+[0]: https://github.com/Arcady1/Scrolling-web-page-with-your-eyes/blob/main/web/github/eye-control-gif.gif
 
 [1]: https://scrolling-web-page-with-your-eyes.glitch.me/
 [2]: https://github.com/jquery/jquery
