@@ -1,6 +1,13 @@
-# [Scrolling web page with your eyes][1]
+<h1 align="center">
+  <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">
+    <img src="###" alt="" width="350"></img>
+  </a>
+  <br>
+  <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">Scrolling web page with your eyes</a>
+  <br>
+</h1>
 
-This software allows you to scroll a web page with your head movements.
+This application allows you to scroll a web page with your head movements.
 The following features are implemented in the current version:
 1) Determining the current head position
 2) Blink detection
@@ -8,17 +15,17 @@ The following features are implemented in the current version:
 
 ### Important
 1) This website uses your webcam
-2) Face detection is performed online
+2) Face and blink detection is performed online
 
-![GIF]()
+![GIF][0]
 
 ### How it works
 * Open this [DEMO][1]
 * Allow access to the camera
-* Wait for the algorithm to recognize your face (the eye icon in the upper right corner)
-* Make a double blink to start scroll (the "unlock" icon will appear)
+* Wait for the algorithm to recognize your face 
+* Make a double blink to start scroll (the "unlock" icon will appear in the upper right corner)
 * Nod up or down
-* Make a double blink to stop scroll (the "lock" icon will appear)
+* Make a double blink to stop scroll (the "lock" icon will appear in the upper right corner)
 
 ### How to use
 
@@ -26,10 +33,10 @@ To clone and run this application, you'll need Git. From your command line:
 
 ```
 # Clone this repository
-$ git clone https://github.com/Arcady1/Eye-control.git
+$ git clone https://github.com/Arcady1/Scrolling-web-page-with-your-eyes.git
 
 # Go into the repository
-$ cd Eye-control
+$ cd Scrolling-web-page-with-your-eyes
 
 # Install dependencies
 $ npm install
@@ -60,7 +67,9 @@ This software uses the following open source packages:
 ### License
 MIT
 
-[1]: #
+[0]: ./web/github/eye-control-gif.gif
+
+[1]: https://scrolling-web-page-with-your-eyes.glitch.me/
 [2]: https://github.com/jquery/jquery
 [3]: https://github.com/browserify/browserify
 [4]: https://github.com/tensorflow/tfjs
