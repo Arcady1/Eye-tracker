@@ -73,7 +73,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /*--------------------*/
 :root {
-  --index-min-width: 360px;
+  --index-min-width: 305px;
+  --index-bgc: #333;
   --max-video-width: 640px;
   --position-dot: 3px;
   --dot-color: #fff;
@@ -82,49 +83,10 @@ h1, h2, h3, h4, h5, h6 {
   --symbol-color: #ccc;
   --symbols-duration: .5s;
   --chart-height: 320px;
-  --video-shroud: .5;
+  --symbol-margin: 15px;
+  --paragraph_margin: calc(30px - 30*(100vw - 320px)/(1297 - 320));
 }
 
-@media (min-width: 1366px) {
-  .index-content_padding {
-    padding: 100px 45px !important;
-  }
-}
-@media (max-width: 710px) {
-  .video__wrapper {
-    -webkit-transform: scale(-0.52344, 0.52344) !important;
-            transform: scale(-0.52344, 0.52344) !important;
-  }
-}
-@media (min-width: 425px) and (max-width: 710px) {
-  .video__wrapper {
-    left: 60px !important;
-  }
-
-  .video-shroud {
-    margin-left: 130px !important;
-    -webkit-transform: scaleX(1.68) !important;
-            transform: scaleX(1.68) !important;
-  }
-}
-@media (max-width: 424px) {
-  .video__wrapper {
-    left: 80px !important;
-  }
-
-  .video-shroud {
-    margin-left: 153px !important;
-    -webkit-transform: scaleX(1.915) !important;
-            transform: scaleX(1.915) !important;
-  }
-}
-@media (max-width: 320px) {
-  .video-shroud {
-    margin-left: 150px !important;
-    -webkit-transform: scaleX(1.885) !important;
-            transform: scaleX(1.885) !important;
-  }
-}
 .index-container .lock-symbol {
   display: block;
   width: var(--symbol-size);
@@ -138,23 +100,42 @@ h1, h2, h3, h4, h5, h6 {
   background-position: center;
 }
 
+@media (max-width: 1298px) {
+  .video__wrapper {
+    display: none !important;
+  }
+
+  .index__info-block__wrapper {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    border: 1px solid #fff !important;
+    background-color: var(--index-bgc) !important;
+  }
+}
+@media (min-width: 1298px) {
+  :root {
+    --paragraph_margin: 0 !important;
+  }
+}
 html {
   font-size: 16px;
+  background-color: var(--index-bgc);
 }
 
 .index-container {
   width: 100%;
   min-width: var(--index-min-width);
   min-height: 100vh;
-  background-color: #333;
+  background-color: var(--index-bgc);
   position: relative;
 }
 .index-container .lock-symbol {
+  position: fixed;
+  top: var(--symbol-margin);
+  right: var(--symbol-margin);
   -webkit-transition-duration: var(--symbols-duration);
           transition-duration: var(--symbols-duration);
-  position: fixed;
-  top: 10px;
-  right: 10px;
   z-index: 10;
 }
 .index-container .lock-active {
@@ -168,9 +149,9 @@ html {
   display: flex;
   -webkit-box-pack: space-evenly;
           justify-content: space-evenly;
+  flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  flex-wrap: wrap;
 }
 .index-container .index-content .index__info-block__wrapper {
   display: -webkit-box;
@@ -199,17 +180,7 @@ html {
   display: block;
   width: var(--max-video-width);
   height: auto;
-  position: relative;
-}
-.index-container .index-content .index__info-block__wrapper .video__wrapper .video-shroud {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: var(--video-shroud);
+  opacity: 0.3;
 }
 .index-container .index-content .index__info-block__wrapper .video__wrapper .face-pos-dot {
   display: block;
@@ -225,29 +196,35 @@ html {
   background-color: var(--dot-color);
   z-index: 4;
 }
+.index-container .index-content .index__info-block__wrapper .video__wrapper_margin {
+  margin: 0 auto;
+}
 .index-container .index-content .index__info-block__wrapper .chart {
   display: block;
   width: 100%;
-  max-width: var(--max-video-width);
   height: var(--chart-height);
-}
-.index-container .index-content .info-block_margin {
-  margin-bottom: 4vh;
 }
 .index-container .index-content .index__paragraph {
   display: block;
-  width: auto;
+  width: 100%;
   max-width: var(--max-video-width);
   color: #fff;
   font-size: 1.3rem;
   line-height: 1.5rem;
 }
+.index-container .index-content .paragraph_margin {
+  margin-top: var(--paragraph_margin);
+}
 .index-container .index-content_padding {
-  padding: 5% calc(10px + 45*(100vw - 320px)/(1366 - 320));
+  padding: max(20px, min(5vw, 100px)) calc(20px - 20*(100vw - 320px)/(1366 - 320));
+}
+
+.index-container_margin {
+  margin: 0 auto;
 }
 
 .sticky-block {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: var(--symbol-margin);
 }

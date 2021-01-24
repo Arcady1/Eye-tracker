@@ -7,5 +7,6 @@ module.exports = {
     // 1 - closing eyes, 2 - opening eyes, 0 - setting the status (1 / 2)
     numOfBlinks: 0,
     chartXlabels: [],
-    chartYlabels: []
+    chartYlabels: [],
+    video: document.getElementById("video")
 }
