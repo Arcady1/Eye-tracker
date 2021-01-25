@@ -134,6 +134,11 @@ h1, h2, h3, h4, h5, h6 {
     --paragraph_margin: 0 !important;
   }
 }
+@media (max-height: calc(480px + 320px + 15px * 2)) {
+  .video__wrapper {
+    display: none !important;
+  }
+}
 html {
   font-size: 16px;
   background-color: var(--index-bgc);

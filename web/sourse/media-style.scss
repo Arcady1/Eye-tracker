@@ -30,3 +30,9 @@
         --paragraph_margin: 0 !important;
     }
 }
+
+@media (max-height: calc(480px + 320px + 15px * 2)) { // --video-height + --chart-height + (--symbol-margin * 2)
+    .video__wrapper {
+        display: none !important;
+    }
+}
