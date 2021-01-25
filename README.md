@@ -31,10 +31,10 @@ To clone and run this application, you'll need Git. From your command line:
 
 ```
 # Clone this repository
-$ git clone https://github.com/Arcady1/Scrolling-web-page-with-your-eyes.git
+$ git clone https://github.com/Arcady1/Eye-tracker.git
 
 # Go into the repository
-$ cd Scrolling-web-page-with-your-eyes
+$ cd Eye-tracker
 
 # Install dependencies
 $ npm install
