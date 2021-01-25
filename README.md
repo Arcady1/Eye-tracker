@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">
-    <img src="###" alt="" width="350"></img>
+    <img src="https://tech.tobii.com/wp-content/uploads/2019/11/technology-eye-tracking-illustration.jpg" alt="" width="500px"></img>
   </a>
   <br>
   <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">Eye-tracker</a>
@@ -8,15 +8,12 @@
 </h1>
 
 This application allows you to scroll a web page with your head movements.
-<br>
-The following features are implemented in the current version:
-1) Determining the current head position
-2) Blink detection
-3) Page scrolling on double blinks
 
-### Important
-1) This website uses your webcam
-2) Face and blink detection is performed online
+### How eye tracker works
+1) The user's webcam detects his face and eyes 
+2) The algorithm detects user blinks
+3) After a double blink, the algorithm tracks the user's head movements to get the direction to scroll
+4) Then the scroll starts and stops when the user blinks twice
 
 ![GIF][0]
 
