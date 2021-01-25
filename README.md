@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">
-    <img src="https://tech.tobii.com/wp-content/uploads/2019/11/technology-eye-tracking-illustration.jpg" alt="" width="500px"></img>
+    <img src="https://github.com/Arcady1/Eye-tracker/blob/main/web/github/eye-tracker-logo.jpg" alt="" width="500px"></img>
   </a>
   <br>
   <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">Eye-tracker</a>
