@@ -3,7 +3,7 @@
     <img src="###" alt="" width="350"></img>
   </a>
   <br>
-  <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">Scrolling web page with your eyes</a>
+  <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">Eye-tracker</a>
   <br>
 </h1>
 
