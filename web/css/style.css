@@ -83,6 +83,8 @@ h1, h2, h3, h4, h5, h6 {
   --symbol-color: #ccc;
   --symbols-duration: .5s;
   --chart-height: 320px;
+  --chart-box-shadow-size: 15px;
+  --chart-box-shadow-color: #fff;
   --symbol-margin: 15px;
   --paragraph_margin: calc(30px - 30*(100vw - 320px)/(1297 - 320));
 }
@@ -108,14 +110,33 @@ h1, h2, h3, h4, h5, h6 {
   .index__info-block__wrapper {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 0 !important;
-    border: 1px solid #fff !important;
+    top: var(--symbol-margin) !important;
     background-color: var(--index-bgc) !important;
+  }
+
+  .index__info-block__wrapper::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: calc(-1 * (var(--symbol-margin)));
+    left: 0;
+    width: 100%;
+    height: var(--symbol-margin);
+    background-color: var(--index-bgc);
+  }
+
+  .chart {
+    box-shadow: 0 0 var(--chart-box-shadow-size) var(--chart-box-shadow-color);
   }
 }
 @media (min-width: 1298px) {
   :root {
     --paragraph_margin: 0 !important;
+  }
+}
+@media (max-height: calc(480px + 320px + 15px * 2)) {
+  .video__wrapper {
+    display: none !important;
   }
 }
 html {
